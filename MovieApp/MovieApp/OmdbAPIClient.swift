@@ -11,7 +11,16 @@ import Foundation
 
 class OmdbAPIClient{
     
-  
+    
+    //static let sharedStore = OmdbAPIClient()
+    
+    var pageNumber = 1
+    
+    func getNextPage()
+    {
+        pageNumber += 1
+    }
+    
     
     class func getMoviesFromSearch(title: String, completionHandler:([String: AnyObject]) -> () ){
         

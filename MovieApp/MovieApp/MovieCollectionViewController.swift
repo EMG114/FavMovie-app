@@ -83,7 +83,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("movieCell", forIndexPath: indexPath) as! MovieCollectionCell
         
       cell.backgroundColor = UIColor.blueColor()
-      cell.movieTitle.text = "\(indexPath.item)"
+     // cell.movieTitle.text = "\(indexPath.item)"
         
       if self.store.movieList[indexPath.row].moviePosterUrl == "N/A"
       {
@@ -96,19 +96,22 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
        {
            let data = NSData(contentsOfURL: url)
         
-          if let unwrappedImage = data
+          if data != nil
            {
             
                 dispatch_async(dispatch_get_main_queue(),{
-                  cell.moviePosterImage.image = UIImage.init(data: unwrappedImage)
+                  cell.moviePosterImage.image = UIImage(contentsOfFile: self.store.movieList[indexPath.row].moviePosterUrl)
+                    
+                    //UIImage.init(data: unwrappedImage)
              })
             
             }
             cell.movieTitle.text = self.store.movieList[indexPath.row].movieTitle
            cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
+           //cell.moviePosterImage.image = UIImage(contentsOfFile: self.store.movieList[indexPath.row].moviePosterUrl)
       }
      
-      cell.setNeedsDisplay()
+     // cell.setNeedsDisplay()
         return cell
     }
     
