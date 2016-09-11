@@ -11,16 +11,12 @@ import Foundation
 
 class OmdbAPIClient{
     
-  //  static let sharedInstance = OMDBAPIClient()
-    
-    var movieList = [Movie]()
-    
   
     
-    func getMoviesFromSearch(title: String) -> () {
+    class func getMoviesFromSearch(title: String, completionHandler:([String: AnyObject]) -> () ){
         
         // movies by type movie parameter and title
-        let callUrl = "https://www.omdbapi.com/?s=\(title)&type=movie&r=json"
+        let callUrl = "https://www.omdbapi.com/?s=\(title)&type=movie&page&r=json"
        
         
         if let url:String = callUrl {
@@ -28,28 +24,21 @@ class OmdbAPIClient{
             
            let session = NSURLSession.sharedSession()
             let task = session.dataTaskWithURL(url!, completionHandler: { (data, response, error) in
-                if error == nil {
-                    
+        
                     if let data = data {
                         
                         do {
                             let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
-                     //  print(jsonResult)
+                          //  print(jsonResult)
+                            completionHandler(jsonResult as! [String : AnyObject])
                             
-                            if let list = jsonResult["Search"] as? [[String: AnyObject]] {
-                                for item in list {
-                                    let movie = Movie()
-                                    movie.movieTitle = (item["Title"] as? String)!
-                                    movie.movieYear = (item["Year"] as? String)!
-                                    movie.movieID = (item["imdbID"] as? String)!
-                                    movie.moviePosterUrl = (item["Poster"] as? String)!
-                                    
-                                    self.movieList.append(movie)
-                            
-                                }
-                            }
+                          //  print(jsonResult["Title"] as? String)!
+//                            movie.movieYear = (movieDict["Year"] as? String)!
+//                            movie.movieID = (movieDict["imdbID"] as? String)!
+//                            movie.moviePosterUrl = (movieDict["Poster"] as? String)!
                             
                             
+        
                         }
                         catch let error as NSError {
                     
@@ -59,12 +48,52 @@ class OmdbAPIClient{
 
 }
 
-                }else{
-                    print(error!.localizedDescription)
-}
-
 })
             task.resume()
 }
 }
+    
+    
+    
+    
+   class func getMovieDataSearchByID(movieID: String, completion: (NSDictionary)-> ())
+    {
+        let urlString = "http://www.omdbapi.com/?i=\(movieID)"
+        let url = NSURL(string: urlString)
+        
+        guard let unwrappedURL = url else {return}
+        
+        let session = NSURLSession.sharedSession()
+        
+        let task = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
+            
+            guard let unwrappedData = data else {return}
+            
+            do{
+                
+                //  NSJSONReadingAllowFragments
+                //Specifies that the parser should allow top-level objects that are not an instance of NSArray or NSDictionary
+                
+                let jsonmovieData = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                
+                if let movieDataDictionary = jsonmovieData
+                {
+                    completion(movieDataDictionary)
+                }
+            }
+            catch
+            {
+                print(error)
+            }
+        }
+        task.resume()
+        
+    }
+    
+    
+    
+    
+    
+    
+    
 }
