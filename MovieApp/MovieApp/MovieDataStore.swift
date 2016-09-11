@@ -68,10 +68,10 @@ print("*************************************************************************
             
             if let movie = Movie.init(movieDict:movieDataDictionary as! [String : AnyObject]){
                 
-                movie.movieID = (movieDataDictionary["imdbID"] as? String)!
-                movie.moviePosterUrl = (movieDataDictionary["Poster"] as? String)!
-                movie.movieTitle = (movieDataDictionary["Title"] as? String)!
-                movie.movieYear = (movieDataDictionary["Year"] as? String)!
+              //  movie.movieID = (movieDataDictionary["imdbID"] as? String)!
+            //    movie.moviePosterUrl = (movieDataDictionary["Poster"] as? String)!
+            //    movie.movieTitle = (movieDataDictionary["Title"] as? String)!
+           //     movie.movieYear = (movieDataDictionary["Year"] as? String)!
                 movie.moviePlot = (movieDataDictionary["Plot"] as? String)!
                 movie.movieGenre = (movieDataDictionary["Genre"] as? String)!
                 movie.movieDirector = (movieDataDictionary["Director"] as? String)!

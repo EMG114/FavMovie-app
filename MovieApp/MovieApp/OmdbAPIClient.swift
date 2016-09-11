@@ -67,7 +67,7 @@ class OmdbAPIClient{
     
    class func getMovieDataSearchByID(movieID: String, completion: (NSDictionary)-> ())
     {
-        let urlString = "http://www.omdbapi.com/?i=\(movieID)"
+        let urlString = "https://www.omdbapi.com/?i=\(movieID)"
         let url = NSURL(string: urlString)
         
         guard let unwrappedURL = url else {return}
