@@ -12,12 +12,13 @@ import Foundation
 class MovieDataStore {
     
  static let sharedStore = MovieDataStore()
+
  var movieList:[Movie] = []
  private init() {}
 
-    func searchForMovie(title:String, completionHandler:(Bool)->()) {
+   func searchForMovie(title:String, completionHandler:(Bool)->()) {
         
-        OmdbAPIClient.getMoviesFromSearch(title) { jsonResult in
+        OmdbAPIClient().getMoviesFromSearch(title) { jsonResult in
             self.movieList.removeAll()
         
             if let list = jsonResult["Search"] as? [[String: AnyObject]] {

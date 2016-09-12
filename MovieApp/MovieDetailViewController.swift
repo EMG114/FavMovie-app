@@ -15,22 +15,45 @@ var movie: Movie?
     
     let store = MovieDataStore.sharedStore
     
-    @IBOutlet weak var moviePlot: UILabel!
-    @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var starsLabel: UILabel!
-    @IBOutlet weak var writerLabel: UILabel!
-    @IBOutlet weak var releasedLabel: UILabel!
-    @IBOutlet weak var directorLabel: UILabel!
-    @IBOutlet weak var imbdScoreLabel: UILabel!
-    @IBOutlet weak var metaScoreLabel: UILabel!
+    @IBOutlet weak var imageViewPosterLabel: UIImageView!
+   
+    @IBOutlet weak var movieTitleLabel: UILabel!
     
-//    override func viewDidLoad()
-//    {
-//        super.viewDidLoad()
-//        
+    @IBOutlet weak var movieYearLabel: UILabel!
+    
+    @IBOutlet weak var movieShortPlotTextView: UITextView!
+    
+    @IBOutlet weak var movieDirectorLabel: UILabel!
+    
+    @IBOutlet weak var movieWriterLabel: UILabel!
+    
+    
+    @IBOutlet weak var movieActorsLabel: UILabel!
+    
+    @IBOutlet weak var imdbScoreLabel: UILabel!
+    
+    @IBOutlet weak var metascoreLabel: UILabel!
+    
+    @IBOutlet weak var movieRatedLabel: UILabel!
+    
+    @IBOutlet weak var movieLanguageLabel: UILabel!
+    
+    
+    @IBOutlet weak var movieCountryLabel: UILabel!
+    
+    
+    @IBOutlet weak var movieRuntimeLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
 
 
     
     
+
+}
 
 }

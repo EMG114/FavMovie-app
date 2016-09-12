@@ -27,22 +27,9 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
-        movieCollectionView.backgroundColor = UIColor.whiteColor()
-        
+        movieCollectionView.backgroundColor = UIColor.darkGrayColor()
         createSearchBar()
         navigationBarUI()
-//
-//  self.store.searchForMovie("Black") { (true) in
-//  
-//   
-//    
-//    NSOperationQueue.mainQueue().addOperationWithBlock({
-//        
-//        
-//       return self.movieCollectionView.reloadData()
-//    })
-//    
-//        }
 
         }
     
@@ -55,18 +42,16 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         self.navigationItem.titleView = searchBar
+        
+        
+      
     }
 
     func navigationBarUI()
     {
         let navigationBar = navigationController!.navigationBar
-        
-       // navigationBar.backgroundColor = UIColor.blueColor()
         navigationBar.barTintColor = UIColor.orangeColor()
         navigationBar.alpha = 0.5
-//        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 25)!]
-//        
-//        navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 19)!], forState: UIControlState.Normal)
         
     }
     
@@ -102,38 +87,76 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
                 dispatch_async(dispatch_get_main_queue(),{
                   cell.moviePosterImage.image = UIImage.init(data: data!)
                     
-                    //UIImage(contentsOfFile: self.store.movieList[indexPath.row].moviePosterUrl)
+
                     
-                  //  self.movieCollectionView.reloadData()
+                    self.movieCollectionView.reloadData()
              })
             
             }
             cell.movieTitle.text = self.store.movieList[indexPath.row].movieTitle
            cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
-           //cell.moviePosterImage.image = UIImage(contentsOfFile: self.store.movieList[indexPath.row].moviePosterUrl)
+        
       }
      
-     cell.setNeedsDisplay()
+    // cell.setNeedsDisplay()
         return cell
     }
+//    
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        return CGSizeMake((movieCollectionView.frame.width/3), 10)
+//        
+//        layout.minimumLineSpacing = 0.0;
+//        layout.minimumInteritemSpacing = 0.0;
+//    }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
-        self.movieID = self.store.movieList[indexPath.row].movieID
+        self.performSegueWithIdentifier("movieDetailSegue", sender: self)
+      //  self.movieID = self.store.movieList[indexPath.row].movieID
+      //  self.movie?.moviePosterUrl = self.store.movieList[indexPath.row].moviePosterUrl
+        
         
     }
+    
+    // change background color when user touches cell
+    
+    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
         
+        
+        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
+        cell?.backgroundColor = UIColor.yellowColor()
+        
+    
+    
+    
+}
+    
+//    func collectionView(collectionView: UICollectionView, selectedItemIndex: NSIndexPath) {
+//      // let cell = movieCollectionView.cellForItemAtIndexPath(selectedItemIndex)
+//        self.performSegueWithIdentifier("movieDetailSegue", sender: self)
+//    }
+    
+   //  change background color back when user releases touch
+//    func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+//        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
+//        cell?.backgroundColor = UIColor.orangeColor()
+//    }
+    
 
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-       // store.movieList.removeAll()
+        store.movieList.removeAll()
         if !searchBar.text!.isEmpty {
             // replacing characters space with %
+     
             let percentString = searchBar.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+           
              store.searchForMovie((percentString!), completionHandler: { (true) in
                 
                 NSOperationQueue.mainQueue().addOperationWithBlock({
-                     //self.store.movieList.removeAll()
+                   
+                
                     return self.movieCollectionView.reloadData()
+                    
                 })
             
         
@@ -164,14 +187,20 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     {
         if segue.identifier == "movieDetailSegue"
         {
+           // let destinationVC = segue.destinationViewController as! MovieDetailViewController
+            //let cell = sender as! UICollectionViewCell
+            let indexPaths = movieCollectionView.indexPathsForSelectedItems()
+            let indexPath = indexPaths![0] as NSIndexPath
+            
             let destinationVC = segue.destinationViewController as! MovieDetailViewController
             
-            let indexPath = movieCollectionView.indexPathForCell(sender as! UICollectionViewCell)
-            
-            if let unwrappedIndex = indexPath
-            {
-                let movieID = self.store.movieList[unwrappedIndex.row]
-                destinationVC.movie = movieID
+          //  destinationVC.movie.movieID = self.store.movieList[indexPath.row]
+              //  destinationVC.movie?.movieID = movieID.movieID
+                
+             //   let moviePoster = self.store.movieList[unwrappedIndex.row]
+             //   destinationVC.movie?.moviePosterUrl = moviePoster.moviePosterUrl
+                
+                
             }
             
         }
@@ -182,7 +211,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     
 
-}
+
 
 
 

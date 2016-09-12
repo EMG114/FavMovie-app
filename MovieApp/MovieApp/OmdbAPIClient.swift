@@ -12,7 +12,7 @@ import Foundation
 class OmdbAPIClient{
     
     
-    //static let sharedStore = OmdbAPIClient()
+    static let sharedStore = OmdbAPIClient()
     
     var pageNumber = 1
     
@@ -22,10 +22,10 @@ class OmdbAPIClient{
     }
     
     
-    class func getMoviesFromSearch(title: String, completionHandler:([String: AnyObject]) -> () ){
+    func getMoviesFromSearch(title: String, completionHandler:([String: AnyObject]) -> () ){
         
         // movies by type movie parameter and title
-        let callUrl = "https://www.omdbapi.com/?s=\(title)&type=movie&page&r=json"
+        let callUrl = "https://www.omdbapi.com/?s=\(title)&page=\(pageNumber)&type=movie&r=json"
        
         
         if let url:String = callUrl {
