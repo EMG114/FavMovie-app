@@ -15,7 +15,7 @@ var movie: Movie?
 let store = MovieDataStore.sharedStore
     
     
- //   let store = MovieDataStore.sharedStore
+
     
     @IBOutlet weak var imageViewPosterLabel: UIImageView!
    
@@ -51,26 +51,18 @@ let store = MovieDataStore.sharedStore
     {
         super.viewDidLoad()
         
-        self.movie?.movieTitle = (movie?.movieTitle)!
     
       
         self.store.getDetailsForMovieByID((movie?.movieID)!, completion: { (true) in
     
             dispatch_async(dispatch_get_main_queue(),{
                 
-                self.movieTitleLabel.text = self.movie?.movieTitle
-                self.movieShortPlotTextView.text = self.movie?.moviePlotShort
-                self.movieYearLabel.text = self.movie?.movieYear
-                self.movieDirectorLabel.text = self.movie?.movieDirector
-                self.movieWriterLabel.text = self.movie?.movieWriter
-                self.movieActorsLabel.text = self.movie?.movieActors
-                self.imdbScoreLabel.text = self.movie?.movieRating
-                self.metascoreLabel.text = self.movie?.movieMetascore
-                self.movieRuntimeLabel.text = self.movie?.movieRuntime
-                self.movieRatedLabel.text = self.movie?.movieRated
-                self.genreLabel.text = self.movie?.movieGenre
-                self.movieCountryLabel.text = self.movie?.movieCountry
-                self.movieLanguageLabel.text = self.movie?.movieLanguage
+
+                
+                if self.movie?.moviePosterUrl == "N/A"
+                {
+                    self.imageViewPosterLabel.image = UIImage.init(named: "movie-placeholder.jpg")
+                }
                 
                 
                 let imageString = self.movie?.moviePosterUrl
@@ -92,11 +84,27 @@ let store = MovieDataStore.sharedStore
                 
             })
             
+            
+            
        })
 
-       
+        self.movieTitleLabel.text = self.movie?.movieTitle
+        self.movieShortPlotTextView.text = self.movie?.moviePlotShort
+        self.movieYearLabel.text = self.movie?.movieYear
+        self.movieDirectorLabel.text = self.movie?.movieDirector
+        self.movieWriterLabel.text = self.movie?.movieWriter
+        self.movieActorsLabel.text = self.movie?.movieActors
+        self.imdbScoreLabel.text = self.movie?.movieRating
+        self.metascoreLabel.text = self.movie?.movieMetascore
+        self.movieRuntimeLabel.text = self.movie?.movieRuntime
+        self.movieRatedLabel.text = self.movie?.movieRated
+        self.genreLabel.text = self.movie?.movieGenre
+        self.movieCountryLabel.text = self.movie?.movieCountry
+        self.movieLanguageLabel.text = self.movie?.movieLanguage
 
 }
+    
+    
 
 }
 

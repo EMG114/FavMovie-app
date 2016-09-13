@@ -69,10 +69,10 @@ class MovieDataStore {
             
             if let movie = Movie.init(movieDict:movieDataDictionary as! [String : AnyObject]){
                 
-              //  movie.movieID = (movieDataDictionary["imdbID"] as? String)!
-            //    movie.moviePosterUrl = (movieDataDictionary["Poster"] as? String)!
-            //    movie.movieTitle = (movieDataDictionary["Title"] as? String)!
-           //     movie.movieYear = (movieDataDictionary["Year"] as? String)!
+             //   movie.movieID = (movieDataDictionary["imdbID"] as? String)!
+             //   movie.moviePosterUrl = (movieDataDictionary["Poster"] as? String)!
+             //   movie.movieTitle = (movieDataDictionary["Title"] as? String)!
+             //   movie.movieYear = (movieDataDictionary["Year"] as? String)!
                 movie.moviePlotShort = (movieDataDictionary["Plot"] as? String)!
                 movie.movieGenre = (movieDataDictionary["Genre"] as? String)!
                 movie.movieDirector = (movieDataDictionary["Director"] as? String)!
@@ -83,6 +83,7 @@ class MovieDataStore {
                 movie.movieRated = (movieDataDictionary["Rated"] as? String)!
           //      movie.movieRating = (movieDataDictionary["Rating"] as? String)!
                 movie.movieRuntime = (movieDataDictionary["Runtime"] as? String)!
+                
                 
                 print("Movie Genre: \(movie.movieGenre)")
                 print("Movie Director: \(movie.movieDirector)")

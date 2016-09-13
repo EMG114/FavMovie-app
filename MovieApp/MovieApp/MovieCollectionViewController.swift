@@ -215,8 +215,8 @@ func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath i
         {
              let selectedIndexPath = sender as? NSIndexPath
             let destinationVC = segue.destinationViewController as! MovieDetailViewController
-                
             
+          
                 let movieID = self.store.movieList[selectedIndexPath!.item]
                 destinationVC.movie = movieID
         
