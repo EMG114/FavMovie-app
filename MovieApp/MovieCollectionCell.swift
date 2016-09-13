@@ -13,6 +13,6 @@ class MovieCollectionCell: UICollectionViewCell {
     @IBOutlet weak var moviePosterImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     
-
+   
 
 }

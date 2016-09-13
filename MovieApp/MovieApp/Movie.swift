@@ -25,7 +25,7 @@ class Movie {
     var movieGenre:String = ""
     var movieMetascore: String = ""
     var movieRating:String = ""
-    var moviePlot:String = ""
+    var moviePlotShort:String = ""
     var movieRuntime:String = ""
     
     

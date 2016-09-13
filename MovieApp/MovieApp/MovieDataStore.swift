@@ -12,11 +12,11 @@ import Foundation
 class MovieDataStore {
     
  static let sharedStore = MovieDataStore()
-
+ 
  var movieList:[Movie] = []
  private init() {}
 
-   func searchForMovie(title:String, completionHandler:(Bool)->()) {
+ func searchForMovie(title:String, completionHandler:(Bool)->()) {
         
         OmdbAPIClient().getMoviesFromSearch(title) { jsonResult in
             self.movieList.removeAll()
@@ -31,14 +31,14 @@ class MovieDataStore {
       movie.movieID = (movieDict["imdbID"] as? String)!
       movie.moviePosterUrl = (movieDict["Poster"] as? String)!
                             
-                        
-print("***************************************************************************")
-                        print("Movie Title: \(movie.movieTitle)")
-                        print("Movie Year: \(movie.movieYear)")
-                        print("Movie ImdbID: \(movie.movieID)")
-                        print("Movie PosterURL: \(movie.moviePosterUrl)")
-print("***************************************************************************")
-
+//                        
+//print("***************************************************************************")
+//                        print("Movie Title: \(movie.movieTitle)")
+//                        print("Movie Year: \(movie.movieYear)")
+//                        print("Movie ImdbID: \(movie.movieID)")
+//                        print("Movie PosterURL: \(movie.moviePosterUrl)")
+//print("***************************************************************************")
+//
                     self.movieList.append(movie)
                     }
                    
@@ -73,7 +73,7 @@ print("*************************************************************************
             //    movie.moviePosterUrl = (movieDataDictionary["Poster"] as? String)!
             //    movie.movieTitle = (movieDataDictionary["Title"] as? String)!
            //     movie.movieYear = (movieDataDictionary["Year"] as? String)!
-                movie.moviePlot = (movieDataDictionary["Plot"] as? String)!
+                movie.moviePlotShort = (movieDataDictionary["Plot"] as? String)!
                 movie.movieGenre = (movieDataDictionary["Genre"] as? String)!
                 movie.movieDirector = (movieDataDictionary["Director"] as? String)!
                 movie.movieActors = (movieDataDictionary["Actors"] as? String)!
@@ -90,23 +90,19 @@ print("*************************************************************************
                 print("Movie Language: \(movie.movieLanguage)")
                 print("Movie Country: \(movie.movieCountry)")
                 print("Movie Metascore: \(movie.movieMetascore)")
-                print("Movie plotShort: \(movie.moviePlot)")
+                print("Movie plotShort: \(movie.moviePlotShort)")
                 print("Movie Rating: \(movie.movieRating)")
                 print("Movie Rated: \(movie.movieRated)")
                 print("Movie Runtime: \(movie.movieRuntime)")
             
-                completion
+           self.movieList.append(movie)
                 
             }
-         
+          completion
+      
         
-            
-              
-               }
-    
-            
-       
-    
 }
     
+}
+
 }

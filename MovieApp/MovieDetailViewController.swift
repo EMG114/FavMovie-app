@@ -12,8 +12,10 @@ class MovieDetailViewController: UIViewController {
     
 var movie: Movie?
     
+let store = MovieDataStore.sharedStore
     
-    let store = MovieDataStore.sharedStore
+    
+ //   let store = MovieDataStore.sharedStore
     
     @IBOutlet weak var imageViewPosterLabel: UIImageView!
    
@@ -49,11 +51,45 @@ var movie: Movie?
     {
         super.viewDidLoad()
         
-
-
+        self.movie?.movieTitle = (movie?.movieTitle)!
     
-    
+        guard movie != nil else {return
+       // self.store.getDetailsForMovieByID(unwrappedMovie ){
+            dispatch_async(dispatch_get_main_queue(),{
+                
+                self.movieShortPlotTextView.text = self.movie?.moviePlotShort
+                self.movieYearLabel.text = self.movie?.movieYear
+                self.movieDirectorLabel.text = self.movie?.movieDirector
+                self.movieWriterLabel.text = self.movie?.movieWriter
+                self.movieActorsLabel.text = self.movie?.movieActors
+                self.imdbScoreLabel.text = self.movie?.movieRating
+                self.metascoreLabel.text = self.movie?.movieMetascore
+                
+                
+                let imageString = self.movie?.moviePosterUrl
+                
+                if let unwrappedString = imageString
+                {
+                    let stringPosterUrl = NSURL(string: unwrappedString)
+                    if let url = stringPosterUrl
+                    {
+                        let data = NSData(contentsOfURL: url)
+                        
+                        if let unwrappedImage = data
+                        {
+                            self.imageViewPosterLabel.image = UIImage.init(data: unwrappedImage)
+                        }
+                    }
+                    
+                }
+                
+            })
+            
+        }
+
+       
 
 }
-
+    
 }
+
