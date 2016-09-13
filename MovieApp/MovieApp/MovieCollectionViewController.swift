@@ -25,9 +25,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
        
-//        
-//        let nib = UINib(nibName: "movieCell", bundle: nil)
-//        self.movieCollectionView.registerNib(nib, forCellWithReuseIdentifier: "movieCell")
+
         
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
@@ -178,7 +176,8 @@ func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath i
                 self.store.searchForMovie((percentString!), completionHandler: { (true) in
                     
                     NSOperationQueue.mainQueue().addOperationWithBlock({
-                
+                        
+                      
                         self.movieCollectionView.reloadData()
                         //return
                         
@@ -218,7 +217,7 @@ func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath i
             let destinationVC = segue.destinationViewController as! MovieDetailViewController
                 
             
-                let movieID = self.store.movieList[selectedIndexPath!.row]
+                let movieID = self.store.movieList[selectedIndexPath!.item]
                 destinationVC.movie = movieID
         
                 

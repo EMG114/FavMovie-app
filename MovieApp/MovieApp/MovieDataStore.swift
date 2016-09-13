@@ -61,7 +61,7 @@ class MovieDataStore {
     
 }
 
-    func getDetailsForMovieByID(movieID:String, completion:(Bool)){
+    func getDetailsForMovieByID(movieID:String, completion:(Bool)->()){
         
         OmdbAPIClient.getMovieDataSearchByID(movieID){ movieDataDictionary in
             
@@ -81,7 +81,7 @@ class MovieDataStore {
                 movie.movieCountry = (movieDataDictionary["Country"] as? String)!
                 movie.movieMetascore = (movieDataDictionary["Metascore"] as? String)!
                 movie.movieRated = (movieDataDictionary["Rated"] as? String)!
-                movie.movieRating = (movieDataDictionary["Rating"] as? String)!
+          //      movie.movieRating = (movieDataDictionary["Rating"] as? String)!
                 movie.movieRuntime = (movieDataDictionary["Runtime"] as? String)!
                 
                 print("Movie Genre: \(movie.movieGenre)")
@@ -98,7 +98,7 @@ class MovieDataStore {
            self.movieList.append(movie)
                 
             }
-          completion
+          completion(true)
       
         
 }
