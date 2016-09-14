@@ -24,29 +24,26 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        self.store.searchForMovie("Batman") {_ in
-            NSOperationQueue.mainQueue().addOperationWithBlock({
-                self.movieCollectionView.reloadData()
-            })
-        }
         
-
+        self.store.searchForMovie("Batman") {_ in
+        NSOperationQueue.mainQueue().addOperationWithBlock({
+        self.movieCollectionView.reloadData()
+                            })
+                }
+        
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
         movieCollectionView.backgroundColor = UIColor.darkGrayColor()
         createSearchBar()
         navigationBarUI()
-//
-//        self.movieCollectionView.allowsSelection = true
-//        self.movieCollectionView.userInteractionEnabled = true
-    
+      
         
-
-        }
+        
+        
+    }
     
     
-   
+    
     
     func createSearchBar() {
         
@@ -54,12 +51,15 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         searchBar.delegate = self
         searchBar.showsCancelButton = false
         searchBar.placeholder = "Search Movies By Title"
+        
+        // let leftNavBarButton = UIBarButtonItem(customView:searchBar)
+        //  self.navigationItem.leftBarButtonItem = leftNavBarButton
         self.navigationItem.titleView = searchBar
         
         
-      
+        
     }
-
+    
     func navigationBarUI()
     {
         let navigationBar = navigationController!.navigationBar
@@ -69,11 +69,11 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-         return 1
+        return 1
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
+        
         return self.store.movieList.count
     }
     
@@ -81,59 +81,59 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("movieCell", forIndexPath: indexPath) as! MovieCollectionCell
         
-      cell.backgroundColor = UIColor.lightGrayColor()
-     
+        cell.backgroundColor = UIColor.lightGrayColor()
         
-      if self.store.movieList[indexPath.row].moviePosterUrl == "N/A"
-      {
-          cell.moviePosterImage.image = UIImage.init(named: "movie-placeholder.jpg")
-       }
-       
+        
+        if self.store.movieList[indexPath.row].moviePosterUrl == "N/A"
+        {
+            cell.moviePosterImage.image = UIImage.init(named: "movie-placeholder.jpg")
+        }
+        
         let posterUrl = NSURL(string: self.store.movieList[indexPath.row].moviePosterUrl)
-       
-        if let url = posterUrl
-       {
-           let data = NSData(contentsOfURL: url)
         
-          if data != nil
-           {
+        if let url = posterUrl
+        {
+            let data = NSData(contentsOfURL: url)
             
+            if data != nil
+            {
+                
                 dispatch_async(dispatch_get_main_queue(),{
-                  cell.moviePosterImage.image = UIImage.init(data: data!)
+                    cell.moviePosterImage.image = UIImage.init(data: data!)
                     
-
+                    
                     
                     //self.movieCollectionView.reloadData()
-             })
-            
+                })
+                
             }
             cell.movieTitle.text = self.store.movieList[indexPath.row].movieTitle
-           cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
+            cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
+            
+        }
         
-      }
-     
-    // cell.setNeedsDisplay()
-//        cell.userInteractionEnabled = true
-//        cell.movieTitle.userInteractionEnabled = true
-//        cell.movieYear.userInteractionEnabled = true
-//        cell.moviePosterImage.userInteractionEnabled = true
-//        
+        // cell.setNeedsDisplay()
+        //        cell.userInteractionEnabled = true
+        //        cell.movieTitle.userInteractionEnabled = true
+        //        cell.movieYear.userInteractionEnabled = true
+        //        cell.moviePosterImage.userInteractionEnabled = true
+        //
         return cell
     }
-
-  
-func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
+    
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
-       
+        
         self.performSegueWithIdentifier("movieDetailSegue", sender: indexPath)
         
-         print("Selected cell number: \(indexPath.item)")
+        print("Selected cell number: \(indexPath.item)")
         
-   
-   // let movieTitle = self.store.movieList[indexPath.row].movieTitle
         
-      // movieCollectionView.deselectItemAtIndexPath(indexPath, animated: true)
-       
+        // let movieTitle = self.store.movieList[indexPath.row].movieTitle
+        
+        // movieCollectionView.deselectItemAtIndexPath(indexPath, animated: true)
+        
         
     }
     
@@ -144,116 +144,93 @@ func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath i
         
         let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
         cell?.backgroundColor = UIColor.yellowColor()
+        
+        
+        
+        
+    }
     
-  
+    //    func collectionView(collectionView: UICollectionView, selectedItemIndex: NSIndexPath) {
+    //      let cell = movieCollectionView.cellForItemAtIndexPath(selectedItemIndex)
+    //        self.performSegueWithIdentifier("movieDetailSegue", sender: cell)
+    //    }
+    //
+    //  change background color back when user releases touch
+    //    func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+    //        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
+    //        cell?.backgroundColor = UIColor.orangeColor()
+    //    }
     
     
-}
-    
-//    func collectionView(collectionView: UICollectionView, selectedItemIndex: NSIndexPath) {
-//      let cell = movieCollectionView.cellForItemAtIndexPath(selectedItemIndex)
-//        self.performSegueWithIdentifier("movieDetailSegue", sender: cell)
-//    }
-//    
-   //  change background color back when user releases touch
-//    func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
-//        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
-//        cell?.backgroundColor = UIColor.orangeColor()
-//    }
-    
-
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-      
+        
         if !searchBar.text!.isEmpty {
             // replacing characters space with %
-   
+            
             let percentString = searchBar.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-         
+            
             var queue = NSOperationQueue()
             queue.qualityOfService = .Background
-           
+            
             queue.addOperationWithBlock({
                 
-            
+                
                 self.store.searchForMovie((percentString!), completionHandler: { (true) in
                     
                     NSOperationQueue.mainQueue().addOperationWithBlock({
                         
-                      
                         self.movieCollectionView.reloadData()
-                         // OmdbAPIClient().getNextPage()
-                    
+                        //return
                         
                     })
-            })
-           
-            
+                })
+                
+                
+                
+                
+                }
+                
+                
+            )}
         
-      
-    }
-
-
-)}
         
-
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-         self.store.movieList.removeAll()
+        func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+            self.store.movieList.removeAll()
             self.searchBar.resignFirstResponder()
         }
         
-    func searchClear(sender: AnyObject) {
-        if searchBar.text == ""{
-        self.store.movieList.removeAll()
-            self.movieCollectionView.reloadData()
+        func searchClear(sender: AnyObject) {
+            if searchBar.text == ""{
+                self.store.movieList.removeAll()
+                self.movieCollectionView.reloadData()
+            }
         }
+        
+        
     }
-        
-        
-}
     
-//    
-//    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
-//    {
-//        self.store.movieList.removeAll()
-//    }
     
-
- 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if segue.identifier == "movieDetailSegue"
         {
-             let selectedIndexPath = sender as? NSIndexPath
+            let selectedIndexPath = sender as? NSIndexPath
             let destinationVC = segue.destinationViewController as! MovieDetailViewController
             
-          
-                let movieID = self.store.movieList[selectedIndexPath!.item]
-                destinationVC.movie = movieID
-                
-                
-        
-            }
+            
+            let movieID = self.store.movieList[selectedIndexPath!.row]
+            destinationVC.movie = movieID
             
             
-                
             
-        
         }
         
         
+        
+        
+        
     }
-
-
-    
-
-   
     
     
-
-
-
-
-
-
-    
+}
 
