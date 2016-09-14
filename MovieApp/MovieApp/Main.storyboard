@@ -67,7 +67,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S99-NR-mwq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6983" y="-72"/>
+            <point key="canvasLocation" x="6817" y="-132"/>
         </scene>
         <!--Movie Details-->
         <scene sceneID="DFI-SE-Va1">
@@ -166,8 +166,10 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6P-a9-3jn">
                                 <rect key="frame" x="95" y="657" width="215" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Full Plot Description">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="1" green="0.41395763419999998" blue="0.085072357380000005" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="fullPlotDescriptionButton:" destination="Sfa-Mb-o8B" eventType="touchUpInside" id="ixk-xc-1ga"/>

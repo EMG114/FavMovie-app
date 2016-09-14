@@ -10,15 +10,15 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
     
-var movie: Movie?
+    var movie: Movie?
     
-let store = MovieDataStore.sharedStore
+    let store = MovieDataStore.sharedStore
     
     
-
+    
     
     @IBOutlet weak var imageViewPosterLabel: UIImageView!
-   
+    
     @IBOutlet weak var movieTitleLabel: UILabel!
     
     @IBOutlet weak var movieYearLabel: UILabel!
@@ -51,16 +51,18 @@ let store = MovieDataStore.sharedStore
     {
         super.viewDidLoad()
         
-self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style: .Done, target: self, action: #selector(MovieDetailViewController.saveMovieAsFavorite))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style: .Done, target: self, action: #selector(MovieDetailViewController.saveMovieAsFavorite))
         
-    view.backgroundColor = UIColor.darkGrayColor()
-    movieShortPlotTextView.backgroundColor = UIColor.darkGrayColor()
-  //  movieShortPlotTextView.textColor = UIColor.blackColor()
-      
-       self.store.getDetailsForMovieByID((movie?.movieID)!, completion: { (true) in
-    
+        view.backgroundColor = UIColor.darkGrayColor()
+        movieShortPlotTextView.backgroundColor = UIColor.darkGrayColor()
+        //  movieShortPlotTextView.textColor = UIColor.blackColor()
+        
+        guard let unwrappedMovie = movie else{return}
+        //(movie?.movieID)!
+        self.store.getDetailsForMovieByID(unwrappedMovie) { _ in
+            
             dispatch_async(dispatch_get_main_queue(),{
-               
+                
                 self.movieTitleLabel.text = self.movie?.movieTitle
                 self.movieYearLabel.text = self.movie?.movieYear
                 self.movieShortPlotTextView.text = self.movie?.moviePlotShort
@@ -75,7 +77,7 @@ self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style:
                 self.movieCountryLabel.text = self.movie?.movieCountry
                 self.movieLanguageLabel.text = self.movie?.movieLanguage
                 
-
+                
                 
                 if self.movie?.moviePosterUrl == "N/A"
                 {
@@ -97,15 +99,15 @@ self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style:
                             self.imageViewPosterLabel.image = UIImage.init(data: unwrappedImage)
                         }
                     }
-                
+                    
                 }
                 
             })
             
             
             
-      })
-
+        }
+        
         self.movieShortPlotTextView.text = self.movie?.moviePlotShort
         self.movieDirectorLabel.text = self.movie?.movieDirector
         self.movieWriterLabel.text = self.movie?.movieWriter
@@ -118,23 +120,25 @@ self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style:
         self.movieCountryLabel.text = self.movie?.movieCountry
         self.movieLanguageLabel.text = self.movie?.movieLanguage
         
-
-
-}
+        
+        
+    }
     
     func saveMovieAsFavorite()
     {
         print("save to my favorite list")
     }
-
+    
     
     @IBAction func fullPlotDescriptionButton(sender: AnyObject)
     {
         //segue: This button will go to Long VC
-    
+        
+        
+        
     }
-
-
+    
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
@@ -142,15 +146,15 @@ self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style:
         {
             let destinationLongPlotVC = segue.destinationViewController as? LongPlotViewController
             
-            if let unwrappedMovie = movie?.moviePlotShort
+            if let unwrappedMovie = movie
             {
-                destinationLongPlotVC!.movie?.moviePlotShort = unwrappedMovie
+                destinationLongPlotVC!.movie = unwrappedMovie
             }
             
         }
         
     }
-
+    
 }
 
 

@@ -21,7 +21,7 @@ class OmdbAPIClient{
     func getNextPage()
     {
         pageNumber += 1
-     //return  pageNumber
+    
     }
     
     
@@ -61,7 +61,7 @@ class OmdbAPIClient{
     
     
     
-   class func getMovieDataSearchByID(movieID: String, completion: (NSDictionary)-> ())
+func getMovieDataSearchByID(movieID: String, completion: (NSDictionary)-> ())
     {
         let urlString = "https://www.omdbapi.com/?i=\(movieID)&plot=short"
         let url = NSURL(string: urlString)
@@ -71,6 +71,9 @@ class OmdbAPIClient{
         let session = NSURLSession.sharedSession()
         
         let task = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
+//            print(data)
+//            print(response)
+//            print(error)
             
             guard let unwrappedData = data else {return}
             
@@ -80,7 +83,7 @@ class OmdbAPIClient{
                 //Specifies that the parser should allow top-level objects that are not an instance of NSArray or NSDictionary
                 
                 let jsonmovieData = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
-                
+               //print(jsonmovieData)
                 if let movieDataDictionary = jsonmovieData
                 {
                     completion(movieDataDictionary)
@@ -97,37 +100,46 @@ class OmdbAPIClient{
     
     
     
-class  func getMovieLongPlot(id: String, completion: (NSDictionary)->())
+ func getMovieLongPlot(movieID: String, completion: (NSDictionary)->())
     {
-        let urlString = "https://www.omdbapi.com/?i=\(id)&plot=full"
         
+       // print("Whats the movie id: \(movieID)")
+        let urlString = "https://www.omdbapi.com/?i=\(movieID)&plot=full&r=json"
         let url = NSURL(string: urlString)
         
         guard let unwrappedURL = url else {return}
         
         let session = NSURLSession.sharedSession()
         
-        let dataTask = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
-            
+        let task = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
+          // print(data)
+          //  print(response)
+          //  print(error?.localizedDescription)
+         
             guard let unwrappedData = data else {return}
             
+            
             do{
-                let movieLongPlot = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                 
-                if let movieFromDetailDictionaryToLong = movieLongPlot
+                //  NSJSONReadingAllowFragments
+                //Specifies that the parser should allow top-level objects that are not an instance of NSArray or NSDictionary
+                
+                let jsonmovieLongPlot = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? [String : AnyObject]
+       //       print(jsonmovieLongPlot)
+                if let movieLongPlotDictionary = jsonmovieLongPlot
+                  
                 {
-                    completion(movieFromDetailDictionaryToLong)
+                    completion(movieLongPlotDictionary)
                 }
             }
-            catch
+            catch let error as NSError
             {
-                print(error)
+                print(error.localizedDescription)
             }
         }
-        dataTask.resume()
+        task.resume()
+        
     }
-    
-    
     
     
 }

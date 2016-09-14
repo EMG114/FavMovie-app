@@ -62,14 +62,10 @@ class MovieDataStore {
     
 }
             //movieID:String
-    func getDetailsForMovieByID(movieID:String, completion:(Bool)->()){
+    func getDetailsForMovieByID(movie: Movie, completion:(Bool)->()){
         
-        OmdbAPIClient.getMovieDataSearchByID(movieID){ movieDataDictionary in
-            
-            
+        OmdbAPIClient().getMovieDataSearchByID(movie.movieID){ movieDataDictionary in
          
-    
-           // self.movieList.removeAll()
             
             if let movie = Movie.init(movieDict:movieDataDictionary as! [String : AnyObject]){
                 
@@ -88,22 +84,22 @@ class MovieDataStore {
            //     movie.movieRating = (movieDataDictionary["Rating"] as? String)!
                 movie.movieRuntime = (movieDataDictionary["Runtime"] as? String)!
                 
-  print("***************************************************************************")
-                
-                print("Movie Title: \(movie.movieTitle)")
-                print("Movie Year: \(movie.movieYear)")
-                print("Movie Genre: \(movie.movieGenre)")
-                print("Movie Director: \(movie.movieDirector)")
-                print("Movie Actors: \(movie.movieActors)")
-                print("Movie Language: \(movie.movieLanguage)")
-                print("Movie Country: \(movie.movieCountry)")
-                print("Movie Metascore: \(movie.movieMetascore)")
-                print("Movie plotShort: \(movie.moviePlotShort)")
-                print("Movie Rating: \(movie.movieRating)")
-                print("Movie Rated: \(movie.movieRated)")
-                print("Movie Runtime: \(movie.movieRuntime)")
- print("***************************************************************************")
-                
+//  print("***************************************************************************")
+//                
+//                print("Movie Title: \(movie.movieTitle)")
+//                print("Movie Year: \(movie.movieYear)")
+//                print("Movie Genre: \(movie.movieGenre)")
+//                print("Movie Director: \(movie.movieDirector)")
+//                print("Movie Actors: \(movie.movieActors)")
+//                print("Movie Language: \(movie.movieLanguage)")
+//                print("Movie Country: \(movie.movieCountry)")
+//                print("Movie Metascore: \(movie.movieMetascore)")
+//                print("Movie plotShort: \(movie.moviePlotShort)")
+//                print("Movie Rating: \(movie.movieRating)")
+//                print("Movie Rated: \(movie.movieRated)")
+//                print("Movie Runtime: \(movie.movieRuntime)")
+// print("***************************************************************************")
+////
             
            self.movieIDList.append(movie)
                 
@@ -115,18 +111,22 @@ class MovieDataStore {
     
 }
     
-//    func getLongSummaryPlot(movie: Movie, completion: ()->())
-//    {
-//        OmdbAPIClient.getMovieLongPlot(movie.movieID) { (dictionary) in
-//movie.m
+    func getLongSummaryPlot(movie: Movie, completion:(Bool)->())
+    {
+        OmdbAPIClient().getMovieLongPlot(movie.movieID) { (movieLongPlotDictionary) in
             
-      //      dictionary, completion: { (successful) in
-    //if successful
-              //  {
-//                    completion()
-//                }
-//           })
-        }
+       
+                if let movie = Movie.init(movieDict: movieLongPlotDictionary as! [String : AnyObject]){
     
+                movie.movieLongPlot = (movieLongPlotDictionary["Plot"] as? String)!
+               // print("Movie plotLong: \(movie.movieLongPlot)")
+                  
+        }
+            completion(true)
+        }
 
 
+
+}
+    
+}

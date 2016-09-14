@@ -10,7 +10,7 @@ import UIKit
 
 class MovieCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UISearchBarDelegate{
     
-  
+    
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
     var searchBar: UISearchBar!
@@ -19,24 +19,26 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     var movieID: String = ""
     var movie : Movie?
-  private let reuseIdentifier = "movieCell"
+    private let reuseIdentifier = "movieCell"
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.store.searchForMovie("Batman") {_ in
-        NSOperationQueue.mainQueue().addOperationWithBlock({
-        self.movieCollectionView.reloadData()
-                            })
-                }
+        print("VIEW DID LOAD GETTING CALLED!!!!!!!")
+        
+        self.store.searchForMovie("Movie") {_ in
+            NSOperationQueue.mainQueue().addOperationWithBlock({
+                self.movieCollectionView.reloadData()
+            })
+        }
         
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
         movieCollectionView.backgroundColor = UIColor.darkGrayColor()
         createSearchBar()
         navigationBarUI()
-      
+        
         
         
         
@@ -127,12 +129,9 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         self.performSegueWithIdentifier("movieDetailSegue", sender: indexPath)
         
-        print("Selected cell number: \(indexPath.item)")
+        print("Selected cell number: \(indexPath.row)")
         
         
-        // let movieTitle = self.store.movieList[indexPath.row].movieTitle
-        
-        // movieCollectionView.deselectItemAtIndexPath(indexPath, animated: true)
         
         
     }
@@ -150,10 +149,10 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
     }
     
-    //    func collectionView(collectionView: UICollectionView, selectedItemIndex: NSIndexPath) {
-    //      let cell = movieCollectionView.cellForItemAtIndexPath(selectedItemIndex)
-    //        self.performSegueWithIdentifier("movieDetailSegue", sender: cell)
-    //    }
+    //        func collectionView(collectionView: UICollectionView, selectedItemIndex: NSIndexPath) {
+    //          let cell = movieCollectionView.cellForItemAtIndexPath(selectedItemIndex)
+    //            self.performSegueWithIdentifier("movieDetailSegue", sender: cell)
+    //        }
     //
     //  change background color back when user releases touch
     //    func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
@@ -212,25 +211,22 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
-        if segue.identifier == "movieDetailSegue"
-        {
-            let selectedIndexPath = sender as? NSIndexPath
-            let destinationVC = segue.destinationViewController as! MovieDetailViewController
+        if segue.identifier == "movieDetailSegue" {
             
-            
-            let movieID = self.store.movieList[selectedIndexPath!.row]
-            destinationVC.movie = movieID
-            
+            if let selectedIndexPath = sender as? NSIndexPath {
+                let destinationVC = segue.destinationViewController as! MovieDetailViewController
+                let movieID = self.store.movieList[selectedIndexPath.row]
+                destinationVC.movie = movieID
+            }
             
             
         }
         
-        
-        
-        
+               
         
     }
     
     
+    
+    
 }
-

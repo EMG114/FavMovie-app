@@ -27,6 +27,7 @@ class Movie {
     var movieRating:String = ""
     var moviePlotShort:String = ""
     var movieRuntime:String = ""
+    var movieLongPlot:String = ""
     
     
     
@@ -50,32 +51,31 @@ class Movie {
         }
         
 
-        
+    }
             
-        func populateDetailsViewController(dictionary: NSDictionary, completion:(Bool) -> ())
+ func populateDetailsViewController(movieDataDictionary: NSDictionary, completion:(Bool) -> ())
         {
-            self.moviePlotShort = (dictionary["Plot"] as? String)!
-            self.movieActors = (dictionary["Actors"] as? String)!
-            self.movieYear = (dictionary["Released"] as? String)!
-            self.movieDirector = (dictionary["Director"] as? String)!
-            self.movieWriter = (dictionary["Writer"] as? String)!
-            self.movieRating = (dictionary["imdbRating"] as? String)!
-            self.movieMetascore = (dictionary["Metascore"] as? String)!
+            self.moviePlotShort = (movieDataDictionary["Plot"] as? String)!
+            self.movieActors = (movieDataDictionary["Actors"] as? String)!
+            self.movieYear = (movieDataDictionary["Released"] as? String)!
+            self.movieDirector = (movieDataDictionary["Director"] as? String)!
+            self.movieWriter = (movieDataDictionary["Writer"] as? String)!
+            self.movieRating = (movieDataDictionary["imdbRating"] as? String)!
+            self.movieMetascore = (movieDataDictionary["Metascore"] as? String)!
             
             completion(true)
         }
 
                 
         
-        func LongPlotDescription(dictionary: NSDictionary, completion:(Bool)->())
-        {
-            self.moviePlotShort = (dictionary["Plot"] as? String)!
+func longPlotDescription(movieLongPlotDictionary: NSDictionary, completion:(Bool) -> ()) {
+            self.movieLongPlot = (movieLongPlotDictionary["Plot"] as? String)!
             completion(true)
         }
 
     
-            }
+    }
     
-}
-    
+
+
 
