@@ -19,6 +19,7 @@ class OmdbAPIClient{
     func getNextPage()
     {
         pageNumber += 1
+     //   pageNumber
     }
     
     
@@ -41,13 +42,6 @@ class OmdbAPIClient{
                           //  print(jsonResult)
                             completionHandler(jsonResult as! [String : AnyObject])
                             
-                          //  print(jsonResult["Title"] as? String)!
-//                            movie.movieYear = (movieDict["Year"] as? String)!
-//                            movie.movieID = (movieDict["imdbID"] as? String)!
-//                            movie.moviePosterUrl = (movieDict["Poster"] as? String)!
-                            
-                            
-        
                         }
                         catch let error as NSError {
                     
@@ -101,6 +95,35 @@ class OmdbAPIClient{
     
     
     
+class  func getMovieLongPlot(id: String, completion: (NSDictionary)->())
+    {
+        let urlString = "https://www.omdbapi.com/?i=\(id)&plot=full"
+        
+        let url = NSURL(string: urlString)
+        
+        guard let unwrappedURL = url else {return}
+        
+        let session = NSURLSession.sharedSession()
+        
+        let dataTask = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
+            
+            guard let unwrappedData = data else {return}
+            
+            do{
+                let movieLongPlot = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                
+                if let movieFromDetailDictionaryToLong = movieLongPlot
+                {
+                    completion(movieFromDetailDictionaryToLong)
+                }
+            }
+            catch
+            {
+                print(error)
+            }
+        }
+        dataTask.resume()
+    }
     
     
     

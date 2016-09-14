@@ -36,43 +36,46 @@ class Movie {
              let year = movieDict["Year"] as? String
              let id = movieDict["imdbID"] as? String
              let posterUrl = movieDict["Poster"] as? String
-        
+            
+            
             
             self.movieTitle = title
             self.movieYear = year!
             self.movieID = id!
             self.moviePosterUrl = posterUrl!
+            
+            
         } else {
             return nil
         }
+        
 
-}
-//    
-//    enum MoviePlot:String {
-//        case plotShort, plotLong
-//        
-//        }
-//        
-//    
-//    
-//
-//    
-//    func moviePlotDescription(i: MoviePlot){
-//        // i: Handle the enum argument in a func.
-//        if i == .plotShort {
-//            return
-//            
-//        
-//        } else if i == .plotLong {
-//                
-//            print("Long")
-//        }
-//        else {
-//            print("No Plot")
-//        }
-//    }
-  
+        
+            
+        func populateDetailsViewController(dictionary: NSDictionary, completion:(Bool) -> ())
+        {
+            self.moviePlotShort = (dictionary["Plot"] as? String)!
+            self.movieActors = (dictionary["Actors"] as? String)!
+            self.movieYear = (dictionary["Released"] as? String)!
+            self.movieDirector = (dictionary["Director"] as? String)!
+            self.movieWriter = (dictionary["Writer"] as? String)!
+            self.movieRating = (dictionary["imdbRating"] as? String)!
+            self.movieMetascore = (dictionary["Metascore"] as? String)!
+            
+            completion(true)
+        }
+
+                
+        
+        func LongPlotDescription(dictionary: NSDictionary, completion:(Bool)->())
+        {
+            self.moviePlotShort = (dictionary["Plot"] as? String)!
+            completion(true)
+        }
+
     
+            }
+    
+}
     
 
-}

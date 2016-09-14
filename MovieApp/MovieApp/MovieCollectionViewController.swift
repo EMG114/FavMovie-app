@@ -25,8 +25,13 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
        
-
+        self.store.searchForMovie("Batman") {_ in
+            NSOperationQueue.mainQueue().addOperationWithBlock({
+                self.movieCollectionView.reloadData()
+            })
+        }
         
+
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
         movieCollectionView.backgroundColor = UIColor.darkGrayColor()
@@ -49,9 +54,6 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         searchBar.delegate = self
         searchBar.showsCancelButton = false
         searchBar.placeholder = "Search Movies By Title"
-        
-       // let leftNavBarButton = UIBarButtonItem(customView:searchBar)
-      //  self.navigationItem.leftBarButtonItem = leftNavBarButton
         self.navigationItem.titleView = searchBar
         
         
@@ -124,7 +126,7 @@ func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath i
     {
        
         self.performSegueWithIdentifier("movieDetailSegue", sender: indexPath)
-     
+        
          print("Selected cell number: \(indexPath.item)")
         
    
@@ -166,20 +168,21 @@ func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath i
             // replacing characters space with %
    
             let percentString = searchBar.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-            
+         
             var queue = NSOperationQueue()
             queue.qualityOfService = .Background
            
             queue.addOperationWithBlock({
                 
-             
+            
                 self.store.searchForMovie((percentString!), completionHandler: { (true) in
                     
                     NSOperationQueue.mainQueue().addOperationWithBlock({
                         
                       
                         self.movieCollectionView.reloadData()
-                        //return
+                         // OmdbAPIClient().getNextPage()
+                    
                         
                     })
             })
@@ -208,7 +211,14 @@ func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath i
         
 }
     
+//    
+//    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
+//    {
+//        self.store.movieList.removeAll()
+//    }
     
+
+ 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if segue.identifier == "movieDetailSegue"
@@ -219,7 +229,7 @@ func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath i
           
                 let movieID = self.store.movieList[selectedIndexPath!.item]
                 destinationVC.movie = movieID
-        
+                
                 
         
             }

@@ -51,11 +51,29 @@ let store = MovieDataStore.sharedStore
     {
         super.viewDidLoad()
         
-    
+self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style: .Done, target: self, action: #selector(MovieDetailViewController.saveMovieAsFavorite))
+        
+    view.backgroundColor = UIColor.darkGrayColor()
+    movieShortPlotTextView.backgroundColor = UIColor.darkGrayColor()
+  //  movieShortPlotTextView.textColor = UIColor.blackColor()
       
-        self.store.getDetailsForMovieByID((movie?.movieID)!, completion: { (true) in
+       self.store.getDetailsForMovieByID((movie?.movieID)!, completion: { (true) in
     
             dispatch_async(dispatch_get_main_queue(),{
+               
+                self.movieTitleLabel.text = self.movie?.movieTitle
+                self.movieYearLabel.text = self.movie?.movieYear
+                self.movieShortPlotTextView.text = self.movie?.moviePlotShort
+                self.movieActorsLabel.text = self.movie?.movieDirector
+                self.movieWriterLabel.text = self.movie?.movieWriter
+                self.movieActorsLabel.text = self.movie?.movieActors
+                self.imdbScoreLabel.text = self.movie?.movieRating
+                self.metascoreLabel.text = self.movie?.movieMetascore
+                self.movieRuntimeLabel.text = self.movie?.movieRuntime
+                self.movieRatedLabel.text = self.movie?.movieRated
+                self.genreLabel.text = self.movie?.movieGenre
+                self.movieCountryLabel.text = self.movie?.movieCountry
+                self.movieLanguageLabel.text = self.movie?.movieLanguage
                 
 
                 
@@ -86,11 +104,9 @@ let store = MovieDataStore.sharedStore
             
             
             
-       })
+      })
 
-        self.movieTitleLabel.text = self.movie?.movieTitle
         self.movieShortPlotTextView.text = self.movie?.moviePlotShort
-        self.movieYearLabel.text = self.movie?.movieYear
         self.movieDirectorLabel.text = self.movie?.movieDirector
         self.movieWriterLabel.text = self.movie?.movieWriter
         self.movieActorsLabel.text = self.movie?.movieActors
@@ -101,10 +117,39 @@ let store = MovieDataStore.sharedStore
         self.genreLabel.text = self.movie?.movieGenre
         self.movieCountryLabel.text = self.movie?.movieCountry
         self.movieLanguageLabel.text = self.movie?.movieLanguage
+        
+
 
 }
     
+    func saveMovieAsFavorite()
+    {
+        print("save to my favorite list")
+    }
+
     
+    @IBAction func fullPlotDescriptionButton(sender: AnyObject)
+    {
+        //segue: This button will go to Long VC
+    
+    }
+
+
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == "FromDetailToLongSegue"
+        {
+            let destinationLongPlotVC = segue.destinationViewController as? LongPlotViewController
+            
+            if let unwrappedMovie = movie?.moviePlotShort
+            {
+                destinationLongPlotVC!.movie?.moviePlotShort = unwrappedMovie
+            }
+            
+        }
+        
+    }
 
 }
 
