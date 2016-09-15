@@ -55,22 +55,9 @@ class MovieDetailViewController: UIViewController {
         
         view.backgroundColor = UIColor.darkGrayColor()
         movieShortPlotTextView.backgroundColor = UIColor.darkGrayColor()
-        //  movieShortPlotTextView.textColor = UIColor.blackColor()
+      //   movieShortPlotTextView.textColor = UIColor.blackColor()
         
-        //only apply the blur if the user hasn't disabled transparency effects
-       // if !UIAccessibilityIsReduceTransparencyEnabled() {
-           // self.view.backgroundColor = UIColor.clearColor()
-//            
-//          let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
-//         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//            //always fill the view
-//          blurEffectView.frame = self.view.bounds
-//          blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-//            
-//            self.view.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
-//        } else {
-//            self.view.backgroundColor = UIColor.clearColor()
-//        }
+
         
         guard let unwrappedMovie = movie else{return}
         //(movie?.movieID)!
@@ -81,7 +68,7 @@ class MovieDetailViewController: UIViewController {
                 self.movieTitleLabel.text = self.movie?.movieTitle
                 self.movieYearLabel.text = self.movie?.movieYear
                 self.movieShortPlotTextView.text = self.movie?.moviePlotShort
-                self.movieActorsLabel.text = self.movie?.movieDirector
+                self.movieDirectorLabel.text = self.movie?.movieDirector
                 self.movieWriterLabel.text = self.movie?.movieWriter
                 self.movieActorsLabel.text = self.movie?.movieActors
                 self.imdbScoreLabel.text = self.movie?.movieRating
@@ -159,9 +146,9 @@ class MovieDetailViewController: UIViewController {
         {
             let destinationLongPlotVC = segue.destinationViewController as? LongPlotViewController
             
-            if let unwrappedMoviePlot = movie
+            if let unwrappedMovie = movie
             {
-                destinationLongPlotVC!.movie? = unwrappedMoviePlot
+                destinationLongPlotVC!.movie? = unwrappedMovie
             }
             
         }

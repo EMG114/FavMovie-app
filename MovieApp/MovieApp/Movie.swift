@@ -57,7 +57,7 @@ class Movie {
         {
             self.moviePlotShort = (movieDataDictionary["Plot"] as? String)!
             self.movieActors = (movieDataDictionary["Actors"] as? String)!
-            self.movieYear = (movieDataDictionary["Released"] as? String)!
+            self.movieYear = (movieDataDictionary["Year"] as? String)!
             self.movieDirector = (movieDataDictionary["Director"] as? String)!
             self.movieWriter = (movieDataDictionary["Writer"] as? String)!
             self.movieRating = (movieDataDictionary["imdbRating"] as? String)!
@@ -65,7 +65,9 @@ class Movie {
             self.movieLanguage = (movieDataDictionary["Language"] as? String)!
             self.movieCountry = (movieDataDictionary["Country"] as? String)!
             self.movieRated = (movieDataDictionary["Rated"] as? String)!
-          //  self.movieRating = (movieDataDictionary["Rating"] as? String)!
+            self.movieGenre = (movieDataDictionary["Genre"] as? String)!
+            self.movieRuntime = (movieDataDictionary["Runtime"] as? String)!
+           // self.movieRating = (movieDataDictionary["Rating"] as? String)!
 
             
             completion(true)

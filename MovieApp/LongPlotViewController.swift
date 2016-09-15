@@ -24,13 +24,13 @@ class LongPlotViewController: UIViewController {
         
        self.title = "Full Plot"
         
-         view.backgroundColor = UIColor.darkGrayColor()
-        longPlotSummaryTextField.backgroundColor = UIColor.darkGrayColor()
+//         view.backgroundColor = UIColor.darkGrayColor()
+//        longPlotSummaryTextField.backgroundColor = UIColor.darkGrayColor()
         
        guard let unwrappedMoviePlot = movie else {return}
         self.store.getLongSummaryPlot(unwrappedMoviePlot) {
         
-       // OmdbAPIClient().getMovieLongPlot(unwrappedMoviePlot){success in
+      // OmdbAPIClient().getMovieLongPlot(unwrappedMoviePlot.movieID){success in
             dispatch_async(dispatch_get_main_queue(),{
                self.longPlotSummaryTextField.text = self.movie?.movieLongPlot
             })

@@ -41,7 +41,7 @@ class OmdbAPIClient{
                         
                         do {
                             let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
-                          //  print(jsonResult)
+                          // print(jsonResult)
                             completionHandler(jsonResult as! [String : AnyObject])
                             
                         }
@@ -83,7 +83,7 @@ func getMovieDataSearchByID(movieID: String, completion: (NSDictionary)-> ())
                 //Specifies that the parser should allow top-level objects that are not an instance of NSArray or NSDictionary
                 
                 let jsonmovieData = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
-               //print(jsonmovieData)
+            // print(jsonmovieData)
                 if let movieDataDictionary = jsonmovieData
                 {
                     completion(movieDataDictionary as! [String : AnyObject])
@@ -112,9 +112,9 @@ func getMovieDataSearchByID(movieID: String, completion: (NSDictionary)-> ())
         let session = NSURLSession.sharedSession()
         
         let task = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
-          // print(data)
-          //  print(response)
-          //  print(error?.localizedDescription)
+//          print(data)
+//           print(response)
+//            print(error?.localizedDescription)
          
             guard let unwrappedData = data else {return}
             
@@ -125,7 +125,8 @@ func getMovieDataSearchByID(movieID: String, completion: (NSDictionary)-> ())
                 //Specifies that the parser should allow top-level objects that are not an instance of NSArray or NSDictionary
                 
                 let jsonmovieLongPlot = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? [String : AnyObject]
-              print(jsonmovieLongPlot)
+              
+               print(jsonmovieLongPlot)
                 if let movieLongPlotDictionary = jsonmovieLongPlot
                   
                 {

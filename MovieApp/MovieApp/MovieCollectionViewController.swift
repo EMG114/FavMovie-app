@@ -81,19 +81,20 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("movieCell", forIndexPath: indexPath) as! MovieCollectionCell
         
         cell.backgroundColor = UIColor.lightGrayColor()
-        
+       
         
         if self.store.movieList[indexPath.row].moviePosterUrl == "N/A"
         {
             cell.moviePosterImage.image = UIImage.init(named: "movie-placeholder.jpg")
+           
         }
-        
-        let posterUrl = NSURL(string: self.store.movieList[indexPath.row].moviePosterUrl)
-        
+     
+       let posterUrl = NSURL(string: self.store.movieList[indexPath.row].moviePosterUrl)
+       
         if let url = posterUrl
         {
             let data = NSData(contentsOfURL: url)
-            
+          
             if data != nil
             {
                 
@@ -102,7 +103,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
                     
                     
                     
-                    //self.movieCollectionView.reloadData()
+              //  self.movieCollectionView.reloadData()
                 })
                 
             }
@@ -112,10 +113,12 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         }
         
 
-    
+
         return cell
     }
     
+    
+  
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
@@ -124,35 +127,47 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         print("Selected cell index: \(indexPath.row)")
         
+        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
+        cell?.backgroundColor = UIColor.yellowColor()
         
         
+    }
+    
+    
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
+        cell?.backgroundColor = UIColor.lightGrayColor()
+        movieCollectionView.deselectItemAtIndexPath(indexPath, animated: true)
         
     }
     
     // change background color when user touches cell
     
-    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-        
-        
-        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
-        cell?.backgroundColor = UIColor.yellowColor()
-        
-        
-        
-        
-    }
+//    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+//        
+//        
+//        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
+//        cell?.backgroundColor = UIColor.lightGrayColor()
+//        
+//        
+//        
+//        
+//    }
     
-    //        func collectionView(collectionView: UICollectionView, selectedItemIndex: NSIndexPath) {
-    //          let cell = movieCollectionView.cellForItemAtIndexPath(selectedItemIndex)
-    //            self.performSegueWithIdentifier("movieDetailSegue", sender: cell)
-    //        }
+            func collectionView(collectionView: UICollectionView, selectedItemIndex: NSIndexPath) {
+              let cell = movieCollectionView.cellForItemAtIndexPath(selectedItemIndex)
+                self.performSegueWithIdentifier("movieDetailSegue", sender: cell)
+              //  let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
+                        cell?.backgroundColor = UIColor.lightGrayColor()
+            
+            }
     //
     //  change background color back when user releases touch
-    //    func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
-    //        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
-    //        cell?.backgroundColor = UIColor.orangeColor()
-    //    }
-    
+//        func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+//            let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
+//            cell?.backgroundColor = UIColor.lightGrayColor()
+//        }
+//    
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         
