@@ -57,6 +57,21 @@ class MovieDetailViewController: UIViewController {
         movieShortPlotTextView.backgroundColor = UIColor.darkGrayColor()
         //  movieShortPlotTextView.textColor = UIColor.blackColor()
         
+        //only apply the blur if the user hasn't disabled transparency effects
+       // if !UIAccessibilityIsReduceTransparencyEnabled() {
+           // self.view.backgroundColor = UIColor.clearColor()
+//            
+//          let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+//         let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//            //always fill the view
+//          blurEffectView.frame = self.view.bounds
+//          blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+//            
+//            self.view.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
+//        } else {
+//            self.view.backgroundColor = UIColor.clearColor()
+//        }
+        
         guard let unwrappedMovie = movie else{return}
         //(movie?.movieID)!
         self.store.getDetailsForMovieByID(unwrappedMovie){success in

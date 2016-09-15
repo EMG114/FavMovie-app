@@ -24,6 +24,9 @@ class LongPlotViewController: UIViewController {
         
        self.title = "Full Plot"
         
+         view.backgroundColor = UIColor.darkGrayColor()
+        longPlotSummaryTextField.backgroundColor = UIColor.darkGrayColor()
+        
        guard let unwrappedMoviePlot = movie else {return}
         self.store.getLongSummaryPlot(unwrappedMoviePlot) {
         
