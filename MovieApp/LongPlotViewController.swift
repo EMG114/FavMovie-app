@@ -12,9 +12,6 @@ import UIKit
 class LongPlotViewController: UIViewController {
     
     var movie: Movie?
-    
-    var longPlotString = ""
-    
    
     let store = MovieDataStore.sharedStore
     
@@ -28,9 +25,9 @@ class LongPlotViewController: UIViewController {
        self.title = "Full Plot"
         
        guard let unwrappedMoviePlot = movie else {return}
+        self.store.getLongSummaryPlot(unwrappedMoviePlot) {
         
-        OmdbAPIClient().getMovieLongPlot(unwrappedMoviePlot.movieID)
-        {success in
+       // OmdbAPIClient().getMovieLongPlot(unwrappedMoviePlot){success in
             dispatch_async(dispatch_get_main_queue(),{
                self.longPlotSummaryTextField.text = self.movie?.movieLongPlot
             })

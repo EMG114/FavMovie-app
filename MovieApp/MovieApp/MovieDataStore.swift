@@ -62,28 +62,30 @@ class MovieDataStore {
     
 }
             //movieID:String
-    func getDetailsForMovieByID(movie: Movie, completion:(Bool)->()){
+    func getDetailsForMovieByID(movie: Movie, completion:()->()){
         
         OmdbAPIClient().getMovieDataSearchByID(movie.movieID){ movieDataDictionary in
-         
+            movie.populateDetailsViewController(movieDataDictionary, completion: { success in
+                if success {
             
-            if let movie = Movie.init(movieDict:movieDataDictionary as! [String : AnyObject]){
-                
-               movie.movieID = (movieDataDictionary["imdbID"] as? String)!
-               movie.moviePosterUrl = (movieDataDictionary["Poster"] as? String)!
-               movie.movieTitle = (movieDataDictionary["Title"] as? String)!
-               movie.movieYear = (movieDataDictionary["Year"] as? String)!
-                movie.moviePlotShort = (movieDataDictionary["Plot"] as? String)!
-                movie.movieGenre = (movieDataDictionary["Genre"] as? String)!
-                movie.movieDirector = (movieDataDictionary["Director"] as? String)!
-                movie.movieActors = (movieDataDictionary["Actors"] as? String)!
-                movie.movieLanguage = (movieDataDictionary["Language"] as? String)!
-                movie.movieCountry = (movieDataDictionary["Country"] as? String)!
-                movie.movieMetascore = (movieDataDictionary["Metascore"] as? String)!
-                movie.movieRated = (movieDataDictionary["Rated"] as? String)!
-           //     movie.movieRating = (movieDataDictionary["Rating"] as? String)!
-                movie.movieRuntime = (movieDataDictionary["Runtime"] as? String)!
-                
+            
+//            if let movie = Movie.init(movieDict:movieDataDictionary as! [String : AnyObject]){
+//                
+//               movie.movieID = (movieDataDictionary["imdbID"] as? String)!
+//               movie.moviePosterUrl = (movieDataDictionary["Poster"] as? String)!
+//               movie.movieTitle = (movieDataDictionary["Title"] as? String)!
+//               movie.movieYear = (movieDataDictionary["Year"] as? String)!
+//                movie.moviePlotShort = (movieDataDictionary["Plot"] as? String)!
+//                movie.movieGenre = (movieDataDictionary["Genre"] as? String)!
+//                movie.movieDirector = (movieDataDictionary["Director"] as? String)!
+//                movie.movieActors = (movieDataDictionary["Actors"] as? String)!
+//                movie.movieLanguage = (movieDataDictionary["Language"] as? String)!
+//                movie.movieCountry = (movieDataDictionary["Country"] as? String)!
+//                movie.movieMetascore = (movieDataDictionary["Metascore"] as? String)!
+//                movie.movieRated = (movieDataDictionary["Rated"] as? String)!
+//           //     movie.movieRating = (movieDataDictionary["Rating"] as? String)!
+//                movie.movieRuntime = (movieDataDictionary["Runtime"] as? String)!
+            
 //  print("***************************************************************************")
 //                
 //                print("Movie Title: \(movie.movieTitle)")
@@ -101,32 +103,34 @@ class MovieDataStore {
 // print("***************************************************************************")
 ////
             
-           self.movieIDList.append(movie)
+         
                 
-            }
-          completion(true)
+  
+          completion()
       
         
 }
+    })
     
 }
+        
+}
     
-    func getLongSummaryPlot(movie: Movie, completion:(Bool)->())
+    func getLongSummaryPlot(movie: Movie, completion:()->())
     {
         OmdbAPIClient().getMovieLongPlot(movie.movieID) { (movieLongPlotDictionary) in
-            
-       
-                if let movie = Movie.init(movieDict: movieLongPlotDictionary as! [String : AnyObject]){
-    
-                movie.movieLongPlot = (movieLongPlotDictionary["Plot"] as? String)!
-               // print("Movie plotLong: \(movie.movieLongPlot)")
-                  
+   
+            movie.longPlotDescription(movieLongPlotDictionary, completion: { successful in
+                 if successful {
+                
+            completion()
         }
-            completion(true)
-        }
-
+            })
 
 
 }
     
 }
+
+}
+

@@ -53,9 +53,6 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         searchBar.delegate = self
         searchBar.showsCancelButton = false
         searchBar.placeholder = "Search Movies By Title"
-        
-        // let leftNavBarButton = UIBarButtonItem(customView:searchBar)
-        //  self.navigationItem.leftBarButtonItem = leftNavBarButton
         self.navigationItem.titleView = searchBar
         
         
@@ -114,12 +111,8 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
             
         }
         
-        // cell.setNeedsDisplay()
-        //        cell.userInteractionEnabled = true
-        //        cell.movieTitle.userInteractionEnabled = true
-        //        cell.movieYear.userInteractionEnabled = true
-        //        cell.moviePosterImage.userInteractionEnabled = true
-        //
+
+    
         return cell
     }
     
@@ -129,7 +122,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         self.performSegueWithIdentifier("movieDetailSegue", sender: indexPath)
         
-        print("Selected cell number: \(indexPath.row)")
+        print("Selected cell index: \(indexPath.row)")
         
         
         
@@ -179,8 +172,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
                     NSOperationQueue.mainQueue().addOperationWithBlock({
                         
                         self.movieCollectionView.reloadData()
-                        //return
-                        
+                
                     })
                 })
                 

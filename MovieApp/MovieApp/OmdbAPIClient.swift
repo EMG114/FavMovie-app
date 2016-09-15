@@ -86,7 +86,7 @@ func getMovieDataSearchByID(movieID: String, completion: (NSDictionary)-> ())
                //print(jsonmovieData)
                 if let movieDataDictionary = jsonmovieData
                 {
-                    completion(movieDataDictionary)
+                    completion(movieDataDictionary as! [String : AnyObject])
                 }
             }
             catch
@@ -125,11 +125,11 @@ func getMovieDataSearchByID(movieID: String, completion: (NSDictionary)-> ())
                 //Specifies that the parser should allow top-level objects that are not an instance of NSArray or NSDictionary
                 
                 let jsonmovieLongPlot = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? [String : AnyObject]
-       //       print(jsonmovieLongPlot)
+              print(jsonmovieLongPlot)
                 if let movieLongPlotDictionary = jsonmovieLongPlot
                   
                 {
-                    completion(movieLongPlotDictionary)
+                    completion(movieLongPlotDictionary )
                 }
             }
             catch let error as NSError

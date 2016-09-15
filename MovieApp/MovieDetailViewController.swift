@@ -59,7 +59,7 @@ class MovieDetailViewController: UIViewController {
         
         guard let unwrappedMovie = movie else{return}
         //(movie?.movieID)!
-        self.store.getDetailsForMovieByID(unwrappedMovie) { _ in
+        self.store.getDetailsForMovieByID(unwrappedMovie){success in
             
             dispatch_async(dispatch_get_main_queue(),{
                 
@@ -132,12 +132,10 @@ class MovieDetailViewController: UIViewController {
     
     @IBAction func fullPlotDescriptionButton(sender: AnyObject)
     {
-        //segue: This button will go to Long VC
+        //segue: This button will go to Long Plot VC
         
-        
-        
+  
     }
-    
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -146,9 +144,9 @@ class MovieDetailViewController: UIViewController {
         {
             let destinationLongPlotVC = segue.destinationViewController as? LongPlotViewController
             
-            if let unwrappedMovie = movie
+            if let unwrappedMoviePlot = movie
             {
-                destinationLongPlotVC!.movie = unwrappedMovie
+                destinationLongPlotVC!.movie? = unwrappedMoviePlot
             }
             
         }

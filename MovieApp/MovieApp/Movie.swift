@@ -62,6 +62,11 @@ class Movie {
             self.movieWriter = (movieDataDictionary["Writer"] as? String)!
             self.movieRating = (movieDataDictionary["imdbRating"] as? String)!
             self.movieMetascore = (movieDataDictionary["Metascore"] as? String)!
+            self.movieLanguage = (movieDataDictionary["Language"] as? String)!
+            self.movieCountry = (movieDataDictionary["Country"] as? String)!
+            self.movieRated = (movieDataDictionary["Rated"] as? String)!
+          //  self.movieRating = (movieDataDictionary["Rating"] as? String)!
+
             
             completion(true)
         }
