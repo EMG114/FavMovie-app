@@ -19,13 +19,13 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     var movieID: String = ""
     var movie : Movie?
-    private let reuseIdentifier = "movieCell"
+  
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("VIEW DID LOAD GETTING CALLED!!!!!!!")
+      
         
         self.store.searchForMovie("Movie") {_ in
             NSOperationQueue.mainQueue().addOperationWithBlock({
@@ -90,11 +90,12 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         }
      
        let posterUrl = NSURL(string: self.store.movieList[indexPath.row].moviePosterUrl)
+      
        
         if let url = posterUrl
         {
-            let data = NSData(contentsOfURL: url)
-          
+            let data = NSData(contentsOfURL:url)
+       
             if data != nil
             {
                 
@@ -103,13 +104,13 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
                     
                     
                     
-              //  self.movieCollectionView.reloadData()
+              // self.movieCollectionView.reloadData()
                 })
                 
             }
             cell.movieTitle.text = self.store.movieList[indexPath.row].movieTitle
             cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
-            
+              // cell.moviePosterImage.image = UIImage.init(data: data!)
         }
         
 
@@ -137,38 +138,20 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
         cell?.backgroundColor = UIColor.lightGrayColor()
-        movieCollectionView.deselectItemAtIndexPath(indexPath, animated: true)
+      //  movieCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
         
     }
     
-    // change background color when user touches cell
     
-//    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-//        
-//        
-//        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
-//        cell?.backgroundColor = UIColor.lightGrayColor()
-//        
-//        
-//        
-//        
-//    }
+//func collectionView(collectionView: UICollectionView, selectedItemIndex: NSIndexPath) {
+//              let cell = movieCollectionView.cellForItemAtIndexPath(selectedItemIndex)
+//                self.performSegueWithIdentifier("movieDetailSegue", sender: cell)
+//             
+//                        cell?.backgroundColor = UIColor.lightGrayColor()
+//            
+//            }
     
-            func collectionView(collectionView: UICollectionView, selectedItemIndex: NSIndexPath) {
-              let cell = movieCollectionView.cellForItemAtIndexPath(selectedItemIndex)
-                self.performSegueWithIdentifier("movieDetailSegue", sender: cell)
-              //  let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
-                        cell?.backgroundColor = UIColor.lightGrayColor()
-            
-            }
-    //
-    //  change background color back when user releases touch
-//        func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
-//            let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
-//            cell?.backgroundColor = UIColor.lightGrayColor()
-//        }
-//    
-    
+  
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         
         if !searchBar.text!.isEmpty {
@@ -201,7 +184,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         
         func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-            self.store.movieList.removeAll()
+           self.store.movieList.removeAll()
             self.searchBar.resignFirstResponder()
         }
         

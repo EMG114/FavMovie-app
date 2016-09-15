@@ -144,11 +144,17 @@ class MovieDetailViewController: UIViewController {
     {
         if segue.identifier == "FromDetailToLongSegue"
         {
+            
+            print(movie)
             let destinationLongPlotVC = segue.destinationViewController as? LongPlotViewController
             
             if let unwrappedMovie = movie
             {
+                
+                print(unwrappedMovie)
+                destinationLongPlotVC?.movieId = unwrappedMovie.movieID
                 destinationLongPlotVC!.movie? = unwrappedMovie
+                print(destinationLongPlotVC!.movie)
             }
             
         }

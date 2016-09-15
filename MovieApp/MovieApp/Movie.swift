@@ -44,7 +44,8 @@ class Movie {
             self.movieYear = year!
             self.movieID = id!
             self.moviePosterUrl = posterUrl!
-            
+           // print(posterUrl)
+           // print(self.moviePosterUrl)
             
         } else {
             return nil
