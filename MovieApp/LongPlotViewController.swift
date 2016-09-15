@@ -22,15 +22,15 @@ class LongPlotViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        print("loading long plot view controller")
+     
         
 
-        print(movieId)
+      //  print(movieId)
         
        self.title = "Full Plot"
         
          view.backgroundColor = UIColor.darkGrayColor()
-//        longPlotSummaryTextField.backgroundColor = UIColor.darkGrayColor()
+       longPlotSummaryTextField.backgroundColor = UIColor.darkGrayColor()
     
         
         self.store.getLongSummaryPlot(movieId) { (longPlot) in

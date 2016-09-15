@@ -112,7 +112,7 @@ class OmdbAPIClient{
         let session = NSURLSession.sharedSession()
        // print(unwrappedURL)
         let task = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
-            print(data)
+           // print(data)
             
             //           print(response)
             //            print(error?.localizedDescription)

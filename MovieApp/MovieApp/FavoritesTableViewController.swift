@@ -17,13 +17,19 @@ class FavoritesTableViewController: UITableViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        navigationBarUI()
     
         self.title = "Favorites"
      //  navigationBarUI()
-       // self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancel")
-       // self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "done")
-       
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NSProgress.cancel))
+     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.Done, target: self, action: #selector(NSProgress.cancel))}
+    
+    func navigationBarUI()
+    {
+        let navigationBar = navigationController!.navigationBar
+        navigationBar.barTintColor = UIColor.orangeColor()
+        navigationBar.alpha = 0.5
+        
     }
     
 //    func cancel() {
