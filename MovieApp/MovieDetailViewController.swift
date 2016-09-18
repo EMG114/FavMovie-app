@@ -53,7 +53,7 @@ class MovieDetailViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style: .Done, target: self, action: #selector(MovieDetailViewController.saveMovieAsFavorite))
         
-        view.backgroundColor = UIColor.darkGrayColor()
+       view.backgroundColor = UIColor.darkGrayColor()
         movieShortPlotTextView.backgroundColor = UIColor.darkGrayColor()
       //   movieShortPlotTextView.textColor = UIColor.blackColor()
         

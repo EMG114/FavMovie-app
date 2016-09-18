@@ -32,28 +32,16 @@ class FavoritesTableViewController: UITableViewController {
         
     }
     
-//    func cancel() {
-//        self.dismissViewControllerAnimated(true, completion: nil)
-  //  }
+    func cancel() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
-  //  func done() {
-        //save things
-   //     self.dismissViewControllerAnimated(true, completion: nil)
- //   }
-//    func navigationBarUI()
-//        
-//    {
-////        let nav : UINavigationController = UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("YourControllerName") as UIViewController)
-//        
-//       // self.navigationController?.presentViewController(nav, animated: true, completion: nil)
-//      // let navigationController =  UINavigationController(rootViewController: FavoritesTableViewController)
-//        //let navigationController = UINavigationController(MovieCollectionViewController)
-//       let navigationBar = navigationController!.navigationBar
-//       // let navigationController = UINavigationController(MovieCollectionViewController)
-//        navigationBar.barTintColor = UIColor.orangeColor()
-//        navigationBar.alpha = 0.5
-//        
-//    }
+    func done() {
+        //save things maybe ?
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+   
+
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {

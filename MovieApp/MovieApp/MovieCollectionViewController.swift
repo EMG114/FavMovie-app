@@ -35,7 +35,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
-        movieCollectionView.backgroundColor = UIColor.darkGrayColor()
+       movieCollectionView.backgroundColor = UIColor.darkGrayColor()
         createSearchBar()
         navigationBarUI()
         

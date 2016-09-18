@@ -8,9 +8,11 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 class Movie {
 
+    
     
     var movieTitle:String = ""
     var movieYear:String = ""
@@ -29,7 +31,7 @@ class Movie {
     var movieRuntime:String = ""
     var movieLongPlot:String = ""
     
-    
+ 
     
     init?(movieDict:[String: AnyObject]){
        

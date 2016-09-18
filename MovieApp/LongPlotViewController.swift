@@ -29,7 +29,7 @@ class LongPlotViewController: UIViewController {
         
        self.title = "Full Plot"
         
-         view.backgroundColor = UIColor.darkGrayColor()
+        view.backgroundColor = UIColor.darkGrayColor()
        longPlotSummaryTextField.backgroundColor = UIColor.darkGrayColor()
     
         
