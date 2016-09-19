@@ -15,7 +15,7 @@ class MovieDataStore {
  static let sharedStore = MovieDataStore()
  
  var movieList:[Movie] = []
- var movieIDList:[Movie] = []
+ var favoriteList = [Favorite]()
  var pageNumber = 1
     
 func getNextPage() -> Int {
@@ -24,7 +24,9 @@ func getNextPage() -> Int {
         return pageNumber
     }
     
-var favoriteList = [Favorite]()
+
+    
+    
  private init() {}
     
     func searchForMovie(title:String,pages: Int, completionHandler:(Bool)->()) {

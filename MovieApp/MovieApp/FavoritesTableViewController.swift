@@ -13,7 +13,7 @@ import CoreData
 class FavoritesTableViewController: UITableViewController {
     
    let store = MovieDataStore.sharedStore
-// let navigationBar = navigationController!.navigationBar
+
     
     override func viewDidLoad()
     {
@@ -21,15 +21,31 @@ class FavoritesTableViewController: UITableViewController {
         navigationBarUI()
     
         self.title = "Favorites"
-     //  navigationBarUI()
-      self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NSProgress.cancel))
-     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.Done, target: self, action: #selector(NSProgress.cancel))}
+    
+//      self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NSProgress.cancel))
+//     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.Done, target: self, action: #selector(NSProgress.cancel))
+    
+       store.fetchData()
+       self.tableView.reloadData()
+    
+    }
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(true)
+        
+        store.fetchData()
+        self.tableView.reloadData()
+        
+    }
     
     func navigationBarUI()
     {
         let navigationBar = navigationController!.navigationBar
         navigationBar.barTintColor = UIColor.orangeColor()
         navigationBar.alpha = 0.5
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NSProgress.cancel))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.Done, target: self, action: #selector(NSProgress.cancel))
         
     }
     
@@ -46,7 +62,7 @@ class FavoritesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 100
+        return store.favoriteList.count
     }
     
     
@@ -54,30 +70,50 @@ class FavoritesTableViewController: UITableViewController {
      let cell = tableView.dequeueReusableCellWithIdentifier("favoriteMovieCell", forIndexPath: indexPath)
      
      // Configure the cell...
+        
+        
+        
+    //    let favoriteMovie = store.favoriteList[indexPath.row].movies
+
+            
+        
+        
+        
      cell.backgroundColor = UIColor.darkGrayColor()
      return cell
      }
-     
+
     
-    /*
+    
      // Override to support conditional editing of the table view.
      override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
      // Return false if you do not want the specified item to be editable.
      return true
      }
-     */
+ 
     
-    /*
+    
      // Override to support editing the table view.
      override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
      if editingStyle == .Delete {
      // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
+        
+        
+        let managedcontext = store.managedObjectContext
+        managedcontext.deleteObject(store.favoriteList[indexPath.row])
+        
+        store.favoriteList.removeAtIndex(indexPath.row)
+        store.saveContext()
+        
+        self.tableView.reloadData()
+        
+//
+//     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+//     } else if editingStyle == .Insert {
      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
      }
      }
-     */
+    
     
     /*
      // Override to support rearranging the table view.
