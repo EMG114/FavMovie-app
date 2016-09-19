@@ -10,30 +10,33 @@ import UIKit
 import Foundation
 import CoreData
 
-class Movie {
+class Movie: NSManagedObject {
 
+//Insert code here to add functionality to your managed object subclass
     
-    
-    var movieTitle:String = ""
-    var movieYear:String = ""
-    var movieDirector:String = ""
-    var movieWriter:String = ""
-    var movieActors:String = ""
-    var movieID:String = ""
-    var moviePosterUrl:String = ""
-    var movieRated:String = ""
-    var movieLanguage:String = ""
-    var movieCountry:String = ""
-    var movieGenre:String = ""
-    var movieMetascore: String = ""
-    var movieRating:String = ""
-    var moviePlotShort:String = ""
-    var movieRuntime:String = ""
-    var movieLongPlot:String = ""
-    
- 
-    
-    init?(movieDict:[String: AnyObject]){
+//    var movieTitle:String = ""
+//    var movieYear:String = ""
+//    var movieDirector:String = ""
+//    var movieWriter:String = ""
+//    var movieActors:String = ""
+//    var movieID:String = ""
+//    var moviePosterUrl:String = ""
+//    var movieRated:String = ""
+//    var movieLanguage:String = ""
+//    var movieCountry:String = ""
+//    var movieGenre:String = ""
+//    var movieMetascore: String = ""
+//    var movieRating:String = ""
+//    var moviePlotShort:String = ""
+//    var movieRuntime:String = ""
+//    var movieLongPlot:String = ""
+//    
+    convenience init?(movieDict: NSDictionary,entity: NSEntityDescription, managedObjectContext: NSManagedObjectContext)
+    {
+        self.init(entity: entity, insertIntoManagedObjectContext: managedObjectContext)
+
+   
+    //init?(movieDict:[String: AnyObject]){
        
         if let title = movieDict["Title"] as? String {
              let year = movieDict["Year"] as? String

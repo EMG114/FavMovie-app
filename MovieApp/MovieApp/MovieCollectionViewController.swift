@@ -27,7 +27,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
       
         
-        self.store.searchForMovie("Movie") {_ in
+        self.store.searchForMovie("Movie", pages: store.pageNumber) {_ in
             NSOperationQueue.mainQueue().addOperationWithBlock({
                 self.movieCollectionView.reloadData()
             })
@@ -89,7 +89,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
            
         }
      
-       let posterUrl = NSURL(string: self.store.movieList[indexPath.row].moviePosterUrl)
+       let posterUrl = NSURL(string: self.store.movieList[indexPath.row].moviePosterUrl!)
       
        
         if let url = posterUrl
@@ -165,7 +165,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
             queue.addOperationWithBlock({
                 
                 
-                self.store.searchForMovie((percentString!), completionHandler: { (true) in
+                self.store.searchForMovie((percentString!),pages: self.store.pageNumber,completionHandler: { (true) in
                     
                     NSOperationQueue.mainQueue().addOperationWithBlock({
                         

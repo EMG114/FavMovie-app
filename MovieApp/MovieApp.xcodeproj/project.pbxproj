@@ -24,6 +24,9 @@
 		079729681D8253C100231DE2 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079729671D8253C100231DE2 /* MovieDetailViewController.swift */; };
 		07A5B8E91D863B160091BF43 /* LongPlotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A5B8E81D863B160091BF43 /* LongPlotViewController.swift */; };
 		07C2E8621D807EF300A2A03B /* MovieDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C2E8611D807EF300A2A03B /* MovieDataStore.swift */; };
+		07C634CB1D901E9600B3529D /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C634C71D901E9600B3529D /* Favorite+CoreDataProperties.swift */; };
+		07C634CC1D901E9600B3529D /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C634C81D901E9600B3529D /* Favorite.swift */; };
+		07C634CD1D901E9600B3529D /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		079729671D8253C100231DE2 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieDetailViewController.swift; path = ../MovieDetailViewController.swift; sourceTree = "<group>"; };
 		07A5B8E81D863B160091BF43 /* LongPlotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LongPlotViewController.swift; path = ../LongPlotViewController.swift; sourceTree = "<group>"; };
 		07C2E8611D807EF300A2A03B /* MovieDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDataStore.swift; sourceTree = "<group>"; };
+		07C634C71D901E9600B3529D /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		07C634C81D901E9600B3529D /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,9 @@
 		076B498C1D7A6E7700C478D1 = {
 			isa = PBXGroup;
 			children = (
+				07C634C71D901E9600B3529D /* Favorite+CoreDataProperties.swift */,
+				07C634C81D901E9600B3529D /* Favorite.swift */,
+				07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */,
 				076B49971D7A6E7700C478D1 /* MovieApp */,
 				076B49961D7A6E7700C478D1 /* Products */,
 			);
@@ -174,10 +183,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				079385AA1D820F2D00D475EF /* MovieCollectionCell.swift in Sources */,
+				07C634CD1D901E9600B3529D /* Movie+CoreDataProperties.swift in Sources */,
+				07C634CC1D901E9600B3529D /* Favorite.swift in Sources */,
 				07A5B8E91D863B160091BF43 /* LongPlotViewController.swift in Sources */,
 				076B499B1D7A6E7700C478D1 /* MovieCollectionViewController.swift in Sources */,
 				072509CD1D885A230056F331 /* FavoritesTableViewController.swift in Sources */,
 				076B49B21D7A79FB00C478D1 /* OmdbAPIClient.swift in Sources */,
+				07C634CB1D901E9600B3529D /* Favorite+CoreDataProperties.swift in Sources */,
 				076B49991D7A6E7700C478D1 /* AppDelegate.swift in Sources */,
 				079729681D8253C100231DE2 /* MovieDetailViewController.swift in Sources */,
 				076B49AE1D7A726100C478D1 /* Movie.swift in Sources */,

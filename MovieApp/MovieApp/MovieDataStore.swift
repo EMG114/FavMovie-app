@@ -16,19 +16,33 @@ class MovieDataStore {
  
  var movieList:[Movie] = []
  var movieIDList:[Movie] = []
+ var pageNumber = 1
+    
+func getNextPage() -> Int {
+        self.pageNumber += 1
+        
+        return pageNumber
+    }
     
 //var favoriteList = [Favorite]()
  private init() {}
     
-    func searchForMovie(title:String, completionHandler:(Bool)->()) {
+    func searchForMovie(title:String,pages: Int, completionHandler:(Bool)->()) {
         
         OmdbAPIClient().getMoviesFromSearch(title) { jsonResult in
             self.movieList.removeAll()
             
             if let list = jsonResult["Search"] as? [[String: AnyObject]] {
                 for movieDict in list {
-                    if let movie = Movie.init(movieDict:movieDict){
-                        
+                    
+                    let movieEntity = NSEntityDescription.entityForName("Movie", inManagedObjectContext: self.managedObjectContext)
+                    
+                    guard let entity = movieEntity else {fatalError("there is an error")}
+                    
+//                    let repository = Movie(movieDict: movieDict, entity:entity , managedObjectContext: self.managedObjectContext)
+                    
+                    if let movie = Movie.init(movieDict:movieDict, entity:entity, managedObjectContext: self.managedObjectContext){
+                    
                         
                         movie.movieTitle = (movieDict["Title"] as? String)!
                         movie.movieYear = (movieDict["Year"] as? String)!
@@ -67,7 +81,7 @@ class MovieDataStore {
     //movieID:String
     func getDetailsForMovieByID(movie: Movie, completion:()->()){
         
-        OmdbAPIClient().getMovieDataSearchByID(movie.movieID){ movieDataDictionary in
+        OmdbAPIClient().getMovieDataSearchByID(movie.movieID!){ movieDataDictionary in
             movie.populateDetailsViewController(movieDataDictionary, completion: { success in
                 if success {
                     
