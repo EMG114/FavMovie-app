@@ -24,7 +24,7 @@ func getNextPage() -> Int {
         return pageNumber
     }
     
-//var favoriteList = [Favorite]()
+var favoriteList = [Favorite]()
  private init() {}
     
     func searchForMovie(title:String,pages: Int, completionHandler:(Bool)->()) {
@@ -225,21 +225,21 @@ func getNextPage() -> Int {
     }()
     
     
-//    func fetchData()
-//    {
-//        
-//        let favoriteFetch = NSFetchRequest(entityName: "Favorite")
-//        
-//        do{
-//            self.favoriteList = try managedObjectContext.executeFetchRequest(favoriteFetch) as! [Favorite]
-//        }
-//        catch
-//        {
-//            print(error)
-//            favoriteList = []
-//        }
-//        
-//    }
+    func fetchData()
+    {
+        
+        let favoriteFetch = NSFetchRequest(entityName: "Favorite")
+        
+        do{
+            self.favoriteList = try managedObjectContext.executeFetchRequest(favoriteFetch) as! [Favorite]
+        }
+        catch
+        {
+            print(error)
+            favoriteList = []
+        }
+        
+    }
 
     
     // MARK: - Core Data Saving support

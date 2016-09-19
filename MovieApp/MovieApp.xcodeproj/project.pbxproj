@@ -49,9 +49,9 @@
 		079729671D8253C100231DE2 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieDetailViewController.swift; path = ../MovieDetailViewController.swift; sourceTree = "<group>"; };
 		07A5B8E81D863B160091BF43 /* LongPlotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LongPlotViewController.swift; path = ../LongPlotViewController.swift; sourceTree = "<group>"; };
 		07C2E8611D807EF300A2A03B /* MovieDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDataStore.swift; sourceTree = "<group>"; };
-		07C634C71D901E9600B3529D /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		07C634C81D901E9600B3529D /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
-		07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		07C634C71D901E9600B3529D /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Favorite+CoreDataProperties.swift"; path = "../Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		07C634C81D901E9600B3529D /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Favorite.swift; path = ../Favorite.swift; sourceTree = "<group>"; };
+		07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Movie+CoreDataProperties.swift"; path = "../Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +68,6 @@
 		076B498C1D7A6E7700C478D1 = {
 			isa = PBXGroup;
 			children = (
-				07C634C71D901E9600B3529D /* Favorite+CoreDataProperties.swift */,
-				07C634C81D901E9600B3529D /* Favorite.swift */,
-				07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */,
 				076B49971D7A6E7700C478D1 /* MovieApp */,
 				076B49961D7A6E7700C478D1 /* Products */,
 			);
@@ -89,6 +86,7 @@
 			children = (
 				076B49981D7A6E7700C478D1 /* AppDelegate.swift */,
 				076B49AD1D7A726100C478D1 /* Movie.swift */,
+				07C634C81D901E9600B3529D /* Favorite.swift */,
 				077CCEA81D8F47D30070C5CF /* ReachabilityInternet.swift */,
 				076B49B11D7A79FB00C478D1 /* OmdbAPIClient.swift */,
 				07C2E8611D807EF300A2A03B /* MovieDataStore.swift */,
@@ -98,6 +96,8 @@
 				07A5B8E81D863B160091BF43 /* LongPlotViewController.swift */,
 				0796AAFC1D88E80400927942 /* FavoriteTableViewCell.swift */,
 				072509CC1D885A230056F331 /* FavoritesTableViewController.swift */,
+				07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */,
+				07C634C71D901E9600B3529D /* Favorite+CoreDataProperties.swift */,
 				076B49A21D7A6E7800C478D1 /* Assets.xcassets */,
 				072509DA1D88A4A60056F331 /* Star Filled.png */,
 				072509D81D88A45D0056F331 /* Film Reel.png */,
