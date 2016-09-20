@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MovieDetailViewController: UIViewController {
     
@@ -128,13 +129,35 @@ class MovieDetailViewController: UIViewController {
     
     func saveMovieAsFavorite()
     {
-        print("save to my favorite list")
+        
+        guard let savedThisMovie = self.movie?.movieTitle  else {return}
+        let savedAlert = UIAlertController.init(title: "Favorite!", message: "\(savedThisMovie) was saved in favorites", preferredStyle: .Alert)
+        
+        let doneAction = UIAlertAction.init(title: "Done", style: .Cancel) { (action) in
+        }
+        savedAlert.addAction(doneAction)
+        self.navigationItem.rightBarButtonItem = nil
+        self.presentViewController(savedAlert, animated: true){
+        }
+        
+        let managedContext = store.managedObjectContext
+        
+        let addThisMovie = NSEntityDescription.insertNewObjectForEntityForName("Favorite", inManagedObjectContext: managedContext) as! Favorite
+        
+        guard let savedMovie = self.movie else {return}
+        addThisMovie.movies?.insert(savedMovie)
+        
+        print(addThisMovie.movies)
+        
+        store.saveContext()
+        
+       // print("save to my favorite list")
     }
     
     
     @IBAction func fullPlotDescriptionButton(sender: AnyObject)
     {
-        //segue: This button will go to Long Plot VC
+        //segue: This button will go to Long Plot VC, it just segue...
         
   
     }

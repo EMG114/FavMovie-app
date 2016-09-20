@@ -62,7 +62,8 @@ class FavoritesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return store.favoriteList.count
+       //return store.favoriteList.count
+        return 100
     }
     
     
@@ -73,9 +74,10 @@ class FavoritesTableViewController: UITableViewController {
         
         
         
-    //    let favoriteMovie = store.favoriteList[indexPath.row].movies
+       // let favoriteMovie = store.favoriteList[indexPath.row].movies
 
-            
+
+        //detailTextLabel.text = movieList
         
         
         
