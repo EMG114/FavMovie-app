@@ -288,7 +288,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JHA-4g-3TX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8159" y="-125"/>
+            <point key="canvasLocation" x="8085" y="-90"/>
         </scene>
         <!--Full Description-->
         <scene sceneID="HEs-BR-nw5">
@@ -410,6 +410,7 @@
                                     <outlet property="favMovieTitleLabel" destination="dSM-Ne-iWP" id="lAw-9V-aH8"/>
                                     <outlet property="favMovieYearLabel" destination="7hn-wQ-L8P" id="VoF-eA-S7Q"/>
                                     <outlet property="favWriterLabel" destination="Zdz-Uj-kdy" id="Sw8-xo-SDX"/>
+                                    <segue destination="Sfa-Mb-o8B" kind="show" identifier="favoriteToDetailsSegue" id="DG3-wy-TZd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -489,4 +490,7 @@
         <image name="Star Filled.png" width="30" height="30"/>
         <image name="movie-placeholder" width="386" height="572"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="DG3-wy-TZd"/>
+    </inferredMetricsTieBreakers>
 </document>

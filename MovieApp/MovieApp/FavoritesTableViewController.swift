@@ -20,10 +20,8 @@ class FavoritesTableViewController: UITableViewController {
         super.viewDidLoad()
         navigationBarUI()
     
-        self.title = "Favorites"
-    
-//      self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NSProgress.cancel))
-//     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.Done, target: self, action: #selector(NSProgress.cancel))
+       self.title = "Favorites"
+       tableView.backgroundColor = UIColor.darkGrayColor()
     
        store.fetchData()
        self.tableView.reloadData()
@@ -44,17 +42,26 @@ class FavoritesTableViewController: UITableViewController {
         navigationBar.barTintColor = UIColor.orangeColor()
         navigationBar.alpha = 0.5
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NSProgress.cancel))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.Done, target: self, action: #selector(NSProgress.cancel))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: #selector(NSProgress.cancel))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NSProgress.cancel))
         
     }
     
     func cancel() {
+        //done button
+//          let indexPath = tableView.indexPathForCell as! UITableViewCell
+      //  self.performSegueWithIdentifier("movieDetailSegue", sender: indexPath )
+        
+ //       print("Selected cell index: \(indexPath.row)")
+        
+//        self.presentViewController(MovieCollectionViewController, animated: true, completion: nil)
+
         self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
-    func done() {
-        //save things maybe ?
+    func delete() {
+        //delete/clear entire list maybe ?
         self.dismissViewControllerAnimated(true, completion: nil)
     }
    
@@ -139,6 +146,8 @@ class FavoritesTableViewController: UITableViewController {
      }
     
     
+
+    
     /*
      // Override to support rearranging the table view.
      override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
@@ -163,5 +172,29 @@ class FavoritesTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        
+        if segue.identifier == "favoriteToDetailsSegue"
+        {
+            let destinationVC = segue.destinationViewController as? MovieDetailViewController
+            
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
+            
+            if let index = indexPath
+            {
+                let movieID = self.store.favoriteList[index.row].movies
+               let movieTitle = movieID?.first
+                
+               let destinationVC = destinationVC
+                destinationVC!.movie = movieTitle
+                
+            }
+            
+        }
+        
+    }
+
 
 }
