@@ -62,23 +62,45 @@ class FavoritesTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-       //return store.favoriteList.count
-        return 100
+       return store.favoriteList.count
+       // return 100
     }
     
     
      override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCellWithIdentifier("favoriteMovieCell", forIndexPath: indexPath)
+     let cell = tableView.dequeueReusableCellWithIdentifier("favoriteMovieCell", forIndexPath: indexPath) as! FavoriteTableViewCell
      
      // Configure the cell...
         
         
+        let favoriteMovie = store.favoriteList[indexPath.row].movies
         
-       // let favoriteMovie = store.favoriteList[indexPath.row].movies
-
-
-        //detailTextLabel.text = movieList
+        cell.favMovieTitleLabel.text = favoriteMovie?.first?.movieTitle
+        cell.favMovieYearLabel.text = favoriteMovie?.first?.movieYear
+        cell.favMovieDirectorLabel.text = favoriteMovie?.first?.movieDirector
+    
+        cell.favWriterLabel.text = favoriteMovie?.first?.movieWriter
         
+        let imagePoster = favoriteMovie?.first?.moviePosterUrl
+        
+        if let unwrappedMoviePosterString = imagePoster
+        {
+            if unwrappedMoviePosterString == "N/A"
+            {
+                cell.favMoviePosterImage.image = UIImage.init(named:"movie-placeholder.jpg")
+            }
+            let imagePosterUrl = NSURL(string: unwrappedMoviePosterString)
+            if let url = imagePosterUrl
+            {
+                let dataImage = NSData(contentsOfURL: url)
+                
+                if let unwrappedPosterImage = dataImage
+                {
+                    cell.favMoviePosterImage.image = UIImage.init(data: unwrappedPosterImage)
+                }
+            }
+            
+        }
         
         
      cell.backgroundColor = UIColor.darkGrayColor()
