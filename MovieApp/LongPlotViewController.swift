@@ -8,9 +8,11 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class LongPlotViewController: UIViewController {
     
+    @IBOutlet weak var fullActivityIndicator: UIActivityIndicatorView!
     var movie: Movie?
     var movieId:String!
    
@@ -29,6 +31,9 @@ class LongPlotViewController: UIViewController {
         
        self.title = "Full Plot"
         
+        self.fullActivityIndicator.hidden = false
+        self.fullActivityIndicator.startAnimating()
+        
         view.backgroundColor = UIColor.darkGrayColor()
        longPlotSummaryTextField.backgroundColor = UIColor.darkGrayColor()
     
@@ -40,6 +45,8 @@ class LongPlotViewController: UIViewController {
             dispatch_async(dispatch_get_main_queue(),{
                 
                 self.longPlotSummaryTextField.text = longPlot
+                self.fullActivityIndicator.hidden = true
+                self.fullActivityIndicator.stopAnimating()
                 
             })
             

@@ -16,6 +16,7 @@ class MovieDetailViewController: UIViewController {
     let store = MovieDataStore.sharedStore
     
     
+    @IBOutlet weak var detailsActivityIndicator: UIActivityIndicatorView!
     
     
     @IBOutlet weak var imageViewPosterLabel: UIImageView!
@@ -51,6 +52,9 @@ class MovieDetailViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        self.detailsActivityIndicator.hidden = false
+        self.detailsActivityIndicator.startAnimating()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style: .Done, target: self, action: #selector(MovieDetailViewController.saveMovieAsFavorite))
         
@@ -122,7 +126,8 @@ class MovieDetailViewController: UIViewController {
         self.genreLabel.text = self.movie?.movieGenre
         self.movieCountryLabel.text = self.movie?.movieCountry
         self.movieLanguageLabel.text = self.movie?.movieLanguage
-        
+        self.detailsActivityIndicator.hidden = true
+        self.detailsActivityIndicator.stopAnimating()
         
         
     }

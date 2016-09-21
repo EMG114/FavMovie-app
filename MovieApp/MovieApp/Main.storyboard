@@ -19,6 +19,11 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="30" minY="15" maxX="30" maxY="20"/>
                         </collectionViewFlowLayout>
+                        <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="WtU-T2-IJK">
+                            <rect key="frame" x="189" y="285" width="37" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" contentMode="center" reuseIdentifier="movieCell" id="b4b-3C-Fxe" customClass="MovieCollectionCell" customModule="MovieApp">
                                 <rect key="frame" x="30" y="79" width="100" height="183"/>
@@ -63,12 +68,13 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="movieCollectionView" destination="LIm-cp-CLt" id="Uzb-sl-gmO"/>
+                        <outlet property="searchActivityIndicator" destination="WtU-T2-IJK" id="gsc-Th-9Sx"/>
                         <segue destination="Sfa-Mb-o8B" kind="show" identifier="movieDetailSegue" id="Og9-Xk-v9o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S99-NR-mwq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7629" y="-132"/>
+            <point key="canvasLocation" x="7611" y="-65"/>
         </scene>
         <!--Movie Details-->
         <scene sceneID="DFI-SE-Va1">
@@ -265,11 +271,16 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="t9b-bo-qdB">
+                                <rect key="frame" x="189" y="475" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="detailsActivityIndicator" destination="t9b-bo-qdB" id="7sF-ca-QfF"/>
                         <outlet property="genreLabel" destination="IfG-RC-lrn" id="Nv6-5h-Wnu"/>
                         <outlet property="imageViewPosterLabel" destination="mHR-Kf-VVA" id="vCJ-ok-iYh"/>
                         <outlet property="imdbScoreLabel" destination="ipV-Vc-wSV" id="rDP-QA-Int"/>
@@ -309,10 +320,15 @@
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="C41-zW-JkZ">
+                                <rect key="frame" x="189" y="392" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="fullActivityIndicator" destination="C41-zW-JkZ" id="9fq-p2-Bto"/>
                         <outlet property="longPlotSummaryTextField" destination="lbH-uG-kak" id="xSx-jD-Uhi"/>
                     </connections>
                 </viewController>
@@ -419,7 +435,19 @@
                             <outlet property="delegate" destination="ayB-xL-nUu" id="FcP-xL-MNY"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="hdO-aD-uVn"/>
+                    <navigationItem key="navigationItem" id="hdO-aD-uVn">
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" id="Wjo-ph-Z47">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jX3-N9-DSc">
+                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Delete All"/>
+                                <connections>
+                                    <action selector="deleteAllButton:" destination="ayB-xL-nUu" eventType="touchUpInside" id="FpZ-zo-Zrq"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xNU-T5-Qem" userLabel="First Responder" sceneMemberID="firstResponder"/>

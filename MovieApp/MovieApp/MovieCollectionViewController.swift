@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
 class MovieCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UISearchBarDelegate{
     
     
     @IBOutlet weak var movieCollectionView: UICollectionView!
+    
+    
+    @IBOutlet weak var searchActivityIndicator: UIActivityIndicatorView!
+    
     
     var searchBar: UISearchBar!
     
@@ -25,11 +30,14 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      
+        self.searchActivityIndicator.hidden = false
+        self.searchActivityIndicator.startAnimating()
         
         self.store.searchForMovie("Movie", pages: store.pageNumber) {_ in
             NSOperationQueue.mainQueue().addOperationWithBlock({
                 self.movieCollectionView.reloadData()
+                self.searchActivityIndicator.hidden = true
+                self.searchActivityIndicator.stopAnimating()
             })
         }
         
