@@ -18,14 +18,14 @@ class OmdbAPIClient{
     
     
     
-    func getNextPage()
+    func getNextPage(title: String)
     {
         pageNumber += 1
         
     }
     
     
-    func getMoviesFromSearch(title: String, completionHandler:([String: AnyObject]) -> () ){
+    func getMoviesFromSearch(title: String, pages: Int, completionHandler:([String: AnyObject]) -> () ){
         
         // movies by type movie parameter and title
         let callUrl = "https://www.omdbapi.com/?s=\(title)&page=\(pageNumber)&type=movie&r=json"

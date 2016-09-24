@@ -18,20 +18,22 @@ class MovieDataStore {
  var favoriteList = [Favorite]()
  var pageNumber = 1
     
-func getNextPage() -> Int {
-        self.pageNumber += 1
-        
-        return pageNumber
-    }
-    
 
+    
+    
+    
+    func getNextPage(searchText: String)
+    {
+        pageNumber += 1
+        
+    }
     
     
  private init() {}
     
-    func searchForMovie(title:String,pages: Int, completionHandler:(Bool)->()) {
+    func searchForMovie(title:String,page: Int, completionHandler:(Bool)->()) {
         
-        OmdbAPIClient().getMoviesFromSearch(title) { jsonResult in
+        OmdbAPIClient().getMoviesFromSearch(title, pages: pageNumber) { jsonResult in
             self.movieList.removeAll()
             
             if let list = jsonResult["Search"] as? [[String: AnyObject]] {

@@ -9,6 +9,16 @@
 import UIKit
 import CoreData
 
+
+let kREACHABILITYWITHWIFI = "ReachableWithWIFI"
+let kNOTREACHABLE = "notReachable"
+let kREACHABLEWITHWWAN = "ReachableWithWWAN"
+
+var reachability: Reachability?
+var reachabilityStatus = kREACHABILITYWITHWIFI
+
+
+
 class MovieCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UISearchBarDelegate{
     
     
@@ -24,16 +34,23 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     var movieID: String = ""
     var movie : Movie?
-  
+    var pageNumber = 1
     
+    var internetReach: Reachability?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+             NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MovieCollectionViewController.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
+   
+        internetReach?.startNotifier()
+        
+      //  self.statusChangedWithReachability(internetReach!)
+        
         self.searchActivityIndicator.hidden = false
         self.searchActivityIndicator.startAnimating()
         
-        self.store.searchForMovie("Movie", pages: store.pageNumber) {_ in
+        self.store.searchForMovie("Movie", page: self.store.pageNumber) {_ in
             NSOperationQueue.mainQueue().addOperationWithBlock({
                 self.movieCollectionView.reloadData()
                 self.searchActivityIndicator.hidden = true
@@ -43,7 +60,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
-       movieCollectionView.backgroundColor = UIColor.darkGrayColor()
+        movieCollectionView.backgroundColor = UIColor.darkGrayColor()
         createSearchBar()
         navigationBarUI()
         
@@ -52,8 +69,50 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let searchText = searchBar.text {
+        self.store.getNextPage(searchText)
+        self.movieCollectionView.reloadData()
+        
+    }
+    }
     
     
+    
+    func reachabilityChanged(notification: NSNotification)
+    {
+        print("Reachability status changed")
+        reachability = notification.object as? Reachability
+        self.statusChangedWithReachability(reachability!)
+    }
+    
+    func statusChangedWithReachability(currentStatus: Reachability)
+    {
+        let networkStatus: NetworkStatus = currentStatus.currentReachabilityStatus()
+        
+        print("Status: \(networkStatus.rawValue)")
+        
+        
+        if networkStatus.rawValue == ReachableViaWiFi.rawValue
+        {
+            print("Reachable with Wifi")
+          //  searchBar.userInteractionEnabled = true
+        } else if (networkStatus.rawValue == NotReachable.rawValue) {
+    reachabilityStatus = kNOTREACHABLE
+    print("Network not reachable")
+    
+    let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
+    
+    self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
+    NSNotificationCenter.defaultCenter().postNotificationName("reachStatusChanged", object: nil)
+    
+    }
+        
+}
+
+
     
     func createSearchBar() {
         
@@ -151,6 +210,37 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        
+
+        if indexPath.row == store.movieList.endIndex {
+            if let searchText = searchBar.text
+            {
+                dispatch_async(dispatch_get_main_queue(),
+                               {
+                                self.store.getNextPage(searchText)
+                                self.store.searchForMovie((searchText),page: self.pageNumber,completionHandler: { (true) in
+                                    
+                                    NSOperationQueue.mainQueue().addOperationWithBlock({
+                                          self.store.getNextPage(searchText)
+                                        self.movieCollectionView.reloadData()
+                                        
+                                    })
+                                })
+                                   self.store.getNextPage(searchText)
+                                self.movieCollectionView.reloadData()
+                })
+            }
+            
+        }
+    
+
+                
+                                                    }
+        
+    
+    
+    
 //func collectionView(collectionView: UICollectionView, selectedItemIndex: NSIndexPath) {
 //              let cell = movieCollectionView.cellForItemAtIndexPath(selectedItemIndex)
 //                self.performSegueWithIdentifier("movieDetailSegue", sender: cell)
@@ -173,7 +263,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
             queue.addOperationWithBlock({
                 
                 
-                self.store.searchForMovie((percentString!),pages: self.store.pageNumber,completionHandler: { (true) in
+                self.store.searchForMovie((percentString!), page: self.pageNumber ,completionHandler: { (true) in
                     
                     NSOperationQueue.mainQueue().addOperationWithBlock({
                         
@@ -207,7 +297,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+override    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if segue.identifier == "movieDetailSegue" {
             
@@ -223,8 +313,6 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
                
         
     }
-    
-    
-    
-    
+
+
 }

@@ -112,6 +112,7 @@ class FavoritesTableViewController: UITableViewController {
         cell.favMovieTitleLabel.text = favoriteMovie?.first?.movieTitle
         cell.favMovieYearLabel.text = favoriteMovie?.first?.movieYear
         cell.favMovieDirectorLabel.text = favoriteMovie?.first?.movieDirector
+        cell.favActorsLabel.text = favoriteMovie!.first?.movieDirector
     
         cell.favWriterLabel.text = favoriteMovie?.first?.movieWriter
         

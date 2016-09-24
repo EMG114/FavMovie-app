@@ -53,6 +53,10 @@ class MovieDetailViewController: UIViewController {
     {
         super.viewDidLoad()
         
+        reachabilityStatusChanged()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MovieDetailViewController.reachabilityStatusChanged), name: "reachStatusChanged", object: nil)
+        
         self.detailsActivityIndicator.hidden = false
         self.detailsActivityIndicator.startAnimating()
         
@@ -132,8 +136,35 @@ class MovieDetailViewController: UIViewController {
         
     }
     
+    func reachabilityStatusChanged()
+    {
+        if reachabilityStatus == kNOTREACHABLE
+        {
+            let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
+            
+            self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
+            
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                    noNetworkAlertController.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
+            
+        }
+        else if reachabilityStatus == kREACHABILITYWITHWIFI
+        {
+            
+        }
+        else if reachabilityStatus == kREACHABLEWITHWWAN
+        {
+            
+        }
+    }
+    
+    
     func saveMovieAsFavorite()
     {
+    
         
         guard let savedThisMovie = self.movie?.movieTitle  else {return}
         let savedAlert = UIAlertController.init(title: "Favorite!", message: "\(savedThisMovie) was saved in favorites", preferredStyle: .Alert)
@@ -150,11 +181,23 @@ class MovieDetailViewController: UIViewController {
         let addThisMovie = NSEntityDescription.insertNewObjectForEntityForName("Favorite", inManagedObjectContext: managedContext) as! Favorite
         
         guard let savedMovie = self.movie else {return}
+        
+      //  if  ((addThisMovie.movies?.contains(savedMovie)) == nil) {
+        
+   
+   
         addThisMovie.movies?.insert(savedMovie)
         
-        print(addThisMovie.movies)
+
+        
+            //else {
+//             addThisMovie.movies?.remove(savedMovie)
+  //      }
+        
+     //   print(addThisMovie.movies)
         
         store.saveContext()
+
         
        // print("save to my favorite list")
     }
