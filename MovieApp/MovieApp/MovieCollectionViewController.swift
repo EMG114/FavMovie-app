@@ -45,7 +45,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
    
         internetReach?.startNotifier()
         
-      //  self.statusChangedWithReachability(internetReach!)
+      // self.statusChangedWithReachability(internetReach!)
         
         self.searchActivityIndicator.hidden = false
         self.searchActivityIndicator.startAnimating()
@@ -65,6 +65,10 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         navigationBarUI()
         
         
+        internetReach = Reachability.reachabilityForInternetConnection()
+        internetReach?.startNotifier()
+        
+        self.statusChangedWithReachability(internetReach!)
         
         
     }
@@ -98,8 +102,13 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         if networkStatus.rawValue == ReachableViaWiFi.rawValue
         {
             print("Reachable with Wifi")
-          //  searchBar.userInteractionEnabled = true
-        } else if (networkStatus.rawValue == NotReachable.rawValue) {
+            reachabilityStatus = kREACHABILITYWITHWIFI
+       
+        } else if networkStatus.rawValue == ReachableViaWWAN.rawValue
+        {
+            print("Reachable with WWAN")
+            reachabilityStatus = kREACHABLEWITHWWAN }
+        else if (networkStatus.rawValue == NotReachable.rawValue) {
     reachabilityStatus = kNOTREACHABLE
     print("Network not reachable")
     
@@ -169,15 +178,16 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
                 dispatch_async(dispatch_get_main_queue(),{
                     cell.moviePosterImage.image = UIImage.init(data: data!)
                     
+                    cell.movieTitle.text = self.store.movieList[indexPath.row].movieTitle
+                    cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
                     
-                    
-              // self.movieCollectionView.reloadData()
+          
                 })
                 
             }
-            cell.movieTitle.text = self.store.movieList[indexPath.row].movieTitle
-            cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
-              // cell.moviePosterImage.image = UIImage.init(data: data!)
+//            cell.movieTitle.text = self.store.movieList[indexPath.row].movieTitle
+//            cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
+            
         }
         
 

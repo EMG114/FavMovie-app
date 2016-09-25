@@ -143,7 +143,7 @@ class MovieDataStore {
     {
         
         _ = ""
-        print("I am getting called and my movie is \(movie)")
+       // print("I am getting called and my movie is \(movie)")
         // make OmdbAPIClient into a class function
         OmdbAPIClient().getMovieLongPlot(movie) { (plot) in
             
@@ -154,28 +154,6 @@ class MovieDataStore {
             }
             
         }
-        
-        
-        
-//        OmdbAPIClient().getMovieLongPlot(movie) { (moviePlot) in
-//            moviePlotString = moviePlot
-//            
-//            if moviePlot != ""{
-//                completion(moviePlotString)
-//            }
-//        }
-        
-        
-        
-        
-        //        OmdbAPIClient().getMovieLongPlot(movie) { (movieLongPlotDictionary) in
-        //   
-        //            movie.longPlotDescription(movieLongPlotDictionary, completion: { successful in
-        //                 if successful {
-        //                
-        //            completion()
-        //        }
-        
         
         
     }

@@ -64,18 +64,48 @@ class FavoritesTableViewController: UITableViewController {
     
     @IBAction func deleteAllButton(sender: AnyObject) {
         
+        
+//        for fav in store.favoriteList {
+//        let managedcontext = store.managedObjectContext
+//        managedcontext.deleteObject(store.favoriteList[indexPath.row])
+//        
+//            store.favoriteList.removeAtIndex(indexPath.row)}
+//        store.saveContext()
+//        
+        self.tableView.reloadData()
+        
+//        let fetchRequest = NSFetchRequest(entityName: "Favorite")
+//        
+//        // Create Batch Delete Request
+//        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        
+//        do {
+//            try store.managedObjectContext.executeRequest(batchDeleteRequest)
+//            
+//        } catch {
+//            print("Error")
+//        }
+  //  }
+
+    
+        
+    
      //   self.cancel()
-     //  store.managedObjectContext.reset()
+        store.favoriteList.removeAll(keepCapacity: true)
+       store.managedObjectContext.refreshAllObjects()
+        
+        store.saveContext()
+       self.tableView.reloadData()
         
       
-            //store.favoriteList.first?.movies
-       // store.saveContext()
+      
      
     }
     
     func cancel() {
         
-       
+//        store.favoriteList.removeAll()
+//       
 //                let fetchRequest = NSFetchRequest(entityName: "Favorite")
 //        
 //                   // Create Batch Delete Request
@@ -88,7 +118,7 @@ class FavoritesTableViewController: UITableViewController {
 //                                print("Error")
 //                            }
 //        }
-   
+//   
 
     }
     
