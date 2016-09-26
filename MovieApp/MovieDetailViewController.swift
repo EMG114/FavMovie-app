@@ -64,10 +64,8 @@ class MovieDetailViewController: UIViewController {
         
        view.backgroundColor = UIColor.darkGrayColor()
         movieShortPlotTextView.backgroundColor = UIColor.darkGrayColor()
-      //   movieShortPlotTextView.textColor = UIColor.blackColor()
-        
-
-        
+    
+    
         guard let unwrappedMovie = movie else{return}
         //(movie?.movieID)!
         self.store.getDetailsForMovieByID(unwrappedMovie){success in
@@ -182,24 +180,11 @@ class MovieDetailViewController: UIViewController {
         
         guard let savedMovie = self.movie else {return}
         
-      //  if  ((addThisMovie.movies?.contains(savedMovie)) == nil) {
-        
-   
-   
         addThisMovie.movies?.insert(savedMovie)
-        
-
-        
-            //else {
-//             addThisMovie.movies?.remove(savedMovie)
-  //      }
-        
-     //   print(addThisMovie.movies)
         
         store.saveContext()
 
-        
-       // print("save to my favorite list")
+ 
     }
     
     
@@ -224,8 +209,7 @@ class MovieDetailViewController: UIViewController {
                 
                 print(unwrappedMovie)
                 destinationLongPlotVC?.movieId = unwrappedMovie.movieID
-               // destinationLongPlotVC!.movie? = unwrappedMovie
-               // print(destinationLongPlotVC!.movie)
+              
             }
             
         }

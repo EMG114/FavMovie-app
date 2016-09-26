@@ -34,7 +34,7 @@ class MovieDataStore {
     func searchForMovie(title:String,pages: Int, completionHandler:(Bool)->()) {
         
         OmdbAPIClient().getMoviesFromSearch(title, pages: pages) { jsonResult in
-            self.movieList.removeAll()
+         
             
             if let list = jsonResult["Search"] as? [[String: AnyObject]] {
                 for movieDict in list {

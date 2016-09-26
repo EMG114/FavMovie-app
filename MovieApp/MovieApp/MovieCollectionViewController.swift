@@ -49,7 +49,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         self.searchActivityIndicator.hidden = false
         self.searchActivityIndicator.startAnimating()
         
-        self.store.searchForMovie("Movie", pages: self.apiClient.pageNumber) {_ in
+        self.store.searchForMovie("Titanic", pages: self.apiClient.pageNumber) {_ in
             NSOperationQueue.mainQueue().addOperationWithBlock({
                 self.movieCollectionView.reloadData()
                 self.searchActivityIndicator.hidden = true
@@ -166,9 +166,9 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
        
         
         if self.store.movieList[indexPath.row].moviePosterUrl  == "N/A"
-        {
+        {     dispatch_async(dispatch_get_main_queue(),{
             cell.moviePosterImage.image = UIImage.init(named: "movie-placeholder.jpg")
-           
+            })
         }
      
        let posterUrl = NSURL(string: self.store.movieList[indexPath.row].moviePosterUrl!)
@@ -185,7 +185,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
                     cell.moviePosterImage.image = UIImage.init(data: data!)
                     
                     cell.movieTitle.text = self.store.movieList[indexPath.row].movieTitle
-                    cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
+                       cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
                  
           
                 })
@@ -217,12 +217,12 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
-        cell?.backgroundColor = UIColor.lightGrayColor()
-      //  movieCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
-        
-    }
+//    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+//        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
+//        cell?.backgroundColor = UIColor.lightGrayColor()
+//      //  movieCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
+//        
+//    }
     
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
@@ -233,10 +233,12 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         if self.store.movieList.count - 1 == indexPath.row {
             
+            print("\n\nmovieList.count: \(self.store.movieList.count) == indexPath.row: \(indexPath.row)\n\n")
+            
             if unwrappedSearch == ""
             {
                 self.apiClient.getNextPage()
-                self.store.searchForMovie("Movie", pages: apiClient.pageNumber, completionHandler: { (success) in
+                self.store.searchForMovie("Titanic", pages: apiClient.pageNumber, completionHandler: { (success) in
                     dispatch_async(dispatch_get_main_queue(),{
                         self.movieCollectionView?.reloadData()
                     })
@@ -259,22 +261,22 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
             }
             
         }
-        
-        
-        
-        
-        
-                
-}
-        
 
+    
+        
+        
+        
+        
+}
+//
+//
     
   
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         
         if !searchBar.text!.isEmpty {
             // replacing characters space with %
-            
+            store.movieList.removeAll()
             let percentString = searchBar.text!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
             
             var queue = NSOperationQueue()
