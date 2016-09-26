@@ -18,7 +18,7 @@ class OmdbAPIClient{
     
     
     
-    func getNextPage(title: String)
+    func getNextPage()
     {
         pageNumber += 1
         
@@ -28,7 +28,7 @@ class OmdbAPIClient{
     func getMoviesFromSearch(title: String, pages: Int, completionHandler:([String: AnyObject]) -> () ){
         
         // movies by type movie parameter and title
-        let callUrl = "https://www.omdbapi.com/?s=\(title)&page=\(pageNumber)&type=movie&r=json"
+        let callUrl = "https://www.omdbapi.com/?s=\(title)&page=\(pages)&type=movie&r=json"
         
         
         if let url:String = callUrl {
@@ -138,7 +138,7 @@ class OmdbAPIClient{
                         completion(String(unwrappedPlot))
                     }
                     
-                    //completion(movieLongPlotDictionary["Plot"] as! String )
+                   
                 }
             }
             catch let error as NSError

@@ -31,6 +31,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     var searchBar: UISearchBar!
     
     let store = MovieDataStore.sharedStore
+    let apiClient = OmdbAPIClient()
     
     var movieID: String = ""
     var movie : Movie?
@@ -48,7 +49,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         self.searchActivityIndicator.hidden = false
         self.searchActivityIndicator.startAnimating()
         
-        self.store.searchForMovie("Movie", page: self.store.pageNumber) {_ in
+        self.store.searchForMovie("Movie", pages: self.apiClient.pageNumber) {_ in
             NSOperationQueue.mainQueue().addOperationWithBlock({
                 self.movieCollectionView.reloadData()
                 self.searchActivityIndicator.hidden = true
@@ -74,11 +75,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-//        if let searchText = searchBar.text {
-//        self.store.getNextPage(searchText)
-//        self.movieCollectionView.reloadData()
-//        
-//    }
+
     }
     
     
@@ -228,37 +225,48 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     
-//    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-//        
-//
-//        if indexPath.row == store.movieList.count {
-//            if let searchText = searchBar.text
-//            {
-//                dispatch_async(dispatch_get_main_queue(),
-//                               {
-//                                self.store.getNextPage(searchText)
-//                                self.store.searchForMovie((searchText),page: self.pageNumber,completionHandler: { (true) in
-//                                    
-//                                    NSOperationQueue.mainQueue().addOperationWithBlock({
-//                                          self.store.getNextPage(searchText)
-//                                        self.movieCollectionView.reloadData()
-//                                        
-//                                    })
-//                                })
-//                                   self.store.getNextPage(searchText)
-//                                self.movieCollectionView.reloadData()
-//                })
-//            }
-//            
-//        }
-//    
-//
-//                
-//                                                    }
-//        
-//    
-//    
-//    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        
+
+        let searchResult = searchBar.text
+        guard let unwrappedSearch = searchResult else {return}
+        
+        if self.store.movieList.count - 1 == indexPath.row {
+            
+            if unwrappedSearch == ""
+            {
+                self.apiClient.getNextPage()
+                self.store.searchForMovie("Movie", pages: apiClient.pageNumber, completionHandler: { (success) in
+                    dispatch_async(dispatch_get_main_queue(),{
+                        self.movieCollectionView?.reloadData()
+                    })
+                })
+                
+            }
+            if unwrappedSearch != ""
+            {
+                
+                self.apiClient.getNextPage()
+                
+                
+                self.store.searchForMovie(unwrappedSearch, pages: apiClient.pageNumber,completionHandler: { (success) in
+               
+                    dispatch_async(dispatch_get_main_queue(),{
+                        self.movieCollectionView?.reloadData()
+                    })
+                })
+                
+            }
+            
+        }
+        
+        
+        
+        
+        
+                
+}
+        
 
     
   
@@ -275,7 +283,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
             queue.addOperationWithBlock({
                 
                 
-                self.store.searchForMovie((percentString!), page: self.pageNumber ,completionHandler: { (true) in
+                self.store.searchForMovie((percentString!), pages: self.apiClient.pageNumber ,completionHandler: { (true) in
                     
                     NSOperationQueue.mainQueue().addOperationWithBlock({
                         
@@ -308,50 +316,6 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
     }
     
-//    func scrollViewDidScroll(scrollView: UIScrollView)
-//    {
-//        let offsetY = scrollView.contentOffset.y
-//        let contentHeight = scrollView.contentSize.height
-//        if offsetY > contentHeight - scrollView.frame.size.height
-//        {
-//            
-//            if let searchText = searchBar.text
-//            {
-//                let search = searchText.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
-//                
-//                if search == ""
-//                {
-//
-//                   // self.store.getNextPage(searchText)
-//                    self.store.searchForMovie(searchText, page: store.pageNumber, completionHandler: { (true) in
-//                        dispatch_async(dispatch_get_main_queue(),{
-//                             self.store.getNextPage(searchText)
-//                            self.movieCollectionView.reloadData()
-//                            print(self.store.movieList.count)
-//                    })
-//                        
-//                    })
-//                }
-//                else if search != ""
-//                {
-//                    //self.store.getNextPage(searchText)
-//                    self.store.searchForMovie(searchText, page: store.pageNumber, completionHandler: {(true) in
-//                        dispatch_async(dispatch_get_main_queue(),{
-//                            self.store.getNextPage(searchText)
-//                            self.movieCollectionView.reloadData()
-//                            print(self.store.movieList.count)
-//                            
-//                        })
-//                    })
-//                }
-//                
-//            }
-//            print("End of collection view")
-//            
-//        }
-//        
-//    }
-//
     
 override    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
