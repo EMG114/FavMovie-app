@@ -224,8 +224,8 @@ class MovieDetailViewController: UIViewController {
                 
                 print(unwrappedMovie)
                 destinationLongPlotVC?.movieId = unwrappedMovie.movieID
-                destinationLongPlotVC!.movie? = unwrappedMovie
-                print(destinationLongPlotVC!.movie)
+               // destinationLongPlotVC!.movie? = unwrappedMovie
+               // print(destinationLongPlotVC!.movie)
             }
             
         }

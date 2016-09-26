@@ -74,11 +74,11 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let searchText = searchBar.text {
-        self.store.getNextPage(searchText)
-        self.movieCollectionView.reloadData()
-        
-    }
+//        if let searchText = searchBar.text {
+//        self.store.getNextPage(searchText)
+//        self.movieCollectionView.reloadData()
+//        
+//    }
     }
     
     
@@ -194,7 +194,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
                 })
                 
             }
-          
+         
             
         }
         
@@ -227,11 +227,11 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
     }
     
-//    
+    
 //    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
 //        
 //
-//        if indexPath.row == store.movieList.endIndex {
+//        if indexPath.row == store.movieList.count {
 //            if let searchText = searchBar.text
 //            {
 //                dispatch_async(dispatch_get_main_queue(),
@@ -256,9 +256,9 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
 //                
 //                                                    }
 //        
-    
-    
-    
+//    
+//    
+//    
 
     
   
@@ -322,10 +322,10 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
 //                if search == ""
 //                {
 //
-//                    self.store.getNextPage(searchText)
+//                   // self.store.getNextPage(searchText)
 //                    self.store.searchForMovie(searchText, page: store.pageNumber, completionHandler: { (true) in
 //                        dispatch_async(dispatch_get_main_queue(),{
-//                            
+//                             self.store.getNextPage(searchText)
 //                            self.movieCollectionView.reloadData()
 //                            print(self.store.movieList.count)
 //                    })
@@ -334,10 +334,10 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
 //                }
 //                else if search != ""
 //                {
-//                    self.store.getNextPage(searchText)
+//                    //self.store.getNextPage(searchText)
 //                    self.store.searchForMovie(searchText, page: store.pageNumber, completionHandler: {(true) in
 //                        dispatch_async(dispatch_get_main_queue(),{
-//                            
+//                            self.store.getNextPage(searchText)
 //                            self.movieCollectionView.reloadData()
 //                            print(self.store.movieList.count)
 //                            
@@ -351,7 +351,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
 //        }
 //        
 //    }
-
+//
     
 override    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
