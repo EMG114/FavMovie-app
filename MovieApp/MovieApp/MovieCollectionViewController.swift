@@ -45,8 +45,6 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
    
         internetReach?.startNotifier()
         
-      // self.statusChangedWithReachability(internetReach!)
-        
         self.searchActivityIndicator.hidden = false
         self.searchActivityIndicator.startAnimating()
         
@@ -103,11 +101,14 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         {
             print("Reachable with Wifi")
             reachabilityStatus = kREACHABILITYWITHWIFI
+             self.movieCollectionView.reloadData()
        
         } else if networkStatus.rawValue == ReachableViaWWAN.rawValue
         {
             print("Reachable with WWAN")
-            reachabilityStatus = kREACHABLEWITHWWAN }
+            reachabilityStatus = kREACHABLEWITHWWAN
+             self.movieCollectionView.reloadData()
+        }
         else if (networkStatus.rawValue == NotReachable.rawValue) {
     reachabilityStatus = kNOTREACHABLE
     print("Network not reachable")
@@ -115,12 +116,18 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
     
     self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
-    NSNotificationCenter.defaultCenter().postNotificationName("reachStatusChanged", object: nil)
-    
-    }
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                    noNetworkAlertController.dismissViewControllerAnimated(true, completion: nil)
+                  self.movieCollectionView.reloadData()
+                })
+            }
+            
+            
+        }
         
-}
-
+        NSNotificationCenter.defaultCenter().postNotificationName("reachStatusChanged", object: nil)
+    }
 
     
     func createSearchBar() {
@@ -156,10 +163,12 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("movieCell", forIndexPath: indexPath) as! MovieCollectionCell
         
+        guard self.store.movieList.count > 0 else { return cell }
+        
         cell.backgroundColor = UIColor.lightGrayColor()
        
         
-        if self.store.movieList[indexPath.row].moviePosterUrl == "N/A"
+        if self.store.movieList[indexPath.row].moviePosterUrl  == "N/A"
         {
             cell.moviePosterImage.image = UIImage.init(named: "movie-placeholder.jpg")
            
@@ -180,13 +189,12 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
                     
                     cell.movieTitle.text = self.store.movieList[indexPath.row].movieTitle
                     cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
-                    
+                 
           
                 })
                 
             }
-//            cell.movieTitle.text = self.store.movieList[indexPath.row].movieTitle
-//            cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
+          
             
         }
         
@@ -219,45 +227,39 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
     }
     
-    
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        
-
-        if indexPath.row == store.movieList.endIndex {
-            if let searchText = searchBar.text
-            {
-                dispatch_async(dispatch_get_main_queue(),
-                               {
-                                self.store.getNextPage(searchText)
-                                self.store.searchForMovie((searchText),page: self.pageNumber,completionHandler: { (true) in
-                                    
-                                    NSOperationQueue.mainQueue().addOperationWithBlock({
-                                          self.store.getNextPage(searchText)
-                                        self.movieCollectionView.reloadData()
-                                        
-                                    })
-                                })
-                                   self.store.getNextPage(searchText)
-                                self.movieCollectionView.reloadData()
-                })
-            }
-            
-        }
-    
-
-                
-                                                    }
-        
-    
-    
-    
-//func collectionView(collectionView: UICollectionView, selectedItemIndex: NSIndexPath) {
-//              let cell = movieCollectionView.cellForItemAtIndexPath(selectedItemIndex)
-//                self.performSegueWithIdentifier("movieDetailSegue", sender: cell)
-//             
-//                        cell?.backgroundColor = UIColor.lightGrayColor()
-//            
+//    
+//    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+//        
+//
+//        if indexPath.row == store.movieList.endIndex {
+//            if let searchText = searchBar.text
+//            {
+//                dispatch_async(dispatch_get_main_queue(),
+//                               {
+//                                self.store.getNextPage(searchText)
+//                                self.store.searchForMovie((searchText),page: self.pageNumber,completionHandler: { (true) in
+//                                    
+//                                    NSOperationQueue.mainQueue().addOperationWithBlock({
+//                                          self.store.getNextPage(searchText)
+//                                        self.movieCollectionView.reloadData()
+//                                        
+//                                    })
+//                                })
+//                                   self.store.getNextPage(searchText)
+//                                self.movieCollectionView.reloadData()
+//                })
 //            }
+//            
+//        }
+//    
+//
+//                
+//                                                    }
+//        
+    
+    
+    
+
     
   
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -306,6 +308,50 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
     }
     
+//    func scrollViewDidScroll(scrollView: UIScrollView)
+//    {
+//        let offsetY = scrollView.contentOffset.y
+//        let contentHeight = scrollView.contentSize.height
+//        if offsetY > contentHeight - scrollView.frame.size.height
+//        {
+//            
+//            if let searchText = searchBar.text
+//            {
+//                let search = searchText.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
+//                
+//                if search == ""
+//                {
+//
+//                    self.store.getNextPage(searchText)
+//                    self.store.searchForMovie(searchText, page: store.pageNumber, completionHandler: { (true) in
+//                        dispatch_async(dispatch_get_main_queue(),{
+//                            
+//                            self.movieCollectionView.reloadData()
+//                            print(self.store.movieList.count)
+//                    })
+//                        
+//                    })
+//                }
+//                else if search != ""
+//                {
+//                    self.store.getNextPage(searchText)
+//                    self.store.searchForMovie(searchText, page: store.pageNumber, completionHandler: {(true) in
+//                        dispatch_async(dispatch_get_main_queue(),{
+//                            
+//                            self.movieCollectionView.reloadData()
+//                            print(self.store.movieList.count)
+//                            
+//                        })
+//                    })
+//                }
+//                
+//            }
+//            print("End of collection view")
+//            
+//        }
+//        
+//    }
+
     
 override    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
