@@ -94,33 +94,81 @@
 		076B49971D7A6E7700C478D1 /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
-				070021081D960444004B6F96 /* Reachability.h */,
-				070021091D96044E004B6F96 /* Reachability.m */,
+				07E736111D9D7D5900F7C268 /* View Controllers */,
+				07E7360D1D9D7CCD00F7C268 /* Model */,
+				07E7360C1D9D7C9C00F7C268 /* Internet */,
+				076B49A21D7A6E7800C478D1 /* Assets.xcassets */,
+				076D4EB11D872554009B1989 /* Main.storyboard */,
+				0739D9F81D947E8B00FA269E /* LaunchScreen.storyboard */,
+				076B49A71D7A6E7800C478D1 /* Info.plist */,
+			);
+			path = MovieApp;
+			sourceTree = "<group>";
+		};
+		07E7360C1D9D7C9C00F7C268 /* Internet */ = {
+			isa = PBXGroup;
+			children = (
+				07E7360E1D9D7CF400F7C268 /* API Client */,
+				077CCEA81D8F47D30070C5CF /* ReachabilityInternet.swift */,
 				0700210B1D960471004B6F96 /* MovieApp-Bridging-Header.h */,
+				070021091D96044E004B6F96 /* Reachability.m */,
+				070021081D960444004B6F96 /* Reachability.h */,
+			);
+			name = Internet;
+			sourceTree = "<group>";
+		};
+		07E7360D1D9D7CCD00F7C268 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				07C634C81D901E9600B3529D /* Favorite.swift */,
+				076B499F1D7A6E7800C478D1 /* MovieApp.xcdatamodeld */,
 				076B49981D7A6E7700C478D1 /* AppDelegate.swift */,
 				076B49AD1D7A726100C478D1 /* Movie.swift */,
-				07C634C81D901E9600B3529D /* Favorite.swift */,
-				077CCEA81D8F47D30070C5CF /* ReachabilityInternet.swift */,
+				07E7360F1D9D7D1500F7C268 /* Store */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		07E7360E1D9D7CF400F7C268 /* API Client */ = {
+			isa = PBXGroup;
+			children = (
 				076B49B11D7A79FB00C478D1 /* OmdbAPIClient.swift */,
+			);
+			name = "API Client";
+			sourceTree = "<group>";
+		};
+		07E7360F1D9D7D1500F7C268 /* Store */ = {
+			isa = PBXGroup;
+			children = (
 				07C2E8611D807EF300A2A03B /* MovieDataStore.swift */,
+				07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */,
+				07C634C71D901E9600B3529D /* Favorite+CoreDataProperties.swift */,
+			);
+			name = Store;
+			sourceTree = "<group>";
+		};
+		07E736111D9D7D5900F7C268 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				07E736121D9D7D8D00F7C268 /* Pics */,
 				079385A91D820F2D00D475EF /* MovieCollectionCell.swift */,
 				076B499A1D7A6E7700C478D1 /* MovieCollectionViewController.swift */,
 				079729671D8253C100231DE2 /* MovieDetailViewController.swift */,
 				07A5B8E81D863B160091BF43 /* LongPlotViewController.swift */,
 				0796AAFC1D88E80400927942 /* FavoriteTableViewCell.swift */,
 				072509CC1D885A230056F331 /* FavoritesTableViewController.swift */,
-				07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */,
-				07C634C71D901E9600B3529D /* Favorite+CoreDataProperties.swift */,
-				076B499F1D7A6E7800C478D1 /* MovieApp.xcdatamodeld */,
-				076B49A21D7A6E7800C478D1 /* Assets.xcassets */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		07E736121D9D7D8D00F7C268 /* Pics */ = {
+			isa = PBXGroup;
+			children = (
 				072509DA1D88A4A60056F331 /* Star Filled.png */,
 				072509D81D88A45D0056F331 /* Film Reel.png */,
 				0739D9FB1D947ED200FA269E /* Clapperboard.png */,
-				076D4EB11D872554009B1989 /* Main.storyboard */,
-				0739D9F81D947E8B00FA269E /* LaunchScreen.storyboard */,
-				076B49A71D7A6E7800C478D1 /* Info.plist */,
 			);
-			path = MovieApp;
+			name = Pics;
 			sourceTree = "<group>";
 		};
 		8A59C7106D6A7D81D67E2780 /* Pods */ = {

@@ -49,7 +49,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         self.searchActivityIndicator.hidden = false
         self.searchActivityIndicator.startAnimating()
         
-        self.store.searchForMovie("Titanic", pages: self.apiClient.pageNumber) {_ in
+        self.store.searchForMovie("Movie", pages: self.apiClient.pageNumber) {_ in
             NSOperationQueue.mainQueue().addOperationWithBlock({
                 self.movieCollectionView.reloadData()
                 self.searchActivityIndicator.hidden = true
@@ -217,13 +217,6 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     
-//    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-//        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
-//        cell?.backgroundColor = UIColor.lightGrayColor()
-//      //  movieCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
-//        
-//    }
-    
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         
@@ -238,7 +231,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
             if unwrappedSearch == ""
             {
                 self.apiClient.getNextPage()
-                self.store.searchForMovie("Titanic", pages: apiClient.pageNumber, completionHandler: { (success) in
+                self.store.searchForMovie("Movie", pages: apiClient.pageNumber, completionHandler: { (success) in
                     dispatch_async(dispatch_get_main_queue(),{
                         self.movieCollectionView?.reloadData()
                     })

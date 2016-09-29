@@ -27,7 +27,7 @@ class OmdbAPIClient{
     
     func getMoviesFromSearch(title: String, pages: Int, completionHandler:([String: AnyObject]) -> () ){
         
-        // movies by type movie parameter and title
+        // movies by type movie parameter and title with json response
         let callUrl = "https://www.omdbapi.com/?s=\(title)&page=\(pages)&type=movie&r=json"
         
         
@@ -36,6 +36,9 @@ class OmdbAPIClient{
             
             let session = NSURLSession.sharedSession()
             let task = session.dataTaskWithURL(url!, completionHandler: { (data, response, error) in
+                
+               // print(data)
+               // print(response)
                 
                 if let data = data {
                     

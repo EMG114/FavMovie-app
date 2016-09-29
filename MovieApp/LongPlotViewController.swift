@@ -39,7 +39,7 @@ class LongPlotViewController: UIViewController {
     
         
         self.store.getLongSummaryPlot(movieId) { (longPlot) in
-           // print("THIS IS THE LONG PLOT CONTROLLER \(longPlot)")
+          
             
             
             dispatch_async(dispatch_get_main_queue(),{
