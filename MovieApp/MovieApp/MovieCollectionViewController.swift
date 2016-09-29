@@ -217,6 +217,12 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+                let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
+                cell?.backgroundColor = UIColor.lightGrayColor()
+             //  movieCollectionView.deselectItemAtIndexPath(indexPath, animated: false)		 
+   
+            }
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         
