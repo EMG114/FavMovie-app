@@ -220,7 +220,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
                 let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
                 cell?.backgroundColor = UIColor.lightGrayColor()
-             //  movieCollectionView.deselectItemAtIndexPath(indexPath, animated: false)		 
+             //  movieCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
    
             }
     
@@ -232,7 +232,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         if self.store.movieList.count - 1 == indexPath.row {
             
-            print("\n\nmovieList.count: \(self.store.movieList.count) == indexPath.row: \(indexPath.row)\n\n")
+        //    print("\n\nmovieList.count: \(self.store.movieList.count) == indexPath.row: \(indexPath.row)\n\n")
             
             if unwrappedSearch == ""
             {
@@ -267,10 +267,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         
 }
-//
-//
-    
-  
+
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         
         if !searchBar.text!.isEmpty {

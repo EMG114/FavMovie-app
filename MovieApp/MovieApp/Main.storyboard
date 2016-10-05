@@ -305,6 +305,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SUn-c3-sAF">
+                                <frame key="frameInset" minX="345" minY="338" width="46" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="12"/>
+                                <state key="normal" title="Trailer" backgroundImage="Clapperboard.png">
+                                    <color key="titleColor" red="0.028725961540000001" green="0.01204532535" blue="0.002681927817" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -328,7 +336,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JHA-4g-3TX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7989" y="262"/>
+            <point key="canvasLocation" x="7988" y="261.31934032983509"/>
         </scene>
         <!--Full Description-->
         <scene sceneID="HEs-BR-nw5">
@@ -364,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N3p-rN-hcL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8594" y="262"/>
+            <point key="canvasLocation" x="8738" y="299"/>
         </scene>
         <!--Favorite Movies-->
         <scene sceneID="vpH-kI-7Ho">
@@ -555,6 +563,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Clapperboard.png" width="100" height="100"/>
         <image name="Film Reel.png" width="30" height="30"/>
         <image name="Star Filled.png" width="30" height="30"/>
         <image name="movie-placeholder" width="386" height="572"/>

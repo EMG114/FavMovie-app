@@ -29,6 +29,7 @@
 		07C634CB1D901E9600B3529D /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C634C71D901E9600B3529D /* Favorite+CoreDataProperties.swift */; };
 		07C634CC1D901E9600B3529D /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C634C81D901E9600B3529D /* Favorite.swift */; };
 		07C634CD1D901E9600B3529D /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */; };
+		818ABF36D09E66BDEFAB5695 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A10C4E9D0A55F3C9C4A415 /* Pods_MovieApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		07C634C71D901E9600B3529D /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Favorite+CoreDataProperties.swift"; path = "../Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		07C634C81D901E9600B3529D /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Favorite.swift; path = ../Favorite.swift; sourceTree = "<group>"; };
 		07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Movie+CoreDataProperties.swift"; path = "../Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		20A10C4E9D0A55F3C9C4A415 /* Pods_MovieApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		33FFF83864556F9172194358 /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
 		7B9278E7EAFC505D2F488EC3 /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				818ABF36D09E66BDEFAB5695 /* Pods_MovieApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +186,7 @@
 		E9DADE2E2B4707C472B9CF68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				20A10C4E9D0A55F3C9C4A415 /* Pods_MovieApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

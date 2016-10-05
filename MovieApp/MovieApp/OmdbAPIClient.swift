@@ -95,6 +95,7 @@ class OmdbAPIClient{
             catch
             {
                 print(error)
+                
             }
         }
         task.resume()
@@ -108,26 +109,21 @@ class OmdbAPIClient{
         
         // print("Whats the movie id: \(movieID)")
         let urlString = "https://www.omdbapi.com/?i=\(movieID)&plot=full&r=json"
+        
         let url = NSURL(string: urlString)
         
         guard let unwrappedURL = url else {return}
         
         let session = NSURLSession.sharedSession()
-       // print(unwrappedURL)
+  
         let task = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
-           // print(data)
-            
-            //           print(response)
-            //            print(error?.localizedDescription)
-            
+      
             guard let unwrappedData = data else {return}
             
             
             do{
                 
-                //  NSJSONReadingAllowFragments
-                //Specifies that the parser should allow top-level objects that are not an instance of NSArray or NSDictionary
-                
+             
                 let jsonmovieLongPlot = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? [String : AnyObject]
                 
                 

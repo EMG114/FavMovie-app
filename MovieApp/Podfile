@@ -7,4 +7,6 @@ target 'MovieApp' do
 
   # Pods for MovieApp
 
+pod "XCDYouTubeKit", "~> 2.5"
+
 end
