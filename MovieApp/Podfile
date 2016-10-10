@@ -6,7 +6,7 @@ target 'MovieApp' do
   use_frameworks!
 
   # Pods for MovieApp
-
+pod "youtube-ios-player-helper", "~> 0.1.4"
 pod "XCDYouTubeKit", "~> 2.5"
 
 end

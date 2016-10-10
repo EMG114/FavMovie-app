@@ -42,8 +42,8 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-             NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MovieCollectionViewController.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
-   
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MovieCollectionViewController.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
+        
         internetReach?.startNotifier()
         
         self.searchActivityIndicator.hidden = false
@@ -75,7 +75,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-
+        
     }
     
     
@@ -98,25 +98,25 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         {
             print("Reachable with Wifi")
             reachabilityStatus = kREACHABILITYWITHWIFI
-             self.movieCollectionView.reloadData()
-       
+            self.movieCollectionView.reloadData()
+            
         } else if networkStatus.rawValue == ReachableViaWWAN.rawValue
         {
             print("Reachable with WWAN")
             reachabilityStatus = kREACHABLEWITHWWAN
-             self.movieCollectionView.reloadData()
+            self.movieCollectionView.reloadData()
         }
         else if (networkStatus.rawValue == NotReachable.rawValue) {
-    reachabilityStatus = kNOTREACHABLE
-    print("Network not reachable")
-    
-    let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
-    
-    self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
+            reachabilityStatus = kNOTREACHABLE
+            print("Network not reachable")
+            
+            let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
+            
+            self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
                     noNetworkAlertController.dismissViewControllerAnimated(true, completion: nil)
-                  self.movieCollectionView.reloadData()
+                    self.movieCollectionView.reloadData()
                 })
             }
             
@@ -125,7 +125,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         NSNotificationCenter.defaultCenter().postNotificationName("reachStatusChanged", object: nil)
     }
-
+    
     
     func createSearchBar() {
         
@@ -158,50 +158,50 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
+        
+        print("THIS IS GETTING CALLED!!!!!!!!!!!")
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("movieCell", forIndexPath: indexPath) as! MovieCollectionCell
         
         guard self.store.movieList.count > 0 else { return cell }
         
         cell.backgroundColor = UIColor.lightGrayColor()
-       
         
-        if self.store.movieList[indexPath.row].moviePosterUrl  == "N/A"
-        {     dispatch_async(dispatch_get_main_queue(),{
-            cell.moviePosterImage.image = UIImage.init(named: "movie-placeholder.jpg")
-            })
+        if let posterURL = self.store.movieList[indexPath.row].moviePosterUrl {
+            if posterURL == "N/A" {
+                dispatch_async(dispatch_get_main_queue(),{
+                    cell.moviePosterImage.image = UIImage.init(named: "movie-placeholder.jpg")
+                })
+            }
         }
-     
-       let posterUrl = NSURL(string: self.store.movieList[indexPath.row].moviePosterUrl!)
-      
-       
+        
+        let posterUrl = NSURL(string: self.store.movieList[indexPath.row].moviePosterUrl!)
+        
         if let url = posterUrl
         {
             let data = NSData(contentsOfURL:url)
-       
+            
             if data != nil
             {
                 
                 dispatch_async(dispatch_get_main_queue(),{
                     cell.moviePosterImage.image = UIImage.init(data: data!)
-                    
                     cell.movieTitle.text = self.store.movieList[indexPath.row].movieTitle
-                       cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
-                 
-          
+                    cell.movieYear.text = self.store.movieList[indexPath.row].movieYear
                 })
                 
             }
-         
+            
             
         }
         
-
-
+        
+        
         return cell
     }
     
     
-  
+    
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
@@ -218,21 +218,21 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-                let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
-                cell?.backgroundColor = UIColor.lightGrayColor()
-             //  movieCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
-   
-            }
+        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
+        cell?.backgroundColor = UIColor.lightGrayColor()
+        //  movieCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
+        
+    }
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         
-
+        
         let searchResult = searchBar.text
         guard let unwrappedSearch = searchResult else {return}
         
         if self.store.movieList.count - 1 == indexPath.row {
             
-        //    print("\n\nmovieList.count: \(self.store.movieList.count) == indexPath.row: \(indexPath.row)\n\n")
+            //    print("\n\nmovieList.count: \(self.store.movieList.count) == indexPath.row: \(indexPath.row)\n\n")
             
             if unwrappedSearch == ""
             {
@@ -251,7 +251,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
                 
                 
                 self.store.searchForMovie(unwrappedSearch, pages: apiClient.pageNumber,completionHandler: { (success) in
-               
+                    
                     dispatch_async(dispatch_get_main_queue(),{
                         self.movieCollectionView?.reloadData()
                     })
@@ -260,14 +260,14 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
             }
             
         }
-
+        
+        
+        
+        
+        
+        
+    }
     
-        
-        
-        
-        
-}
-
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         
         if !searchBar.text!.isEmpty {
@@ -286,7 +286,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
                     NSOperationQueue.mainQueue().addOperationWithBlock({
                         
                         self.movieCollectionView.reloadData()
-                
+                        
                     })
                 })
                 
@@ -300,7 +300,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         
         func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-           self.store.movieList.removeAll()
+            self.store.movieList.removeAll()
             self.searchBar.resignFirstResponder()
         }
         
@@ -315,7 +315,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     
-override    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if segue.identifier == "movieDetailSegue" {
             
@@ -328,9 +328,9 @@ override    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
             
         }
         
-               
+        
         
     }
-
-
+    
+    
 }

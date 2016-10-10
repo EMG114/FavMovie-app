@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTPlayerView.h"
+
 
 @interface TrailerPlayerViewController : UIViewController
 
 @property (nonatomic, strong) NSString *videoID;
-@property (nonatomic) NSInteger trailerVideoIndex;
+//@property (nonatomic) NSInteger trailerVideoIndex;
+//
 
+@property(nonatomic, strong) IBOutlet YTPlayerView *playerView;
+
+//@property(nonatomic, strong) NSString *movieTitle;
+//
+//@property(nonatomic, strong) NSString *releasedYear;
+//
 
 @end

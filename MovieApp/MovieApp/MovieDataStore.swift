@@ -16,17 +16,7 @@ class MovieDataStore {
  
  var movieList:[Movie] = []
  var favoriteList = [Favorite]()
-// var pageNumber = 1
-    
 
-    
-//    
-//    
-//    func getNextPage(searchText: String)
-//    {
-//        pageNumber += 1
-//        
-//    }
     
     
  private init() {}
@@ -111,6 +101,10 @@ class MovieDataStore {
         
         
     }
+    
+//    class func getYoutubeVideoID(title:String, year: String, completion:(dictionary)->()){
+//        
+//    }
     
     
     // MARK: - Core Data stack

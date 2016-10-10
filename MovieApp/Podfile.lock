@@ -1,12 +1,15 @@
 PODS:
   - XCDYouTubeKit (2.5.3)
+  - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
   - XCDYouTubeKit (~> 2.5)
+  - youtube-ios-player-helper (~> 0.1.4)
 
 SPEC CHECKSUMS:
   XCDYouTubeKit: 90690f9e3523735dc93b8024269d991b0cfffe78
+  youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 84ec0072db5908a546f4c4db62e72f1467932451
+PODFILE CHECKSUM: 25e19ad97653113d1d6e73f1995716fc7092359e
 
 COCOAPODS: 1.1.0.beta.1

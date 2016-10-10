@@ -7,25 +7,38 @@
 //
 
 #import "TrailerPlayerViewController.h"
-#import "XCDYouTubeKit/XCDYouTubeKit.h"
+//#import "XCDYouTubeKit/XCDYouTubeKit.h"
+#import "YTPlayerView.h"
 
 
-static void *kMoviePlayerContentURLContext = &kMoviePlayerContentURLContext;
-static NSString *kKeyPath = @"moviePlayer.contentURL";
 
 
 @interface TrailerPlayerViewController ()
 
-@property (nonatomic, strong) XCDYouTubeVideoPlayerViewController *trailerPlayerViewController;
+@property (weak, nonatomic, readwrite) IBOutlet UILabel *theMovieTitle;
+
+@property (weak, nonatomic) IBOutlet UILabel *releasedYear;
 
 
 @end
 
+
+
 @implementation TrailerPlayerViewController
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+//[self.playerView setDelegate: self];
+    
+    [self.playerView loadWithVideoId:@"TUhvdGeN1ao"];
+  
+    
+  //  _releasedYear.text = movie.movieYear
+ //   _theMovieTitle.text = movie.movieYear
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -187,11 +187,31 @@ class MovieDetailViewController: UIViewController {
  
     }
     
+    @IBAction func watchTrailerPressed(sender: AnyObject) {
+        
+//        guard let unwrappedMovie = movie else{return}
+//        //(movie?.movieID)!
+//        self.store.getDetailsForMovieByID(unwrappedMovie){success in
+//            
+//            dispatch_async(dispatch_get_main_queue(),{
+//                
+//                self.movieTitleLabel.text = self.movie?.movieTitle
+//                self.movieYearLabel.text = self.movie?.movieYear
+//                }
+        
+     //   _ = self.movie?.movieTitle as String!
+     //   _ = self.movie?.movieYear as String!
+        //performSegueWithIdentifier("detailToTrailer", sender: nil)
+  //  )}
+        
+
     
+}
+
     @IBAction func fullPlotDescriptionButton(sender: AnyObject)
     {
         //segue: This button will go to Long Plot VC, it just segue...
-        
+        // performSegueWithIdentifier("FromDetailToLongSegue", sender: nil)
   
     }
     
