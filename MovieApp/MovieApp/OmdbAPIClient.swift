@@ -16,6 +16,8 @@ class OmdbAPIClient{
     
     var pageNumber = 1
     
+    var upcomingMovie : [UpcomingMovies] = []
+    
     
     
     func getNextPage()
@@ -147,6 +149,49 @@ class OmdbAPIClient{
             }
         }
         task.resume()
+        
+    }
+    
+    func getMoviesPlayingInTheaters(completion: (NSArray)->())
+    {
+       
+        let urlString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(Secrets.movieApiKey)"
+        
+        let url = NSURL(string: urlString)
+        
+        guard url != nil else {return}
+        
+        let session = NSURLSession.sharedSession()
+        
+        let dataTask = session.dataTaskWithURL(url!, completionHandler: { (data, response, error) in
+            
+      //   print(data)
+       
+            guard let unwrappedData = data else {return}
+            
+            do{
+                let upcomingMovie = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: .AllowFragments) as! NSDictionary
+              //  print(upcomingMovie)
+                let moviesArray = upcomingMovie["results"] as? NSArray
+                
+                guard let unwrappedMovies = moviesArray else {return}
+                
+                for movie in unwrappedMovies
+                {
+                    let movieDict = UpcomingMovies.init(dictionary: movie as! NSDictionary)
+                    
+                  //  print(movieDict)
+                    self.upcomingMovie.append(movieDict)
+                    completion(unwrappedMovies)
+                }
+                
+            }
+            catch
+            {
+                print("Could not get dictionary")
+            }
+        })
+        dataTask.resume()
         
     }
     

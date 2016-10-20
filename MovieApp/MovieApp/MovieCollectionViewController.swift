@@ -19,7 +19,7 @@ var reachabilityStatus = kREACHABILITYWITHWIFI
 
 
 
-class MovieCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, UISearchBarDelegate{
+class MovieCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate{
     
     
     @IBOutlet weak var movieCollectionView: UICollectionView!
@@ -108,7 +108,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         }
         else if (networkStatus.rawValue == NotReachable.rawValue) {
             reachabilityStatus = kNOTREACHABLE
-            print("Network not reachable")
+           print("Network not reachable")
             
             let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
             
@@ -159,12 +159,15 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         
-        print("THIS IS GETTING CALLED!!!!!!!!!!!")
+        print("Display!!!!!")
+        print("\(indexPath)")
+        print("\(indexPath.row)")
+        
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("movieCell", forIndexPath: indexPath) as! MovieCollectionCell
         
-        guard self.store.movieList.count > 0 else { return cell }
-        
+          guard self.store.movieList.count > 0 else { return cell as UICollectionViewCell }
+  
         cell.backgroundColor = UIColor.lightGrayColor()
         
         if let posterURL = self.store.movieList[indexPath.row].moviePosterUrl {
@@ -175,7 +178,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
             }
         }
         
-        let posterUrl = NSURL(string: self.store.movieList[indexPath.row].moviePosterUrl!)
+       let posterUrl = NSURL(string: self.store.movieList[indexPath.row].moviePosterUrl!)
         
         if let url = posterUrl
         {
@@ -195,7 +198,8 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
             
         }
         
-        
+  
+
         
         return cell
     }
@@ -210,7 +214,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         print("Selected cell index: \(indexPath.row)")
         
-        let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
+       let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
         cell?.backgroundColor = UIColor.yellowColor()
         
         
@@ -220,16 +224,16 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = movieCollectionView.cellForItemAtIndexPath(indexPath)
         cell?.backgroundColor = UIColor.lightGrayColor()
-        //  movieCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
+       // movieCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
         
     }
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         
-        
-        let searchResult = searchBar.text
+//        
+       let searchResult = searchBar.text
         guard let unwrappedSearch = searchResult else {return}
-        
+//        
         if self.store.movieList.count - 1 == indexPath.row {
             
             //    print("\n\nmovieList.count: \(self.store.movieList.count) == indexPath.row: \(indexPath.row)\n\n")
@@ -247,7 +251,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
             if unwrappedSearch != ""
             {
                 
-                self.apiClient.getNextPage()
+               self.apiClient.getNextPage()
                 
                 
                 self.store.searchForMovie(unwrappedSearch, pages: apiClient.pageNumber,completionHandler: { (success) in
@@ -298,9 +302,9 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
                 
             )}
         
-        
+    
         func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-            self.store.movieList.removeAll()
+         //   self.store.movieList.removeAll()
             self.searchBar.resignFirstResponder()
         }
         

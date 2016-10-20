@@ -49,9 +49,14 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var movieRuntimeLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     
+    @IBOutlet weak var trailerButton: UIButton!
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+ navigationItem.title = movie?.movieTitle
         
         reachabilityStatusChanged()
         

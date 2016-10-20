@@ -13,10 +13,12 @@ import CoreData
 class MovieDataStore {
     
  static let sharedStore = MovieDataStore()
+
  
  var movieList:[Movie] = []
  var favoriteList = [Favorite]()
-
+//let searchText = "\(movie.movieTitle) +  \(movie.movieYear) + Official Trailer"
+    
     
     
  private init() {}
@@ -102,10 +104,7 @@ class MovieDataStore {
         
     }
     
-//    class func getYoutubeVideoID(title:String, year: String, completion:(dictionary)->()){
-//        
-//    }
-    
+   
     
     // MARK: - Core Data stack
     
