@@ -153,8 +153,8 @@ class OmdbAPIClient{
     }
     func getMoviesPlayingInTheaters(_ completion: @escaping (NSArray)->())
     {
-        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let urlString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(apiKey)"
+      
+        let urlString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(Secrets.movieApiKey)"
         
         let url = URL(string: urlString)
         
@@ -191,8 +191,8 @@ class OmdbAPIClient{
     
     func movieTrailerAPI(_ ID: Int, completion: @escaping (String)->())
     {
-        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(apiKey)"
+ 
+        let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(Secrets.movieApiKey)"
         
         let url = URL(string: urlString)
         
@@ -228,8 +228,8 @@ class OmdbAPIClient{
     
     func movieTrailerAPIWithString(_ ID: String, completion: @escaping (String)->())
     {
-        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(apiKey)"
+    
+        let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(Secrets.movieApiKey)"
         
         let url = URL(string: urlString)
         
@@ -268,7 +268,7 @@ class OmdbAPIClient{
     {
         
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(apiKey)"
+        let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(Secrets.movieApiKey)"
         
         let url = URL(string: urlString)
         
@@ -301,8 +301,8 @@ class OmdbAPIClient{
     func checkIfAnyTrailersAvailableWithString(_ ID: String, completion: @escaping (NSArray)->())
     {
         
-        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(apiKey)"
+       
+        let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(Secrets.movieApiKey)"
         
         let url = URL(string: urlString)
         
@@ -334,8 +334,8 @@ class OmdbAPIClient{
     func checkIfAnyTrailersAvailableStatusCodeWithString(_ ID: String, completion: @escaping (Int)->())
     {
         
-        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(apiKey)"
+    
+        let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(Secrets.movieApiKey)"
         
         let url = URL(string: urlString)
         
@@ -367,8 +367,8 @@ class OmdbAPIClient{
     func checkIfAnyTrailersAvailableStatusCodeWithInt(_ ID: Int, completion: @escaping (Int)->())
     {
         
-        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(apiKey)"
+     
+        let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(Secrets.movieApiKey)"
         
         let url = URL(string: urlString)
         
