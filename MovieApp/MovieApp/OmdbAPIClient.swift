@@ -267,7 +267,7 @@ class OmdbAPIClient{
     func checkIfAnyTrailersAvailable(_ ID: Int, completion: @escaping (NSArray)->())
     {
         
-        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+      
         let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(Secrets.movieApiKey)"
         
         let url = URL(string: urlString)
@@ -291,7 +291,7 @@ class OmdbAPIClient{
             }
             catch
             {
-                print("did i crash?")
+                print("Error")
             }
         })
         dataTask.resume()
@@ -325,7 +325,7 @@ class OmdbAPIClient{
             }
             catch
             {
-                print("did i crash?")
+                print("Error")
             }
         })
         dataTask.resume()
@@ -391,7 +391,7 @@ class OmdbAPIClient{
             }
             catch
             {
-                print("did i crash?")
+                print("Error")
             }
         })
         dataTask.resume()
