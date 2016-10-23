@@ -33,7 +33,7 @@ class Movie: NSManagedObject {
 //    
     convenience init?(movieDict: NSDictionary,entity: NSEntityDescription, managedObjectContext: NSManagedObjectContext)
     {
-        self.init(entity: entity, insertIntoManagedObjectContext: managedObjectContext)
+        self.init(entity: entity, insertInto: managedObjectContext)
 
    
     //init?(movieDict:[String: AnyObject]){
@@ -59,7 +59,7 @@ class Movie: NSManagedObject {
 
     }
             
- func populateDetailsViewController(movieDataDictionary: NSDictionary, completion:(Bool) -> ())
+ func populateDetailsViewController(_ movieDataDictionary: NSDictionary, completion:(Bool) -> ())
         {
             self.moviePlotShort = (movieDataDictionary["Plot"] as? String)!
             self.movieActors = (movieDataDictionary["Actors"] as? String)!
@@ -81,7 +81,7 @@ class Movie: NSManagedObject {
 
                 
         
-func longPlotDescription(movieLongPlotDictionary: NSDictionary, completion:(Bool) -> ()) {
+func longPlotDescription(_ movieLongPlotDictionary: NSDictionary, completion:(Bool) -> ()) {
             self.movieLongPlot = (movieLongPlotDictionary["Plot"] as? String)!
             completion(true)
         }

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Jpl-aj-WOc">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Jpl-aj-WOc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -77,7 +77,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S99-NR-mwq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7269" y="600"/>
+            <point key="canvasLocation" x="6511" y="372"/>
         </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="DFI-SE-Va1">
@@ -195,7 +195,7 @@
                                 </state>
                                 <connections>
                                     <action selector="fullPlotDescriptionButton:" destination="Sfa-Mb-o8B" eventType="touchUpInside" id="ixk-xc-1ga"/>
-                                    <segue destination="KwY-Cm-Rgb" kind="show" identifier="FromDetailToLongSegue" id="sN7-SU-VSv"/>
+                                    <segue destination="KwY-Cm-Rgb" kind="show" identifier="FromDetailToLongSegue" id="oef-SI-DNT"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJc-aT-TLq">
@@ -317,7 +317,6 @@
                                 </state>
                                 <connections>
                                     <action selector="watchTrailerPressed:" destination="Sfa-Mb-o8B" eventType="touchUpInside" id="2rL-6N-60H"/>
-                                    <segue destination="yCr-n5-MoX" kind="show" identifier="detailToTrailer" id="90B-88-oig"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -339,12 +338,13 @@
                         <outlet property="movieTitleLabel" destination="ffz-9H-GtY" id="gED-zA-KHM"/>
                         <outlet property="movieWriterLabel" destination="NnI-Yo-S9p" id="YfO-O8-jDQ"/>
                         <outlet property="movieYearLabel" destination="o1o-4s-UUx" id="tYi-MG-BFS"/>
-                        <outlet property="trailerButton" destination="SUn-c3-sAF" id="uBy-nA-oZR"/>
+                        <outlet property="trailerButton" destination="SUn-c3-sAF" id="uAv-hO-B5B"/>
+                        <segue destination="yCr-n5-MoX" kind="show" identifier="trailerSegue" id="lkd-7K-bcL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JHA-4g-3TX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7142" y="3"/>
+            <point key="canvasLocation" x="7343" y="24"/>
         </scene>
         <!--Full Description-->
         <scene sceneID="HEs-BR-nw5">
@@ -380,7 +380,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N3p-rN-hcL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8722" y="385"/>
+            <point key="canvasLocation" x="8586" y="435"/>
         </scene>
         <!--Favorite Movies-->
         <scene sceneID="vpH-kI-7Ho">
@@ -508,12 +508,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xNU-T5-Qem" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7288.5" y="-694.5"/>
+            <point key="canvasLocation" x="6946" y="-483"/>
         </scene>
         <!--Movie Trailer-->
         <scene sceneID="Drt-Ln-83q">
             <objects>
-                <viewController title="Movie Trailer" id="yCr-n5-MoX" customClass="TrailerPlayerViewController" sceneMemberID="viewController">
+                <viewController title="Movie Trailer" id="yCr-n5-MoX" customClass="TrailerViewController" customModule="MovieApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z6S-I8-hzz"/>
                         <viewControllerLayoutGuide type="bottom" id="tai-FP-Ei6"/>
@@ -522,51 +522,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MHu-qm-qEQ" customClass="YTPlayerView">
-                                <frame key="frameInset" minX="45" minY="104" width="284" height="287"/>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqR-8K-YP2">
+                                <frame key="frameInset" minX="54" minY="184" width="267" height="298"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFe-QA-Dg2">
-                                <frame key="frameInset" minX="166" minY="430" width="38" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Released Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJI-yh-tFb">
-                                <frame key="frameInset" minX="130" minY="523" width="115" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SD3-jP-uoW">
-                                <frame key="frameInset" minX="166" minY="473" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fop-zF-SL4">
-                                <frame key="frameInset" minX="166" minY="570" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="playerView" destination="MHu-qm-qEQ" id="alS-mT-zgL"/>
-                        <outlet property="releasedYear" destination="fop-zF-SL4" id="erf-qo-Hjb"/>
-                        <outlet property="theMovieTitle" destination="SD3-jP-uoW" id="WXl-yF-6MQ"/>
+                        <outlet property="trailerWebView" destination="aqR-8K-YP2" id="9mO-ZR-DuZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qTe-XC-lOy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11063" y="-887"/>
+            <point key="canvasLocation" x="7877.6000000000004" y="-560.86956521739137"/>
         </scene>
         <!--Movies-->
         <scene sceneID="fD6-tH-2Lq">
@@ -667,7 +637,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="upcomingCell" id="tyQ-fm-RPh" customClass="UpcomingMovieCollectionViewCell" customModule="MovieApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="299" height="399"/>
+                                        <rect key="frame" x="38" y="0.0" width="299" height="399"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="299" height="399"/>

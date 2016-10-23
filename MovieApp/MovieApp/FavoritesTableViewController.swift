@@ -27,7 +27,7 @@ class FavoritesTableViewController: UITableViewController {
        navigationBarUI()
     
        self.title = "Favorites"
-       tableView.backgroundColor = UIColor.darkGrayColor()
+       tableView.backgroundColor = UIColor.darkGray
     
        store.fetchData()
        self.tableView.reloadData()
@@ -37,7 +37,7 @@ class FavoritesTableViewController: UITableViewController {
     
     
     
-    override func viewWillAppear(animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
         
@@ -50,17 +50,17 @@ class FavoritesTableViewController: UITableViewController {
     func navigationBarUI()
     {
         let navigationBar = navigationController!.navigationBar
-        navigationBar.barTintColor = UIColor.orangeColor()
+        navigationBar.barTintColor = UIColor.orange
         navigationBar.alpha = 0.5
-        navigationItem.leftBarButtonItem = editButtonItem()
+        navigationItem.leftBarButtonItem = editButtonItem
     }
     
-    @IBAction func deleteAllButton(sender: AnyObject) {
+    @IBAction func deleteAllButton(_ sender: AnyObject) {
         
         
 
 
-       store.favoriteList.removeAll(keepCapacity: true)
+       store.favoriteList.removeAll(keepingCapacity: true)
        store.managedObjectContext.reset()
        store.managedObjectContext.refreshAllObjects()
        //store.saveContext()
@@ -77,20 +77,20 @@ class FavoritesTableViewController: UITableViewController {
     
  
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
        return store.favoriteList.count
      
     }
     
     
-     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCellWithIdentifier("favoriteMovieCell", forIndexPath: indexPath) as! FavoriteTableViewCell
+     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteMovieCell", for: indexPath) as! FavoriteTableViewCell
      
      // Configure the cell...
         
         
-        let favoriteMovie = store.favoriteList[indexPath.row].movies
+        let favoriteMovie = store.favoriteList[(indexPath as NSIndexPath).row].movies
         
         cell.favMovieTitleLabel.text = favoriteMovie?.first?.movieTitle
         cell.favMovieYearLabel.text = favoriteMovie?.first?.movieYear
@@ -107,10 +107,10 @@ class FavoritesTableViewController: UITableViewController {
             {
                 cell.favMoviePosterImage.image = UIImage.init(named:"movie-placeholder.jpg")
             }
-            let imagePosterUrl = NSURL(string: unwrappedMoviePosterString)
+            let imagePosterUrl = URL(string: unwrappedMoviePosterString)
             if let url = imagePosterUrl
             {
-                let dataImage = NSData(contentsOfURL: url)
+                let dataImage = try? Data(contentsOf: url)
                 
                 if let unwrappedPosterImage = dataImage
                 {
@@ -121,7 +121,7 @@ class FavoritesTableViewController: UITableViewController {
         }
         
 
-     cell.backgroundColor = UIColor.darkGrayColor()
+     cell.backgroundColor = UIColor.darkGray
      return cell
      }
 
@@ -137,7 +137,7 @@ class FavoritesTableViewController: UITableViewController {
     
     
      // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
      // Return false if you do not want the specified item to be editable.
      return true
      }
@@ -145,15 +145,15 @@ class FavoritesTableViewController: UITableViewController {
     
     
      // Override to support editing the table view.
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
      // Delete the row from the data source
         
         
         let managedcontext = store.managedObjectContext
-        managedcontext.deleteObject(store.favoriteList[indexPath.row])
+        managedcontext.delete(store.favoriteList[(indexPath as NSIndexPath).row])
         
-        store.favoriteList.removeAtIndex(indexPath.row)
+        store.favoriteList.remove(at: (indexPath as NSIndexPath).row)
         store.saveContext()
         
         self.tableView.reloadData()
@@ -185,7 +185,7 @@ class FavoritesTableViewController: UITableViewController {
     
     
      // Override to support conditional rearranging of the table view.
-     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
      // Return false if you do not want the item to be re-orderable.
      return true
      }
@@ -201,18 +201,18 @@ class FavoritesTableViewController: UITableViewController {
      }
      */
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         
         if segue.identifier == "favoriteToDetailsSegue"
         {
-            let destinationVC = segue.destinationViewController as? MovieDetailViewController
+            let destinationVC = segue.destination as? MovieDetailViewController
             
-            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
             
             if let index = indexPath
             {
-                let movieID = self.store.favoriteList[index.row].movies
+                let movieID = self.store.favoriteList[(index as NSIndexPath).row].movies
                let movieTitle = movieID?.first
                 
                let destinationVC = destinationVC

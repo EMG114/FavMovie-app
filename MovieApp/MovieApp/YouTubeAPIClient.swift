@@ -25,17 +25,17 @@ var type = ["channel", "video", "playlist"]
     
 // let searchText = "\(movie.movieTitle) +  \(movie.movieYear) + Official Trailer"
     
- func getSearches(index: Int, searchText: String, completion: [String : String] -> Void) {   
+ func getSearches(_ index: Int, searchText: String, completion: @escaping ([String : String]) -> Void) {   
    
     let urlString = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=\(searchText)&type=video&key=\(Secrets.youtubeApiKey)"
     
-    let url = NSURL(string: urlString)
+    let url = URL(string: urlString)
     
     guard let unwrappedURL = url else {return}
     
-    let session = NSURLSession.sharedSession()
+    let session = URLSession.shared
     
-    let task = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
+    let task = session.dataTask(with: unwrappedURL, completionHandler: { (data, response, error) in
         
         print("this is my data: \(data)")
         guard let unwrappedData = data else {return}
@@ -44,7 +44,7 @@ var type = ["channel", "video", "playlist"]
         do{
             
             
-            let jsonYoutube = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? [String : AnyObject]
+            let jsonYoutube = try JSONSerialization.jsonObject(with: unwrappedData, options: JSONSerialization.ReadingOptions.allowFragments) as? [String : AnyObject]
             
             
             if let youtubeDict = jsonYoutube
@@ -64,7 +64,7 @@ var type = ["channel", "video", "playlist"]
         {
             print(error.localizedDescription)
         }
-    }
+    }) 
     task.resume()
     
     }

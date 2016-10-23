@@ -12,8 +12,12 @@ import CoreData
 class MovieDetailViewController: UIViewController {
     
     var movie: Movie?
+    var movieID: String?
+    let youtubeURL = "https://www.youtube.com/embed/"
+
     
     let store = MovieDataStore.sharedStore
+    
     
     
     @IBOutlet weak var detailsActivityIndicator: UIActivityIndicatorView!
@@ -57,25 +61,26 @@ class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         
  navigationItem.title = movie?.movieTitle
-        
+        checkIfTrailerExist()
+        checkingStatusCode()
         reachabilityStatusChanged()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MovieDetailViewController.reachabilityStatusChanged), name: "reachStatusChanged", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MovieDetailViewController.reachabilityStatusChanged), name: NSNotification.Name(rawValue: "reachStatusChanged"), object: nil)
         
-        self.detailsActivityIndicator.hidden = false
+        self.detailsActivityIndicator.isHidden = false
         self.detailsActivityIndicator.startAnimating()
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style: .Done, target: self, action: #selector(MovieDetailViewController.saveMovieAsFavorite))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style: .done, target: self, action: #selector(MovieDetailViewController.saveMovieAsFavorite))
         
-       view.backgroundColor = UIColor.darkGrayColor()
-        movieShortPlotTextView.backgroundColor = UIColor.darkGrayColor()
+       view.backgroundColor = UIColor.darkGray
+        movieShortPlotTextView.backgroundColor = UIColor.darkGray
     
     
         guard let unwrappedMovie = movie else{return}
         //(movie?.movieID)!
         self.store.getDetailsForMovieByID(unwrappedMovie){success in
             
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 
                 self.movieTitleLabel.text = self.movie?.movieTitle
                 self.movieYearLabel.text = self.movie?.movieYear
@@ -103,10 +108,10 @@ class MovieDetailViewController: UIViewController {
                 
                 if let unwrappedString = imageString
                 {
-                    let stringPosterUrl = NSURL(string: unwrappedString)
+                    let stringPosterUrl = URL(string: unwrappedString)
                     if let url = stringPosterUrl
                     {
-                        let data = NSData(contentsOfURL: url)
+                        let data = try? Data(contentsOf: url)
                         
                         if let unwrappedImage = data
                         {
@@ -133,7 +138,7 @@ class MovieDetailViewController: UIViewController {
         self.genreLabel.text = self.movie?.movieGenre
         self.movieCountryLabel.text = self.movie?.movieCountry
         self.movieLanguageLabel.text = self.movie?.movieLanguage
-        self.detailsActivityIndicator.hidden = true
+        self.detailsActivityIndicator.isHidden = true
         self.detailsActivityIndicator.stopAnimating()
         
         
@@ -143,13 +148,13 @@ class MovieDetailViewController: UIViewController {
     {
         if reachabilityStatus == kNOTREACHABLE
         {
-            let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
+            let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .alert)
             
-            self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
+            self.present(noNetworkAlertController, animated: true, completion: nil)
             
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
-                    noNetworkAlertController.dismissViewControllerAnimated(true, completion: nil)
+            DispatchQueue.main.async { () -> Void in
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: { () -> Void in
+                    noNetworkAlertController.dismiss(animated: true, completion: nil)
                 })
             }
             
@@ -170,18 +175,18 @@ class MovieDetailViewController: UIViewController {
     
         
         guard let savedThisMovie = self.movie?.movieTitle  else {return}
-        let savedAlert = UIAlertController.init(title: "Favorite!", message: "\(savedThisMovie) was saved in favorites", preferredStyle: .Alert)
+        let savedAlert = UIAlertController.init(title: "Favorite!", message: "\(savedThisMovie) was saved in favorites", preferredStyle: .alert)
         
-        let doneAction = UIAlertAction.init(title: "Done", style: .Cancel) { (action) in
+        let doneAction = UIAlertAction.init(title: "Done", style: .cancel) { (action) in
         }
         savedAlert.addAction(doneAction)
         self.navigationItem.rightBarButtonItem = nil
-        self.presentViewController(savedAlert, animated: true){
+        self.present(savedAlert, animated: true){
         }
         
         let managedContext = store.managedObjectContext
         
-        let addThisMovie = NSEntityDescription.insertNewObjectForEntityForName("Favorite", inManagedObjectContext: managedContext) as! Favorite
+        let addThisMovie = NSEntityDescription.insertNewObject(forEntityName: "Favorite", into: managedContext) as! Favorite
         
         guard let savedMovie = self.movie else {return}
         
@@ -192,42 +197,78 @@ class MovieDetailViewController: UIViewController {
  
     }
     
-    @IBAction func watchTrailerPressed(sender: AnyObject) {
+    @IBAction func watchTrailerPressed(_ sender: AnyObject) {
         
-//        guard let unwrappedMovie = movie else{return}
-//        //(movie?.movieID)!
-//        self.store.getDetailsForMovieByID(unwrappedMovie){success in
-//            
-//            dispatch_async(dispatch_get_main_queue(),{
-//                
-//                self.movieTitleLabel.text = self.movie?.movieTitle
-//                self.movieYearLabel.text = self.movie?.movieYear
-//                }
         
-     //   _ = self.movie?.movieTitle as String!
-     //   _ = self.movie?.movieYear as String!
-        //performSegueWithIdentifier("detailToTrailer", sender: nil)
-  //  )}
-        
+//         let unwrappedMovie = movie
+//         unwrappedMovie
+//       
+    performSegue(withIdentifier: "trailerSegue", sender: nil)
+// 
+//        
 
     
 }
 
-    @IBAction func fullPlotDescriptionButton(sender: AnyObject)
+    @IBAction func fullPlotDescriptionButton(_ sender: AnyObject)
     {
         //segue: This button will go to Long Plot VC, it just segue...
         // performSegueWithIdentifier("FromDetailToLongSegue", sender: nil)
   
     }
     
+    func checkIfTrailerExist()
+    {
+        if let imdbID = movie?.movieID
+        {
+            store.api.checkIfAnyTrailersAvailableWithString(imdbID, completion: { (results) in
+                if results == []
+                {
+                    self.trailerButton.isHidden = true
+                   // self.trailerPic.isHidden = true
+                    
+                }
+                else if results != []
+                {
+                      self.trailerButton.isHidden = false
+//                    self.trailerPic.isHidden = false
+//                    self.trailerPic.image = UIImage.init(named: "trailerButtonLogo.png")
+                    
+                }
+                
+            })
+            
+            
+        }
+        
+        
+    }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    func checkingStatusCode()
+    {
+        if let id = movie?.movieID
+        {
+            store.api.checkIfAnyTrailersAvailableStatusCodeWithString(id, completion: { (code) in
+                if code == 34
+                {
+                    print("no trailer available")
+                    self.trailerButton.isHidden = true
+                  //  self.trailerPic.isHidden = true
+                    
+                }
+                
+            })
+        }
+    }
+
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "FromDetailToLongSegue"
         {
             
-            print(movie)
-            let destinationLongPlotVC = segue.destinationViewController as? LongPlotViewController
+           // print(movie)
+            let destinationLongPlotVC = segue.destination as? LongPlotViewController
             
             if let unwrappedMovie = movie
             {
@@ -238,9 +279,21 @@ class MovieDetailViewController: UIViewController {
             }
             
         }
-        
+            if segue.identifier == "trailerSegue"
+            {
+                let destinationVC = segue.destination as? TrailerViewController
+                
+                if let unwrappedMovie = movie
+                {
+                    destinationVC?.movieTrailer = unwrappedMovie
+                }
+            }
+            
+            
     }
     
-}
+    }
+    
+
 
 

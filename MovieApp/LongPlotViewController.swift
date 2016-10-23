@@ -31,21 +31,21 @@ class LongPlotViewController: UIViewController {
         
        self.title = "Full Plot"
         
-        self.fullActivityIndicator.hidden = false
+        self.fullActivityIndicator.isHidden = false
         self.fullActivityIndicator.startAnimating()
         
-        view.backgroundColor = UIColor.darkGrayColor()
-       longPlotSummaryTextField.backgroundColor = UIColor.darkGrayColor()
+        view.backgroundColor = UIColor.darkGray
+       longPlotSummaryTextField.backgroundColor = UIColor.darkGray
     
         
-        self.store.getLongSummaryPlot(movieId) { (longPlot) in
+        self.store.getLongSummaryPlot((movieId)!) { (longPlot) in
           
             
             
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 
                 self.longPlotSummaryTextField.text = longPlot
-                self.fullActivityIndicator.hidden = true
+                self.fullActivityIndicator.isHidden = true
                 self.fullActivityIndicator.stopAnimating()
                 
             })
