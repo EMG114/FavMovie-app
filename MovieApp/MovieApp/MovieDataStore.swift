@@ -38,7 +38,7 @@ class MovieDataStore {
                     if let movie = Movie.init(movieDict:movieDict as NSDictionary, entity:entity, managedObjectContext: self.managedObjectContext){
                     
                         
-                        movie.movieTitle = (movieDict["Title"] as? String)!
+                        movie.movieTitle = (movieDict["Title"] as? String)!//String(
                         movie.movieYear = (movieDict["Year"] as? String)!
                         movie.movieID = (movieDict["imdbID"] as? String)!
                         movie.moviePosterUrl = (movieDict["Poster"] as? String)!
@@ -46,19 +46,14 @@ class MovieDataStore {
                      
                         self.movieList.append(movie)
                     }
-                    
-                    
-                    completionHandler(true)
-                    
+
                 }
+                completionHandler(true)
             }
             
             
-            
-            if self.movieList.count > 0 {
-                
-                completionHandler(true)}
         }
+   
         
 
         

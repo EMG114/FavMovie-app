@@ -28,6 +28,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     @IBOutlet weak var searchActivityIndicator: UIActivityIndicatorView!
     
     
+    @IBOutlet weak var movieCell: MovieCollectionCell!
     var searchBar: UISearchBar!
     
     let store = MovieDataStore.sharedStore
@@ -71,13 +72,6 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-    }
-    
     
     
     func reachabilityChanged(_ notification: Notification)
@@ -167,6 +161,8 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieCell", for: indexPath) as! MovieCollectionCell
         
           guard self.store.movieList.count > 0 else { return cell as UICollectionViewCell }
+        
+        cell.movie = self.store.movieList[indexPath.row]
   
         cell.backgroundColor = UIColor.lightGray
         
@@ -212,11 +208,11 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         self.performSegue(withIdentifier: "movieDetailSegue", sender: indexPath)
         
-        print("Selected cell index: \((indexPath as NSIndexPath).row)")
+       // print("Selected cell index: \((indexPath as NSIndexPath).row)")
         
        let cell = movieCollectionView.cellForItem(at: indexPath)
         cell?.backgroundColor = UIColor.yellow
-        
+      
         
     }
     
@@ -224,8 +220,16 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = movieCollectionView.cellForItem(at: indexPath)
         cell?.backgroundColor = UIColor.lightGray
-       // movieCollectionView.deselectItemAtIndexPath(indexPath, animated: false)
+       // movieCollectionView.deselectItem(at: indexPath, animated: true)
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+//        let cell = movieCollectionView.cellForItem(at: indexPath)
+//        cell?.backgroundColor =
+        //movieCollectionView.deselectItem(at: indexPath, animated: true)
+        
+      //  movieCell.sel
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

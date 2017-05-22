@@ -63,11 +63,10 @@ class FavoritesTableViewController: UITableViewController {
        store.favoriteList.removeAll(keepingCapacity: true)
        store.managedObjectContext.reset()
        store.managedObjectContext.refreshAllObjects()
-       //store.saveContext()
+    
+       store.saveContext()
+    
        self.tableView.reloadData()
-        
-      
-      
      
     }
     

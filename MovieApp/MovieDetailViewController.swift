@@ -225,14 +225,12 @@ class MovieDetailViewController: UIViewController {
                 if results == []
                 {
                     self.trailerButton.isHidden = true
-                   // self.trailerPic.isHidden = true
+                  
                     
                 }
                 else if results != []
                 {
                       self.trailerButton.isHidden = false
-//                    self.trailerPic.isHidden = false
-//                    self.trailerPic.image = UIImage.init(named: "trailerButtonLogo.png")
                     
                 }
                 

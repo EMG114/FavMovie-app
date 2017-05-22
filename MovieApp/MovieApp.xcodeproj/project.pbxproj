@@ -31,7 +31,6 @@
 		07C634CD1D901E9600B3529D /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */; };
 		07DF67651DBD81F100358781 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07DF67641DBD81F100358781 /* Main.storyboard */; };
 		07ED876E1DAB1D3C0014154F /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED876D1DAB1D3C0014154F /* Secrets.swift */; };
-		07ED87701DAB1F560014154F /* YouTubeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED876F1DAB1F560014154F /* YouTubeAPIClient.swift */; };
 		07F075031DBD4F6E0097B7A5 /* TrailerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F075021DBD4F6E0097B7A5 /* TrailerViewController.swift */; };
 		07F3395C1DABE84F00D0F724 /* UpcomingMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3395B1DABE84F00D0F724 /* UpcomingMovies.swift */; };
 		07F3395E1DABEF6600D0F724 /* UpcomingMovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3395D1DABEF6600D0F724 /* UpcomingMovieCollectionViewCell.swift */; };
@@ -67,7 +66,6 @@
 		07C634C91D901E9600B3529D /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Movie+CoreDataProperties.swift"; path = "../Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		07DF67641DBD81F100358781 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		07ED876D1DAB1D3C0014154F /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
-		07ED876F1DAB1F560014154F /* YouTubeAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeAPIClient.swift; sourceTree = "<group>"; };
 		07F075021DBD4F6E0097B7A5 /* TrailerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailerViewController.swift; sourceTree = "<group>"; };
 		07F3395B1DABE84F00D0F724 /* UpcomingMovies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingMovies.swift; sourceTree = "<group>"; };
 		07F3395D1DABEF6600D0F724 /* UpcomingMovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingMovieCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				076B49B11D7A79FB00C478D1 /* OmdbAPIClient.swift */,
-				07ED876F1DAB1F560014154F /* YouTubeAPIClient.swift */,
 				07ED876D1DAB1D3C0014154F /* Secrets.swift */,
 				076B49AD1D7A726100C478D1 /* Movie.swift */,
 				07C2E8611D807EF300A2A03B /* MovieDataStore.swift */,
@@ -324,7 +321,6 @@
 				07F3395C1DABE84F00D0F724 /* UpcomingMovies.swift in Sources */,
 				07ED876E1DAB1D3C0014154F /* Secrets.swift in Sources */,
 				07C634CD1D901E9600B3529D /* Movie+CoreDataProperties.swift in Sources */,
-				07ED87701DAB1F560014154F /* YouTubeAPIClient.swift in Sources */,
 				07C634CC1D901E9600B3529D /* Favorite.swift in Sources */,
 				07A5B8E91D863B160091BF43 /* LongPlotViewController.swift in Sources */,
 				076B499B1D7A6E7700C478D1 /* MovieCollectionViewController.swift in Sources */,

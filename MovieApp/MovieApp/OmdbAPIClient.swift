@@ -29,24 +29,21 @@ class OmdbAPIClient{
     
     func getMoviesFromSearch(_ title: String, pages: Int, completionHandler:@escaping ([String: AnyObject]) -> () ){
         
-        // movies by type movie parameter and title with json response
+    
         let callUrl = "https://www.omdbapi.com/?s=\(title)&page=\(pages)&type=movie&r=json"
         
         
-        if let url:String = callUrl {
-            let url = URL(string: url)
+    
+            let url = URL(string: callUrl)
             
             let session = URLSession.shared
             let task = session.dataTask(with: url!, completionHandler: { (data, response, error) in
-                
-               // print(data)
-               // print(response)
-                
+             
                 if let data = data {
                     
                     do {
                         let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
-                        //print(jsonResult)
+                     
                         completionHandler(jsonResult as! [String : AnyObject])
                         
                     }
@@ -60,7 +57,7 @@ class OmdbAPIClient{
                 
             })
             task.resume()
-        }
+    
     }
     
     
@@ -76,19 +73,14 @@ class OmdbAPIClient{
         let session = URLSession.shared
         
         let task = session.dataTask(with: unwrappedURL, completionHandler: { (data, response, error) in
-            //            print(data)
-            //            print(response)
-            //            print(error)
-            
+       
             guard let unwrappedData = data else {return}
             
             do{
                 
-                //  NSJSONReadingAllowFragments
-                //Specifies that the parser should allow top-level objects that are not an instance of NSArray or NSDictionary
-                
+               
                 let jsonmovieData = try JSONSerialization.jsonObject(with: unwrappedData, options: JSONSerialization.ReadingOptions.allowFragments) as? NSDictionary
-                //print(jsonmovieData)
+      
                 if let movieDataDictionary = jsonmovieData
                 {
                     completion(movieDataDictionary as! [String : AnyObject] as NSDictionary)
@@ -110,7 +102,7 @@ class OmdbAPIClient{
     func getMovieLongPlot(_ movieID: String, completion: @escaping (String)->())
     {
         
-        // print("Whats the movie id: \(movieID)")
+    
         let urlString = "https://www.omdbapi.com/?i=\(movieID)&plot=full&r=json"
         
         let url = URL(string: urlString)
@@ -151,44 +143,47 @@ class OmdbAPIClient{
         task.resume()
         
     }
-    func getMoviesPlayingInTheaters(_ completion: @escaping (NSArray)->())
+    
+   func getMoviesPlayingInTheaters(_ completion: @escaping (NSArray)->())
     {
-      
+    
         let urlString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(Secrets.movieApiKey)"
-        
-        let url = URL(string: urlString)
-        
-        
+    
+       let url = URL(string: urlString)
+    
+    
         let session = URLSession.shared
         
         let dataTask = session.dataTask(with: url!, completionHandler: { (data, response, error) in
-            
+    
             guard let unwrappedData = data else {return}
-            
+    
             do{
                 let upcomingMovie = try JSONSerialization.jsonObject(with: unwrappedData, options: []) as! NSDictionary
-                
+    
                 let moviesArray = upcomingMovie["results"] as? NSArray
-                
+    
                 guard let unwrappedMovies = moviesArray else {return}
-                
+    
                 for movie in unwrappedMovies
                 {
                     let movieDict = UpcomingMovies.init(dictionary: movie as! NSDictionary)
                     self.upcomingMovie.append(movieDict)
-                    completion(unwrappedMovies)
+                    
+                   completion(unwrappedMovies)
                 }
-                
-            }
-            catch
-            {
-                print("did i crash?")
-            }
-        })
-        dataTask.resume()
-        
-    }
     
+           }
+          catch            {
+              print("Error")
+          }
+            
+        })
+
+        dataTask.resume()
+    
+    }
+
     func movieTrailerAPI(_ ID: Int, completion: @escaping (String)->())
     {
  
@@ -220,7 +215,7 @@ class OmdbAPIClient{
             }
             catch
             {
-                print("did i crash?")
+                print("Error")
             }
         })
         dataTask.resume()
@@ -358,7 +353,7 @@ class OmdbAPIClient{
             }
             catch
             {
-                print("did i crash?")
+                print("Error")
             }
         })
         dataTask.resume()
@@ -396,4 +391,5 @@ class OmdbAPIClient{
         })
         dataTask.resume()
     }
+
 }

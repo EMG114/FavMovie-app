@@ -9,6 +9,7 @@
 import UIKit
 
 class UpcomingMovieCollectionViewCell: UICollectionViewCell {
+   
     
-    @IBOutlet weak var upcomingMovieCell: UIImageView!
+    @IBOutlet weak var upcomingMovieImagePoster: UIImageView!
 }

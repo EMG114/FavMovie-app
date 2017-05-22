@@ -13,7 +13,19 @@ class MovieCollectionCell: UICollectionViewCell {
     @IBOutlet weak var moviePosterImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     
-
+    var movie: Movie? {
+        didSet {
+            
+           updateContent()
+            
+        }
+    }
+    
+    func updateContent() {
+        
+        
+        
+    }
     
    
 
