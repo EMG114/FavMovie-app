@@ -43,6 +43,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("Is it reaching me?")
         NotificationCenter.default.addObserver(self, selector: #selector(MovieCollectionViewController.reachabilityChanged(_:)), name: NSNotification.Name.reachabilityChanged, object: nil)
         
         internetReach?.startNotifier()
@@ -50,11 +51,11 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
         self.searchActivityIndicator.isHidden = false
         self.searchActivityIndicator.startAnimating()
         
-        self.store.searchForMovie("Movie", pages: self.apiClient.pageNumber) {_ in
+    self.store.searchForMovie("Movie", pages: self.apiClient.pageNumber) {_ in
             OperationQueue.main.addOperation({
                 self.movieCollectionView.reloadData()
-                self.searchActivityIndicator.isHidden = true
-                self.searchActivityIndicator.stopAnimating()
+              self.searchActivityIndicator.isHidden = true
+               self.searchActivityIndicator.stopAnimating()
             })
         }
         

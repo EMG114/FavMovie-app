@@ -46,11 +46,30 @@ class UpcomingMoviesViewController: UIViewController, UICollectionViewDelegate, 
         
     }
     
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        var itemsCount : CGFloat = 1.0
+        if UIApplication.shared.statusBarOrientation != UIInterfaceOrientation.portrait
+        {
+            itemsCount = 1.0
+        }
+        return CGSize(width: self.view.frame.width/itemsCount, height: 100/65 * (self.view.frame.width/itemsCount));
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
       //  print(store.api.upcomingMovie.count)
         return store.api.upcomingMovie.count
         
     }
+    
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -81,15 +100,28 @@ class UpcomingMoviesViewController: UIViewController, UICollectionViewDelegate, 
         return cell
     }
     
-//   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        <#code#>
-//    }
-    
-//    internal func collectionView(_ colectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//          let screenWidth = UIScreen.main.bounds.width
-//          let screenHeight = UIScreen.main.bounds.height
-//        return CGSize(width: screenWidth, height: screenHeight)
-//        
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "trailerSegue"
+        {
+            let destinationVC = segue.destination as! TrailerViewController
+            
+            let indexPath = upcomingMovieCollectionView.indexPath(for: sender as! UICollectionViewCell)
+            
+            if let unwrappedIndex = indexPath
+            {
+               let id = self.store.api.upcomingMovie[(unwrappedIndex as NSIndexPath).row].id
+                let title = self.store.api.upcomingMovie[(unwrappedIndex as NSIndexPath).row].title
+            //    let release = self.store.api.upcomingMovie[(unwrappedIndex as NSIndexPath).row].releaseDate
+               // let overview = self.store.api.upcomingMovie[(unwrappedIndex as NSIndexPath).row].plot
+                
+                destinationVC.movieTrailer?.movieID = id
+                destinationVC.movieTrailer?.movieTitle = title
+               //destinationVC.movie.mo
+               // destinationVC.movie?.moviePlotShort = overview
+            }
+            
+        }
+    }
     
 }

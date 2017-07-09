@@ -27,7 +27,7 @@ class LongPlotViewController: UIViewController {
      
         
 
-      //  print(movieId)
+       // print(movieId)
         
        self.title = "Full Plot"
         

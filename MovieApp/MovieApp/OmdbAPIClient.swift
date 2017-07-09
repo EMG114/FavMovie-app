@@ -30,15 +30,16 @@ class OmdbAPIClient{
     func getMoviesFromSearch(_ title: String, pages: Int, completionHandler:@escaping ([String: AnyObject]) -> () ){
         
     
-        let callUrl = "https://www.omdbapi.com/?s=\(title)&page=\(pages)&type=movie&r=json"
+        let callUrl = "https://www.omdbapi.com/?apikey=\(Secrets.omdbKey)&s=\(title)&page=\(pages)&type=movie&r=json"
         
         
-    
-            let url = URL(string: callUrl)
+        if let url:String = callUrl {
+            let url = URL(string: url)
             
             let session = URLSession.shared
             let task = session.dataTask(with: url!, completionHandler: { (data, response, error) in
-             
+           //  print(data)
+           //  print(response)
                 if let data = data {
                     
                     do {
@@ -57,6 +58,7 @@ class OmdbAPIClient{
                 
             })
             task.resume()
+        }
     
     }
     
@@ -65,7 +67,7 @@ class OmdbAPIClient{
     
     func getMovieDataSearchByID(_ movieID: String, completion: @escaping (NSDictionary)-> ())
     {
-        let urlString = "https://www.omdbapi.com/?i=\(movieID)&plot=short"
+        let urlString = "https://www.omdbapi.com/?i=\(movieID)&plot=short&apikey=\(Secrets.omdbKey)"
         let url = URL(string: urlString)
         
         guard let unwrappedURL = url else {return}
@@ -80,7 +82,7 @@ class OmdbAPIClient{
                 
                
                 let jsonmovieData = try JSONSerialization.jsonObject(with: unwrappedData, options: JSONSerialization.ReadingOptions.allowFragments) as? NSDictionary
-      
+    
                 if let movieDataDictionary = jsonmovieData
                 {
                     completion(movieDataDictionary as! [String : AnyObject] as NSDictionary)
@@ -103,7 +105,7 @@ class OmdbAPIClient{
     {
         
     
-        let urlString = "https://www.omdbapi.com/?i=\(movieID)&plot=full&r=json"
+        let urlString = "https://www.omdbapi.com/?i=\(movieID)&plot=full&r=json&apikey=\(Secrets.omdbKey)"
         
         let url = URL(string: urlString)
         
@@ -141,7 +143,8 @@ class OmdbAPIClient{
             }
         }) 
         task.resume()
-        
+    
+    
     }
     
    func getMoviesPlayingInTheaters(_ completion: @escaping (NSArray)->())

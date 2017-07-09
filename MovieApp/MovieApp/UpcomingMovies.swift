@@ -14,7 +14,7 @@ class UpcomingMovies
     var poster: String?
     var releaseDate: String?
     var plot : String?
-    var id : Int?
+    var id : String?
     
     
     init(dictionary: NSDictionary)
@@ -41,7 +41,7 @@ class UpcomingMovies
         }
         if let movieID = dictionary["id"]
         {
-            self.id = movieID as? Int
+            self.id = movieID as? String
         }
         else
         {

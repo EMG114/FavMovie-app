@@ -86,8 +86,8 @@ class MovieDetailViewController: UIViewController {
                 self.movieYearLabel.text = self.movie?.movieYear
                 self.movieShortPlotTextView.text = self.movie?.moviePlotShort
                 self.movieDirectorLabel.text = self.movie?.movieDirector
-                self.movieWriterLabel.text = self.movie?.movieWriter
-                self.movieActorsLabel.text = self.movie?.movieActors
+              //  self.movieWriterLabel.text = self.movie?.movieWriter
+               self.movieActorsLabel.text = self.movie?.movieActors
                 self.imdbScoreLabel.text = self.movie?.movieRating
                 self.metascoreLabel.text = self.movie?.movieMetascore
                 self.movieRuntimeLabel.text = self.movie?.movieRuntime
@@ -129,8 +129,8 @@ class MovieDetailViewController: UIViewController {
         
         self.movieShortPlotTextView.text = self.movie?.moviePlotShort
         self.movieDirectorLabel.text = self.movie?.movieDirector
-        self.movieWriterLabel.text = self.movie?.movieWriter
-        self.movieActorsLabel.text = self.movie?.movieActors
+      //  self.movieWriterLabel.text = self.movie?.movieWriter
+       self.movieActorsLabel.text = self.movie?.movieActors
         self.imdbScoreLabel.text = self.movie?.movieRating
         self.metascoreLabel.text = self.movie?.movieMetascore
         self.movieRuntimeLabel.text = self.movie?.movieRuntime
@@ -271,7 +271,7 @@ class MovieDetailViewController: UIViewController {
             if let unwrappedMovie = movie
             {
                 
-                print(unwrappedMovie)
+               // print(unwrappedMovie)
                 destinationLongPlotVC?.movieId = unwrappedMovie.movieID
               
             }
