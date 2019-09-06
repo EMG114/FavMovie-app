@@ -78,7 +78,7 @@ class MovieDetailViewController: UIViewController {
     
         guard let unwrappedMovie = movie else{return}
         //(movie?.movieID)!
-        self.store.getDetailsForMovieByID(unwrappedMovie){success in
+        self.store.getDetailsForMovieByID(unwrappedMovie){ //success in
             
             DispatchQueue.main.async(execute: {
                 
@@ -144,7 +144,7 @@ class MovieDetailViewController: UIViewController {
         
     }
     
-    func reachabilityStatusChanged()
+    @objc func reachabilityStatusChanged()
     {
         if reachabilityStatus == kNOTREACHABLE
         {
@@ -170,7 +170,7 @@ class MovieDetailViewController: UIViewController {
     }
     
     
-    func saveMovieAsFavorite()
+    @objc func saveMovieAsFavorite()
     {
     
         

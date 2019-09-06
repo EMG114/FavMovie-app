@@ -75,7 +75,7 @@ class MovieCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     
-    func reachabilityChanged(_ notification: Notification)
+    @objc func reachabilityChanged(_ notification: Notification)
     {
         print("Reachability status changed")
         reachability = notification.object as? Reachability
